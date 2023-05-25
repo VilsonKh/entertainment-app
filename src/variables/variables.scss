@@ -1,0 +1,33 @@
+$color-red: #fc4747;
+$color-dark-blue: #10141e;
+$color-light-purple: #5a698f;
+$color-light-blue: #161d2f;
+
+@mixin fs-L {
+	font-size: 32px;
+	font-weight: 300;
+	line-height: 40px;
+	font-style: normal;
+	letter-spacing: -0.5px;
+}
+
+@mixin fs-M {
+	font-style: normal;
+	font-weight: 300;
+	font-size: 24px;
+	line-height: 30px;
+}
+
+@mixin fs-S {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 30px;
+}
+
+@mixin fs-XS {
+	font-style: normal;
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 23px;
+}
