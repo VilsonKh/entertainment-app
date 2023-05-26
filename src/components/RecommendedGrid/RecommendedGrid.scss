@@ -1,0 +1,50 @@
+.recommended {
+	&__title {
+		font-style: normal;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 18px;
+	}
+
+	&__item {
+		position: relative;
+	}
+
+	&__info {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 8px;
+	}
+
+	&__img-container {
+		margin-bottom: 8px;
+	}
+
+	&__img {
+		width: 100%;
+	}
+
+	&__category-container {
+		display: flex;
+	}
+
+	&__category {
+		margin-left: 5px;
+	}
+
+	&__caption {
+		font-style: normal;
+		font-weight: 300;
+		font-size: 13px;
+		line-height: 16px;
+	}
+
+	&__year {
+	}
+}
+
+.recommended-bookmark {
+	position: absolute;
+	top: 5%;
+	right: 12%;
+}

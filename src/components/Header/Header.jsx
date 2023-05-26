@@ -12,6 +12,7 @@ import bookmarkTab from "../../assets/bookmarkTab.svg";
 import bookmarkTabBig from "../../assets/bookmarkTabBig.svg";
 import wishlistTab from "../../assets/wishlistTab.svg";
 import avatar from "../../assets/avatar.jpg";
+import gigachad from "../../assets/gigachad.jpg"
 
 import { NavLink, Navlink } from "react-router-dom";
 
@@ -42,7 +43,7 @@ const Header = () => {
           </NavLink> */}
 				</div>
         <div className="header__avatar">
-          <img src={avatar} alt="" />
+          <img src={gigachad} alt="" />
         </div>
 			</div>
 		</header>

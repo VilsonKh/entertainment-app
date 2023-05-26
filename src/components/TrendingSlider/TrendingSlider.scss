@@ -1,0 +1,77 @@
+.trending {
+	padding-left: 16px;
+
+	&__heading {
+		font-style: normal;
+		font-weight: 300;
+		font-size: 20px;
+		line-height: 25px;
+		letter-spacing: -0.3125px;
+	}
+
+	&__bookmark-container {
+		background-color: #10141e05;
+		border-radius: 50%;
+		position: absolute;
+		top: 5%;
+		right: 5%;
+		width: 32px;
+		height: 32px;
+
+    &:hover {
+      background-color: white;
+      opacity: 1;
+    }
+	}
+
+	&__caption {
+    width: 100%;
+		position: absolute;
+		bottom: 5%;
+    left: 5%;
+		display: flex;
+    flex-direction: column;
+		font-style: normal;
+		font-weight: 300;
+		font-size: 13px;
+		line-height: 16px;
+	}
+}
+
+.caption {
+  &__info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 130px;
+		margin-bottom: 5px;
+  }
+
+	&__title {
+		font-size: 15px;
+	}
+
+  &__category-container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__category {
+    margin-left: 5px;
+  }
+}
+
+.movie-thumb {
+	width: 150px;
+	height: 200px;
+	object-fit: cover;
+  opacity: 0.5;
+}
+
+.slider-item {
+	position: relative;
+}
+
+.slick-slide {
+	margin-right: 20px;
+}
