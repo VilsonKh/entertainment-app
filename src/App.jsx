@@ -7,9 +7,11 @@ import Trending from "./components/Trending/Trending";
 import Recommended from "./components/Recomended/Recommended";
 import Home from "./pages/Home";
 import { db } from "./firebase/config";
-import { collection, doc, query, where, getDocs } from "firebase/firestore";
 import store from "./store/videosSlice"
-
+import Movies from "./pages/Movies";
+import Serials from "./pages/Serials";
+import Bookmarks from "./pages/Bookmarks";
+import Wishlist from "./pages/Wishlist";
 
 const App = () => {
 	return (
@@ -17,7 +19,14 @@ const App = () => {
 				<>
 					<Header></Header>
 					<Search></Search>
-					<Home></Home>
+					<Routes>
+						<Route path="/" element={<Home/>}/>
+						<Route path="/movies" element={<Movies/>}/>
+						<Route path="/serials" element={<Serials/>}/>
+						<Route path="/bookmarks" element={<Bookmarks/>}/>
+						<Route path="/wishlist" element={<Wishlist/>}/>
+					</Routes>	
+					
 				</>
 			</Router>
 	);

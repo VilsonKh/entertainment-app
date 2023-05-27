@@ -1,17 +1,21 @@
-import React from "react";
-import VideosGrid from "../components/VideosGrid/VideosGrid";
-import { useSelector } from "react-redux";
+import example1 from "../../assets/forrestGump.webp";
+import example2 from "../../assets/movieThumb.webp";
+import movieIcon from "../../assets/moviesTab.svg";
+import { useSelector, useDispatch } from "react-redux";
+import videosSlice from "../../store/videosSlice";
 
-const Movies = () => {
+import "./VideosGrid.scss";
+
+const VideosGrid = () => {
 	const movies = useSelector((state) => state.videos.movies);
-	
+	const serials = useSelector((state) => state.videos.serials);
+	const allVideos = [...movies, ...serials];
+
 	return (
-		<div className="container">
-        <h1 className="trending__heading">Movies</h1>
+		<>
 			<div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
-				{movies.map((movie) => {
-					if (movie.category === "movie") {
-						const { thumbnail, year, category, rating, title, id } = movie;
+				{allVideos.map((video) => {
+						const { thumbnail, year, category, rating, title, id } = video;
 						return (
 							<div key={id} className="col recommended__item">
 								<div className="recommended__img-container">
@@ -47,13 +51,11 @@ const Movies = () => {
 									</svg>
 								</div>
 							</div>
-						);
-					}
-          return false
+						);		
 				})}
 			</div>
-		</div>
+		</>
 	);
 };
 
-export default Movies;
+export default VideosGrid;

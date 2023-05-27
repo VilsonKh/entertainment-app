@@ -1,17 +1,17 @@
-import React from "react";
-import VideosGrid from "../components/VideosGrid/VideosGrid";
-import { useSelector } from "react-redux";
+import React from 'react'
+import { useSelector } from 'react-redux';
 
-const Movies = () => {
-	const movies = useSelector((state) => state.videos.movies);
-	
-	return (
-		<div className="container">
-        <h1 className="trending__heading">Movies</h1>
+const Serials = () => {
+
+  const serials = useSelector((state) => state.videos.serials);
+
+  return (
+    <div className="container">
+        <h1 className="trending__heading">Serials</h1>
 			<div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
-				{movies.map((movie) => {
-					if (movie.category === "movie") {
-						const { thumbnail, year, category, rating, title, id } = movie;
+				{serials.map((serial) => {
+					if (serial.category === "serial") {
+						const { thumbnail, year, category, rating, title, id } = serial;
 						return (
 							<div key={id} className="col recommended__item">
 								<div className="recommended__img-container">
@@ -53,7 +53,7 @@ const Movies = () => {
 				})}
 			</div>
 		</div>
-	);
-};
+  )
+}
 
-export default Movies;
+export default Serials

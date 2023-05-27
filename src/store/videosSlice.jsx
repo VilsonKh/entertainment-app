@@ -1,8 +1,9 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-  movies: null,
-  serials: null
+  movies: [],
+  serials: [],
+  allVideos: []
 }
 
 export const videosSlice = createSlice({
@@ -15,10 +16,14 @@ export const videosSlice = createSlice({
 
     getAllSerials(state, action) {
       state.serials = action.payload
+    },
+
+    concatVideos(state) {
+      state.allVideos = [...state.movies,...state.serials]
     }
   }
 })
 
-export const {getAllMovies, getAllSerials} = videosSlice.actions;
+export const {getAllMovies, getAllSerials, concatVideos} = videosSlice.actions;
 
 export default videosSlice.reducer
