@@ -1,26 +1,24 @@
-import {createSlice, configureStore} from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-  movies: [],
-  serials: [],
-  videos: [],
+  movies: null,
+  serials: null
 }
 
 export const videosSlice = createSlice({
   name: 'videos',
   initialState,
   reducers: {
-    getAllVideos(state) {
-      state.videos.push('Forrest Gump')
+    getAllMovies(state, action) {
+      state.movies = action.payload
+    },
+
+    getAllSerials(state, action) {
+      state.serials = action.payload
     }
   }
 })
 
-const store = configureStore({
-  reducer: {
-    videos: videosSlice.reducer,
-  }
-})
+export const {getAllMovies, getAllSerials} = videosSlice.actions;
 
-
-export default store;
+export default videosSlice.reducer

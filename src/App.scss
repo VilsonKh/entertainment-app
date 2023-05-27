@@ -4,24 +4,22 @@
 //bootstrap
 .input-group-text,
 .form-control {
-  background-color: $color-dark-blue !important;
-  border: none !important;
+	background-color: $color-dark-blue !important;
+	border: none !important;
 }
 
 .form-control {
-  color: white !important;
+	color: white !important;
 }
-
 
 .form-control:active,
-.form-control:focus{
-  outline: 0 !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  border-bottom: 1px solid $color-light-purple !important;
-  caret-color: red;
+.form-control:focus {
+	outline: 0 !important;
+	border: 0 !important;
+	box-shadow: none !important;
+	border-bottom: 1px solid $color-light-purple !important;
+	caret-color: red;
 }
-
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../node_modules/bootstrap/scss/functions";
@@ -31,16 +29,11 @@
 @import "../node_modules/bootstrap/scss/grid";
 
 body {
-  color: white;
-  font-family: "Outfit",sans-serif;
-  background: $color-dark-blue;
+	color: white;
+	font-family: "Outfit", sans-serif;
+	background: $color-dark-blue;
 }
 
 p {
-  margin: 0 ;
+	margin: 0;
 }
-
-
-
-
-
