@@ -12,20 +12,29 @@ import Movies from "./pages/Movies";
 import Serials from "./pages/Serials";
 import Bookmarks from "./pages/Bookmarks";
 import Wishlist from "./pages/Wishlist";
+import { collection, doc, addDoc } from "firebase/firestore";
+import { useQueryAllVideos } from "./firebase/service";
+import VideosGrid from "./components/VideosGrid/VideosGrid";
+import SearchGrid from "./components/SearchGrid/SearchGrid";
 
 const App = () => {
+
+  useQueryAllVideos()
+
+	const [inputValue, setInputValue] = useState('')
+
 	return (
 			<Router>
 				<>
 					<Header></Header>
-					<Search></Search>
-					<Routes>
+					<Search setInputValue={setInputValue} inputValue={inputValue}></Search>
+					{inputValue ? <div className="container"><SearchGrid inputValue={inputValue}/></div> : <Routes>
 						<Route path="/" element={<Home/>}/>
 						<Route path="/movies" element={<Movies/>}/>
 						<Route path="/serials" element={<Serials/>}/>
 						<Route path="/bookmarks" element={<Bookmarks/>}/>
 						<Route path="/wishlist" element={<Wishlist/>}/>
-					</Routes>	
+					</Routes>	}
 					
 				</>
 			</Router>

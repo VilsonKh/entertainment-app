@@ -1,18 +1,26 @@
-import React from "react";
-import VideosGrid from "../components/VideosGrid/VideosGrid";
-import { useSelector } from "react-redux";
-import Bookmark from "../components/UI/Bookmark";
+import React from 'react'
+import Bookmark from '../UI/Bookmark';
+import { useSelector } from 'react-redux';
 
-const Movies = () => {
-	const videos = useSelector((state) => state.videos.allVideos);
-	
-	return (
-		<div className="container">
-        <h1 className="trending__heading">Movies</h1>
+const SearchGrid = ({inputValue}) => {
+
+  const allVideos = useSelector((state) => state.videos.allVideos)
+
+  const filteredVideos = allVideos.filter((video) => {
+    const title = video.title
+    // console.log(inputValue)
+    // if(title.includes(inputValue)) {
+    //   return video
+    // }
+    // return false
+
+  })
+
+  return (
+    <>
 			<div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
-				{videos.map((movie) => {
-					if (movie.category === "movie") {
-						const { thumbnail, year, category, rating, title, id } = movie;
+				{filteredVideos.map((video) => {
+						const { thumbnail, year, category, rating, title, id } = video;
 						return (
 							<div key={id} className="col recommended__item">
 								<div className="recommended__img-container">
@@ -37,15 +45,13 @@ const Movies = () => {
 									</div>
 									<div className="recommended__title">{title}</div>
 								</div>
-                <Bookmark isBookmarked={movie.isBookmarked} videoId={movie.id} category={movie.category}/>
+								<Bookmark isBookmarked={video.isBookmarked} videoId={video.id} category={video.category}/>
 							</div>
-						);
-					}
-          return false
+						);		
 				})}
 			</div>
-		</div>
-	);
-};
+		</>
+  )
+}
 
-export default Movies;
+export default SearchGrid

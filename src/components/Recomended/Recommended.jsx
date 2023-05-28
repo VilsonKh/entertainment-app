@@ -10,7 +10,9 @@ import { useQueryAllVideos } from "../../firebase/service";
 
 const Recommended = () => {
   //получает все видео 
-  useQueryAllVideos()
+
+    // useQueryAllVideos()
+
 
 
     return (

@@ -1,4 +1,4 @@
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, addDoc } from "firebase/firestore";
 import { db } from "./config";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,7 +28,14 @@ export const useQueryAllVideos = () => {
       dispatch(getAllSerials(results))
 		});
 	}, []);
-	
-
-
 };
+
+export const usePostCollection = (data, category) => {
+  if(category === 'movie') {
+    const ref = collection(db, "videos/Vrn6D1TSRhvN4cbMKgPy/movies");
+    addDoc(ref, data)
+  } else if (category === 'serial') {
+    const ref = collection(db, "videos/Vrn6D1TSRhvN4cbMKgPy/serials");
+    addDoc(ref, data)
+  }
+}

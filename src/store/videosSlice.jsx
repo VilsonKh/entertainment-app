@@ -12,18 +12,26 @@ export const videosSlice = createSlice({
   reducers: {
     getAllMovies(state, action) {
       state.movies = action.payload
+      // state.allVideos.push(action.payload)
     },
 
     getAllSerials(state, action) {
-      state.serials = action.payload
+      state.serials = action.payload;
+      // state.allVideos.push(action.payload)
     },
 
-    concatVideos(state) {
-      state.allVideos = [...state.movies,...state.serials]
+    concatVideos(state, action) {
+      state.allVideos = action.payload
+    },
+
+    changeIsBookmarked(state, action) {
+      console.log('changeBookmark')
+      state.allVideos = action.payload
     }
+
   }
 })
 
-export const {getAllMovies, getAllSerials, concatVideos} = videosSlice.actions;
+export const {getAllMovies, getAllSerials, concatVideos, changeIsBookmarked} = videosSlice.actions;
 
 export default videosSlice.reducer

@@ -17,11 +17,16 @@
 		right: 5%;
 		width: 32px;
 		height: 32px;
+		cursor: pointer;
 
     &:hover {
       background-color: white;
       opacity: 1;
     }
+	}
+
+	&__bookmark-container.active svg {
+		fill: white;
 	}
 
 	&__caption {

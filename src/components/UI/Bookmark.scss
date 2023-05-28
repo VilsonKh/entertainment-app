@@ -1,0 +1,18 @@
+.bookmark-container {
+  background-color: #10141e05;
+  border-radius: 50%;
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: white;
+    opacity: 1;
+  }
+}
+.bookmark-container.active svg {
+  fill: white;
+}
