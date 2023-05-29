@@ -1,0 +1,109 @@
+@import "../../variables/variables.scss";
+
+.addForm {
+	background: $color-light-blue;
+	padding: 20px;
+	border-radius: 5%;
+	position: relative;
+}
+
+.form {
+	&__legend {
+		font-weight: 300;
+		font-size: 28px;
+		line-height: 40px;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+
+	&__field {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 20px;
+		position: relative;
+	
+
+		& span {
+			color: #fc4747;
+			font-weight: 300;
+			font-size: 13px;
+			line-height: 16px;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		}
+	}
+
+	&__email {
+		margin-bottom: 40px;
+	}
+
+	&__input {
+		background: $color-light-blue;
+		border: none;
+		color: rgba(255, 255, 255, 0.7);
+		padding: 5px 10px;
+		border-bottom: 1px solid $color-light-purple;
+
+		&:active,
+		&:focus {
+			border-bottom: 1px solid white;
+			outline: none;
+			caret-color: #fc4747;
+		}
+	}
+
+	&__submitButton {
+		background-color: #fc4747;
+		border: none;
+		border-radius: 6px;
+		padding: 10px 15px;
+		color: white;
+		font-size: 15px;
+		transition: 0.3s ease;
+		&:hover {
+			background-color: white;
+			color: black;
+		}
+	}
+}
+
+.formPopup {
+	background-color: $color-light-blue;
+	padding: 20px;
+	position: absolute;
+	z-index: 999;
+	box-shadow: 0px 0px 95px 125px rgba(0,0,0,0.75);
+	width: 80%;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	border-radius: 10px;
+
+	&__heading {
+		margin-bottom: 20px;
+		font-size: 32px;
+		text-align: center;
+	}
+
+	&__text {
+		margin-bottom: 20px;
+		text-align: center;
+	}
+
+	&__button {
+		background-color: #fc4747;
+		border: none;
+		display: block;
+		margin: 0 auto;
+		padding: 10px 10px;
+		border-radius: 6px;
+
+		& a {
+			text-decoration: none;
+			color: white;
+		}
+	}
+
+
+}

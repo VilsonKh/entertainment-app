@@ -1,0 +1,21 @@
+@import "../../variables/variables.scss";
+
+table {
+width: 100%;
+}
+
+th {
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid white;
+  font-size: 15px;
+}
+
+tr {
+  border-bottom: $color-light-purple;
+}
+
+td {
+  border-bottom: 1px solid white;
+  font-size: 18px;
+}

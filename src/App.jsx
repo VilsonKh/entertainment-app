@@ -16,6 +16,8 @@ import { collection, doc, addDoc } from "firebase/firestore";
 import { useQueryAllVideos } from "./firebase/service";
 import VideosGrid from "./components/VideosGrid/VideosGrid";
 import SearchGrid from "./components/SearchGrid/SearchGrid";
+import AddButton from "./components/UI/AddButton";
+import AddForm from "./components/AddForm/AddForm";
 
 const App = () => {
 
@@ -34,8 +36,9 @@ const App = () => {
 						<Route path="/serials" element={<Serials/>}/>
 						<Route path="/bookmarks" element={<Bookmarks/>}/>
 						<Route path="/wishlist" element={<Wishlist/>}/>
+						<Route path="/add" element={<AddForm/>}/>
 					</Routes>	}
-					
+						<AddButton />
 				</>
 			</Router>
 	);

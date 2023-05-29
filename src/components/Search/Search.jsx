@@ -9,7 +9,7 @@ const Search = ({setInputValue, inputValue}) => {
 	const onChangeInput = (e) => {
 		let value = e.target.value
 		setInputValue(value)
-		console.log(inputValue)
+		
 	}
 	return (
 		<div className="searchPanel">

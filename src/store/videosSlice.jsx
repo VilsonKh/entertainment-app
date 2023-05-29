@@ -3,7 +3,8 @@ import {createSlice} from "@reduxjs/toolkit";
 const initialState = {
   movies: [],
   serials: [],
-  allVideos: []
+  allVideos: [],
+  wishlist: []
 }
 
 export const videosSlice = createSlice({
@@ -27,11 +28,16 @@ export const videosSlice = createSlice({
     changeIsBookmarked(state, action) {
       console.log('changeBookmark')
       state.allVideos = action.payload
+    },
+
+    getWishlistItems(state, action) {
+      console.log("getWishlist")
+      state.wishlist = action.payload
     }
 
   }
 })
 
-export const {getAllMovies, getAllSerials, concatVideos, changeIsBookmarked} = videosSlice.actions;
+export const {getAllMovies, getAllSerials, concatVideos, changeIsBookmarked, getWishlistItems} = videosSlice.actions;
 
 export default videosSlice.reducer

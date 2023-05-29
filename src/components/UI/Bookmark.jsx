@@ -2,8 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "./Bookmark.scss";
 import { changeIsBookmarked } from "../../store/videosSlice";
 import { useState } from "react";
-import { usePostCollection } from "../../firebase/service";
-import { addDoc, collection, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 const Bookmark = ({ isBookmarked, videoId, category }) => {
@@ -32,13 +31,10 @@ const [isBookmarkedState, setIsBookmarkedState] = useState(isBookmarked)
 
     console.log(videoId)
 
-
     if(category === 'movie') {
       const ref = doc(db, `videos/Vrn6D1TSRhvN4cbMKgPy/movies/${videoId}`);
-      setDoc(ref, postVideo[0], {merge: true})
+      setDoc(ref, postVideo[0])
     } 
-
-
 
     if(category === 'serial') {
       const ref = doc(db, `videos/Vrn6D1TSRhvN4cbMKgPy/serial/${videoId}`);

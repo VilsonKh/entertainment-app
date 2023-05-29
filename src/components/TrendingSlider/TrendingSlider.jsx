@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { concatVideos } from "../../store/videosSlice";
 import { useEffect } from "react";
 import Bookmark from "../UI/Bookmark";
+import { useQueryAllVideos } from "../../firebase/service";
 
 const TrendingSlider = () => {
 	const settings = {
@@ -21,6 +22,8 @@ const TrendingSlider = () => {
 		arrows: false,
 		variableWidth: true,
 	};
+
+	useQueryAllVideos()
 
 	const movies = useSelector((state) => state.videos.movies);
 	const serials = useSelector((state) => state.videos.serials);
