@@ -1,6 +1,5 @@
 import "./Search.scss";
 import loupe from "../../assets/loupe.svg";
-import { useState } from "react";
 
 const Search = ({setInputValue, inputValue}) => {
 

@@ -1,17 +1,10 @@
 import "./TrendingSlider.scss";
 import Slider from "react-slick";
-import example1 from "../../assets/forrestGump.webp";
-import example2 from "../../assets/movieThumb.webp";
 import "../../../node_modules/slick-carousel/slick/slick.css";
-
-import movieIcon from "../../assets/moviesTab.svg";
-import serialIcon from "../../assets/serialsTab.svg";
-import bookmark from "../../assets/bookmarkIcon.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { concatVideos } from "../../store/videosSlice";
-import { useEffect } from "react";
+import {  useSelector } from "react-redux";
 import Bookmark from "../UI/Bookmark";
 import { useQueryAllVideos } from "../../firebase/service";
+import Preloader from "../Preloader/Preloader";
 
 const TrendingSlider = () => {
 	const settings = {
@@ -23,13 +16,17 @@ const TrendingSlider = () => {
 		variableWidth: true,
 	};
 
-	useQueryAllVideos()
+	useQueryAllVideos();
 
 	const movies = useSelector((state) => state.videos.movies);
 	const serials = useSelector((state) => state.videos.serials);
 	const allVideos = [...movies, ...serials];
 
 	// const allVideos = useSelector((state) => state.videos.allVideos)
+	const isPending = useSelector((state) => state.state.isPending);
+	if (isPending) {
+		return <Preloader />;
+	}
 
 	return (
 		<Slider {...settings}>

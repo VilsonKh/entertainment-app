@@ -4,7 +4,8 @@ const initialState = {
   movies: [],
   serials: [],
   allVideos: [],
-  wishlist: []
+  wishlist: [],
+  loadingQty: 6
 }
 
 export const videosSlice = createSlice({

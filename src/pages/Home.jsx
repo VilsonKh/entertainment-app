@@ -1,14 +1,14 @@
-import React from 'react'
-import Trending from '../components/Trending/Trending'
-import Recommended from '../components/Recomended/Recommended'
+import React from "react";
+import Trending from "../components/Trending/Trending";
+import Recommended from "../components/Recomended/Recommended";
 
 const Home = () => {
-  return (
-   <>
-      <Trending/>
-      <Recommended/>
-   </>
-  )
-}
+	return (
+		<>
+			<Trending />
+			<Recommended />
+		</>
+	);
+};
 
-export default Home
+export default Home;

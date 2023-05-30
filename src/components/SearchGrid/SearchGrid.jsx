@@ -1,4 +1,3 @@
-import React, { useCallback } from "react";
 import Bookmark from "../UI/Bookmark";
 import { useSelector } from "react-redux";
 
@@ -8,10 +7,11 @@ const SearchGrid = ({ inputValue }) => {
 	const filteredVideos = allVideos.filter((video) => {
 		if(video.title === undefined) {
 			return false
-		}
-		if( video.title.toLowerCase().includes(inputValue)) {
+		} else if ( video.title.toLowerCase().includes(inputValue.toLowerCase())) {
 			return true
 		}
+
+		return false
 
 	});
 

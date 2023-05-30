@@ -1,11 +1,9 @@
-import example1 from "../../assets/forrestGump.webp";
-import example2 from "../../assets/movieThumb.webp";
-import movieIcon from "../../assets/moviesTab.svg";
 import { useSelector, useDispatch } from "react-redux";
-import videosSlice, { concatVideos } from "../../store/videosSlice";
+import { concatVideos } from "../../store/videosSlice";
 
 import "./VideosGrid.scss";
 import Bookmark from "../UI/Bookmark";
+import Preloader from "../Preloader/Preloader";
 
 const VideosGrid = () => {
 
@@ -17,6 +15,12 @@ const VideosGrid = () => {
 
 	const allVideos = [...movies, ...serials];
 	dispatch(concatVideos(allVideos))
+
+	const isPending = useSelector((state) => state.state.isPend)
+
+	if(isPending) {
+		return <Preloader/>
+	}
 
 	return (
 		<>

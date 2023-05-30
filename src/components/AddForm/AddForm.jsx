@@ -1,5 +1,5 @@
-import { addDoc, collection, doc } from "firebase/firestore";
-import { usePostWishlistItem } from "../../firebase/service";
+import { addDoc, collection } from "firebase/firestore";
+
 import "./AddForm.scss"
 import { useForm } from 'react-hook-form';
 import { db } from "../../firebase/config";

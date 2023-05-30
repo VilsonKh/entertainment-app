@@ -10,22 +10,28 @@ import serialsTab from "../../assets/serialsTab.svg";
 import serialsTabBig from "../../assets/serialsTabBig.svg";
 import bookmarkTab from "../../assets/bookmarkTab.svg";
 import bookmarkTabBig from "../../assets/bookmarkTabBig.svg";
-
+import preloader from '../../assets/preloader.gif';
 import avatar from "../../assets/avatar.jpg";
 import gigachad from "../../assets/gigachad.jpg";
 
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 
 const chooseIcon = (small, big) => {
 	return window.screen.width > "767" ? big : small;
 };
 
 const Header = () => {
+
+  const pendingStatus = useSelector((state) => state.state.isPending)
+
+  console.log(pendingStatus)
 	return (
 		<header className="header">
 			<div className="container d-flex align-items-center justify-content-between">
 				<div className="header__logo">
-					<img src={chooseIcon(logo, logoBig)} alt="" />
+			<img src={chooseIcon(logo, logoBig)} alt="" />
 				</div>
 				<div className="header__navigation">
 					<NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>

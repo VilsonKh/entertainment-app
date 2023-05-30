@@ -1,46 +1,53 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Bookmark.scss";
-import { changeIsBookmarked } from "../../store/videosSlice";
+import { changeIsBookmarked, getAllMovies } from "../../store/videosSlice";
 import { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/config";
 
 const Bookmark = ({ isBookmarked, videoId, category }) => {
 	const dispatch = useDispatch();
 	const allVideos = useSelector((state) => state.videos.allVideos);
-const [isBookmarkedState, setIsBookmarkedState] = useState(isBookmarked)
+	const [isBookmarkedState, setIsBookmarkedState] = useState(isBookmarked);
 
 	const onBookmarkClick = () => {
 		console.log(`bookmark click on ${videoId}`);
 		const changedBookmark = [...allVideos];
-   
+
 		const newArr = changedBookmark.map((video) => {
-      if(video.id === videoId) {
-        
-        setIsBookmarkedState(!isBookmarkedState)
-        return {...video,isBookmarked: !video.isBookmarked}
-      } else {
-        return video
-      }
-      // video.id === videoId ? { ...video, isBookmarked: !video.isBookmarked } : video
-      
-    });
-		dispatch(changeIsBookmarked(newArr))
-    const postVideo = newArr.filter((video) => video.id === videoId)
-    console.log(postVideo)
+			if (video.id === videoId) {
+				setIsBookmarkedState(!isBookmarkedState);
+				return { ...video, isBookmarked: !video.isBookmarked };
+			} else {
+				return video;
+			}
+			// video.id === videoId ? { ...video, isBookmarked: !video.isBookmarked } : video
+		});
+		dispatch(changeIsBookmarked(newArr));
+		const postVideo = newArr.filter((video) => video.id === videoId);
+		console.log(postVideo);
 
-    console.log(videoId)
+		console.log(videoId);
 
-    if(category === 'movie') {
-      const ref = doc(db, `videos/Vrn6D1TSRhvN4cbMKgPy/movies/${videoId}`);
-      setDoc(ref, postVideo[0])
-    } 
+		if (category === "movie") {
+			const ref = doc(db, `videos/elUR9WQsWsqUqaC1wwlE/movies/${videoId}`);
+			setDoc(ref, postVideo[0]);
+		}
 
-    if(category === 'serial') {
-      const ref = doc(db, `videos/Vrn6D1TSRhvN4cbMKgPy/serial/${videoId}`);
-      setDoc(ref, postVideo[0], {merge: true})
-    } 
+		if (category === "serial") {
+			const ref = doc(db, `videos/elUR9WQsWsqUqaC1wwlE/serial/${videoId}`);
+			setDoc(ref, postVideo[0], { merge: true });
+		}
 
+		const ref = collection(db, "videos/elUR9WQsWsqUqaC1wwlE/movies");
+		getDocs(ref).then((snapshot) => {
+			let results = [];
+			snapshot.docs.forEach((doc) => {
+				results.push({ id: doc.id, ...doc.data() });
+			});
+			dispatch(getAllMovies(results));
+			console.log('получил данные назад')
+		});
 	};
 
 	return (

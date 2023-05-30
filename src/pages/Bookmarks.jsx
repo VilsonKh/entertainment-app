@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import Bookmark from "../components/UI/Bookmark";
-import { useQueryAllVideos } from "../firebase/service";
 
 const Bookmarks = () => {
 
