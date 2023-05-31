@@ -7,8 +7,10 @@ const Trending = () => {
 
   return (
     <div className="trending">
-      <h1 className="trending__heading">Trending</h1>
-      <TrendingSlider/>
+   <div className="container">
+        <h1 className="trending__heading">Trending</h1>
+        <TrendingSlider/>
+   </div>
     </div>
   )
 }

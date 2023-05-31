@@ -7,6 +7,11 @@
 		font-size: 24px;
 		line-height: 25px;
 		letter-spacing: -0.3125px;
+
+		@media screen and (min-width: 767px) {
+			font-size: 32px;
+			margin-bottom: 24px;
+		}
 	}
 
 	&__bookmark-container {
@@ -32,7 +37,7 @@
 	&__caption {
     width: 100%;
 		position: absolute;
-		bottom: 5%;
+		bottom: 10%;
     left: 5%;
 		display: flex;
     flex-direction: column;
@@ -41,7 +46,12 @@
 		font-size: 13px;
 		line-height: 16px;
 		height: 50px;
+
+		@media screen and (min-width: 1439px) {
+			font-size: 18px;
+		}
 	}
+
 }
 
 .caption {
@@ -51,10 +61,26 @@
     justify-content: space-between;
     width: 130px;
 		margin-bottom: 5px;
+
+		
   }
+
+	&__topInfo {
+		display: flex;
+	}
+
+	&__year {
+		margin-right: 10px;
+	}
 
 	&__title {
 		font-size: 15px;
+		margin-bottom: 5px;
+		width: 90%;
+
+		@media screen and (min-width: 1439px) {
+			font-size: 18px;
+		}
 	}
 
   &__category-container {

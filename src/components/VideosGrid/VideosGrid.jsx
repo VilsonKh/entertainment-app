@@ -1,5 +1,6 @@
+import movieIcon from "../../assets/moviesTab.svg";
 import { useSelector, useDispatch } from "react-redux";
-import { concatVideos } from "../../store/videosSlice";
+import videosSlice, { concatVideos } from "../../store/videosSlice";
 
 import "./VideosGrid.scss";
 import Bookmark from "../UI/Bookmark";
@@ -16,7 +17,7 @@ const VideosGrid = () => {
 	const allVideos = [...movies, ...serials];
 	dispatch(concatVideos(allVideos))
 
-	const isPending = useSelector((state) => state.state.isPend)
+	const isPending = useSelector((state) => state.state.isPending)
 
 	if(isPending) {
 		return <Preloader/>
@@ -24,7 +25,7 @@ const VideosGrid = () => {
 
 	return (
 		<>
-			<div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
+			<div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-5">
 				{allVideos.map((video) => {
 						const { thumbnail, year, category, rating, title, id } = video;
 						return (

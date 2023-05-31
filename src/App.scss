@@ -37,3 +37,10 @@ body {
 p {
 	margin: 0;
 }
+
+.gridSys {
+	@media screen and (min-width: 767px) {
+		display: grid;
+		grid-template-columns: 100px 1fr;
+	}
+}

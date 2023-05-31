@@ -12,6 +12,7 @@ import { useQueryAllVideos } from "./firebase/service";
 import SearchGrid from "./components/SearchGrid/SearchGrid";
 import AddButton from "./components/UI/AddButton";
 import AddForm from "./components/AddForm/AddForm";
+import HeaderBig from "./components/Header/HeaderBig";
 
 const App = () => {
 
@@ -21,8 +22,8 @@ const App = () => {
 
 	return (
 			<Router>
-				<>
-					<Header></Header>
+				<div className="gridSys">
+					{window.screen.width > "1440" ? <HeaderBig/> : <Header/>}
 					<Search setInputValue={setInputValue} inputValue={inputValue}></Search>
 					{inputValue ? <div className="container"><SearchGrid inputValue={inputValue}/></div> : <Routes>
 						<Route path="/" element={<Home/>}/>
@@ -33,7 +34,7 @@ const App = () => {
 						<Route path="/add" element={<AddForm/>}/>
 					</Routes>	}
 						<AddButton />
-				</>
+				</div>
 			</Router>
 	);
 };

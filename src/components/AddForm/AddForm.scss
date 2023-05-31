@@ -5,6 +5,11 @@
 	padding: 20px;
 	border-radius: 5%;
 	position: relative;
+
+	@media screen and (min-width: 767px) {
+		max-width: 500px;
+		margin: 0 auto;
+	}
 }
 
 .form {

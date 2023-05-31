@@ -8,22 +8,41 @@
 
 	&__item {
 		position: relative;
+		@media screen and (min-width: 1439px) {
+			height: 350px;
+		}
 	}
 
 	&__info {
 		display: flex;
 		justify-content: space-between;
+		flex-direction: col;
 		margin-bottom: 8px;
 	}
 
 	&__img-container {
 		margin-bottom: 8px;
+
+		@media screen and (min-width: 1439px) {
+			height: 80%;
+		}
 	}
 
 	&__img {
 		width: 115px;
 		height: 150px;
 		object-fit: cover;
+
+		@media screen and (min-width: 767px) {
+			width: 150px;
+			height: 200px;
+		}
+
+		@media screen and (min-width: 1439px) {
+			width: 100%;
+			height: 100%;
+			object-position: top;
+		}
 	}
 
 	&__category-container {
@@ -39,9 +58,19 @@
 		font-weight: 300;
 		font-size: 13px;
 		line-height: 16px;
+		@media screen and (min-width: 1439px) {
+			font-size: 18px;
+		}
+
 	}
 
 	&__year {
+	}
+
+	&__title {
+		@media screen and (min-width: 1439px) {
+			font-size: 18px;
+		}
 	}
 }
 
