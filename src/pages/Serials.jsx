@@ -1,15 +1,21 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import Bookmark from '../components/UI/Bookmark';
+import VideosGrid from '../components/VideosGrid/VideosGrid';
+import { useLoaderData } from 'react-router-dom';
 
 const Serials = () => {
 
-  const videos = useSelector((state) => state.videos.allVideos);
+	const data = useLoaderData()
+
+
+	const contentData = data.docs.map((doc) => doc.data())
+	console.log(contentData)
 
   return (
-    <div className="container">
-        <h1 className="trending__heading">Serials</h1>
-			<div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
+    <div className="serials">
+        <h1 className="section-heading">Serials</h1>
+			{/* <div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
 				{videos.map((serial) => {
 					if (serial.category === "serial") {
 						const { thumbnail, year, category, rating, title, id } = serial;
@@ -43,7 +49,8 @@ const Serials = () => {
 					}
           return false
 				})}
-			</div>
+			</div> */}
+			<VideosGrid/>
 		</div>
   )
 }

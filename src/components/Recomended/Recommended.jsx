@@ -5,8 +5,8 @@ const Recommended = () => {
 
 	return (
 		<section className="recommended">
-			<div className="container">
-				<h1 className="recommended__heading">Recommended for you</h1>
+			<div className="recommended__container">
+				<h1 className="section-heading">Recommended for you</h1>
 				<VideosGrid />
 			</div>
 		</section>

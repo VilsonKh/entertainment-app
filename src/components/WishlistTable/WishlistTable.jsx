@@ -1,10 +1,11 @@
-import { useSelector } from "react-redux";
 import "./WishlistTable.scss";
-import { useQueryAllVideos } from "../../firebase/service";
+import { useLoaderData } from "react-router-dom";
 
 const WishlistTable = () => {
-  useQueryAllVideos()
-	const wishlistItems = useSelector((state) => state.videos.wishlist);
+	const data = useLoaderData()
+	const contentData = data.docs.map((doc) => doc.data())
+	console.log(contentData)
+
   let counter = 1
 	return (
 		<table className="wislist__table">
@@ -18,7 +19,7 @@ const WishlistTable = () => {
 				</tr>
 			</thead>
 			<tbody>
-				{wishlistItems.map((item) => {
+				{contentData.map((item) => {
           
           const { genre, title,id,year,category} = item;
 					return (

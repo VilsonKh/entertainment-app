@@ -1,17 +1,43 @@
-.searchPanel {
-  margin-bottom: 24px;
+@import "../../variables/variables.scss";
 
-  @media screen and (min-width: 767px) {
-    margin-top: 24px;
-  }
+.search {
+	margin-bottom: 24px;
 
-  @media screen and (min-width: 1439px) {
-    grid-area: 1/2/2/3;
-  }
+	@media screen and (min-width: 767px) {
+		margin-top: 24px;
+	}
 
-  & input {
-    @media screen and (min-width: 1439px) {
-      font-size: 18px;
+	@media screen and (min-width: 1439px) {
+		grid-area: 1/2/2/3;
+	}
+
+	&__input {
+		background: transparent;
+		color: rgba(255, 255, 255, 0.5);
+		padding: 10px 0;
+		border: none;
+		width: 100%;
+		caret-color: $color-red;
+    border-bottom: 1px solid transparent;
+
+
+    &::placeholder {
+      @include text-fs-m;
     }
-  }
+
+		&:focus {
+			border: none;
+			border-bottom: 1px solid $color-light-purple;
+			outline: none;
+		}
+
+		&-container {
+			display: flex;
+			align-items: center;
+		}
+		&-icon {
+			display: block;
+			margin-right: 16px;
+		}
+	}
 }

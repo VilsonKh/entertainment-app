@@ -1,4 +1,23 @@
+@import "../../variables/variables";
+
 .recommended {
+	&__gridContainer {
+		display: grid;
+		grid-template-columns: calc(50% - 10px) calc(50% - 10px);
+		gap: 20px;
+
+		@media screen and (min-width: 767px) {
+			grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
+		}
+
+		@media screen and (min-width: 1200px) {
+			grid-template-columns: calc(25% - 15px) calc(25% - 15px) calc(25% - 15px) calc(25% - 15px);
+		}
+
+		@media screen and (min-width: 1919px) {
+			grid-template-columns: repeat(5, 1fr);
+		}
+	}
 	&__title {
 		font-style: normal;
 		font-weight: 500;
@@ -8,35 +27,48 @@
 
 	&__item {
 		position: relative;
+		min-height: 300px;
+		width: calc(300px / 1.4);
+
+		
+		@media screen and (min-width: 767px) {
+			min-height: 350px;
+			width: calc(350px / 1.4);
+		}
+
+		@media screen and (min-width: 1199px) {
+			min-height: 350px;
+			width: calc(350px / 1.4);
+		}
+
 		@media screen and (min-width: 1439px) {
-			height: 350px;
+			min-height: 400px;
+			width: calc(400px / 1.4);
 		}
 	}
 
 	&__info {
 		display: flex;
-		justify-content: space-between;
-		flex-direction: col;
+		justify-content: flex-start;
 		margin-bottom: 8px;
 	}
 
 	&__img-container {
-		margin-bottom: 8px;
-
+		margin-bottom: 10px;
+		border-radius: 3px;
+		overflow: hidden;
 		@media screen and (min-width: 1439px) {
-			height: 80%;
 		}
 	}
 
 	&__img {
-		width: 115px;
-		height: 150px;
+		width: 100%;
 		object-fit: cover;
 
-		@media screen and (min-width: 767px) {
-			width: 150px;
-			height: 200px;
-		}
+		// @media screen and (min-width: 767px) {
+		// 	width: 150px;
+		// 	height: 200px;
+		// }
 
 		@media screen and (min-width: 1439px) {
 			width: 100%;
@@ -61,7 +93,6 @@
 		@media screen and (min-width: 1439px) {
 			font-size: 18px;
 		}
-
 	}
 
 	&__year {
@@ -78,4 +109,21 @@
 	position: absolute;
 	top: 5%;
 	right: 12%;
+}
+
+.loading-button {
+	margin: 0 auto;
+	margin-top: 30px;
+	display: block;
+	width: 100px;
+	height: 30px;
+	border-radius: 5px;
+	background-color: $color-red;
+	border: none;
+	color: white;
+	font-weight: 700;
+
+	&[disabled] {
+		opacity: 0.5;
+	}
 }

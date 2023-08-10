@@ -1,16 +1,21 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Bookmark from "../components/UI/Bookmark";
+import VideosGrid from "../components/VideosGrid/VideosGrid";
+import { useLoaderData } from "react-router-dom";
 
 const Bookmarks = () => {
 
-  const allVideos = useSelector((state) => state.videos.allVideos)
+	const data = useLoaderData()
+
+	const contentData = data.docs.map((doc) => doc.data())
+	console.log(contentData)
 
 
 	return (
-		<div className="container">
-			<h1 className="trending__heading">Bookmarked Movies</h1>
-      <div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4 mb-5">
+		<div className="bookmarks">
+			<h1 className="section-heading">Bookmarked</h1>
+      {/* <div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4 mb-5">
 				{allVideos.map((video) => {
 					if (video.isBookmarked && video.category === 'movie') {
 						const { thumbnail, year, category, rating, title, id } = video;
@@ -44,9 +49,10 @@ const Bookmarks = () => {
 					}
           return false
 				})}
-			</div>
-      <h1 className="trending__heading">Bookmarked TV Series</h1>
-      <div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
+			</div> */}
+			<VideosGrid/>
+      {/* <h1 className="section-heading">Bookmarked TV Series</h1> */}
+      {/* <div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
 				{allVideos.map((video) => {
 					if (video.isBookmarked && video.category === 'serial') {
 						const { thumbnail, year, category, rating, title, id } = video;
@@ -80,7 +86,8 @@ const Bookmarks = () => {
 					}
           return false
 				})}
-			</div>
+			</div> */}
+			{/* <VideosGrid/> */}
 		</div>
 	);
 };

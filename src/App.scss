@@ -1,42 +1,43 @@
 @import url(https://fonts.googleapis.com/css?family=Outfit:100,200,300,regular,500,600,700,800,900);
 @import "./variables/variables";
 
-//bootstrap
-.input-group-text,
-.form-control {
-	background-color: $color-dark-blue !important;
-	border: none !important;
-}
-
-.form-control {
-	color: white !important;
-}
-
-.form-control:active,
-.form-control:focus {
-	outline: 0 !important;
-	border: 0 !important;
-	box-shadow: none !important;
-	border-bottom: 1px solid $color-light-purple !important;
-	caret-color: red;
-}
-
-@import "../node_modules/bootstrap/scss/bootstrap";
-@import "../node_modules/bootstrap/scss/functions";
-@import "../node_modules/bootstrap/scss/variables";
-@import "../node_modules/bootstrap/scss/mixins";
-
-@import "../node_modules/bootstrap/scss/grid";
 
 body {
+	margin: 0;
 	color: white;
 	font-family: "Outfit", sans-serif;
 	background: $color-dark-blue;
+	min-width: 380px;
 }
 
 p {
 	margin: 0;
 }
+
+a {
+	transition: opacity .3s ease;
+}
+
+a:hover {
+	opacity: .5;
+}
+
+.container {
+	padding: 16px;
+
+	@media screen and (min-width: 767px) {
+		padding: 24px;
+	}
+
+	@media screen and (min-width: 1439px) {
+		margin-left: 165px;
+	}
+}
+
+.section-heading {
+	@include section-heading;
+}
+
 
 .gridSys {
 	@media screen and (min-width: 767px) {

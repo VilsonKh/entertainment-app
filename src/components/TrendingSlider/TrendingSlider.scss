@@ -1,17 +1,19 @@
+@import '../../variables/variables';
+
 .trending {
-	padding-left: 16px;
 
 	&__heading {
-		font-style: normal;
-		font-weight: 300;
-		font-size: 24px;
-		line-height: 25px;
-		letter-spacing: -0.3125px;
+		@include heading-fs-s;
 
 		@media screen and (min-width: 767px) {
-			font-size: 32px;
+			@include heading-fs-m;
 			margin-bottom: 24px;
 		}
+
+		@media screen and (min-width: 1439px) {
+			@include heading-fs-l;
+		}
+
 	}
 
 	&__bookmark-container {
@@ -94,16 +96,30 @@
 }
 
 .movie-thumb {
-	width: 150px;
-	height: 200px;
-	object-fit: cover;
+	width: 100%;
   opacity: 0.5;
 }
 
-.slider-item {
+.swiper-slide {
 	position: relative;
+	//необходимо для того, чтобы слайды не растягивались
+	height: 200px !important;
+	width: calc(200px / 1.4) !important;
+
+	@media screen and (min-width: 767px) {
+		height: 250px !important;
+		width: calc(250px / 1.4) !important;
+	}
+
+	@media screen and (min-width: 1440px) {
+		height: 300px !important;
+		width: calc(300px / 1.4) !important;
+	}
 }
 
-.slick-slide {
-	margin-right: 20px;
+.img-placeholder {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

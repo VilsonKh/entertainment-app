@@ -2,15 +2,20 @@ import React from "react";
 import VideosGrid from "../components/VideosGrid/VideosGrid";
 import { useSelector } from "react-redux";
 import Bookmark from "../components/UI/Bookmark";
+import { useLoaderData } from "react-router-dom";
 
 const Movies = () => {
-	const videos = useSelector((state) => state.videos.allVideos);
-	
+	// const videos = useSelector((state) => state.videos.allVideos);
+	const data = useLoaderData()
+
+
+	const contentData = data.docs.map((doc) => doc.data())
+	console.log(contentData)
+
 	return (
-		<div className="container">
-        <h1 className="trending__heading">Movies</h1>
-			<div className="row row-cols-3 row-cols-md-4 row-cols-xxl-5 g-4">
-				{videos.map((movie) => {
+		<div className="movies">
+        <h1 className="section-heading">Movies</h1>
+				{/* {contentData.map((movie) => {
 					if (movie.category === "movie") {
 						const { thumbnail, year, category, rating, title, id } = movie;
 						return (
@@ -42,8 +47,8 @@ const Movies = () => {
 						);
 					}
           return false
-				})}
-			</div>
+				})} */}
+				<VideosGrid/>
 		</div>
 	);
 };

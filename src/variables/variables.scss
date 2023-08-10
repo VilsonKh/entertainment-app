@@ -2,32 +2,52 @@ $color-red: #fc4747;
 $color-dark-blue: #10141e;
 $color-light-purple: #5a698f;
 $color-light-blue: #161d2f;
+$color-white: #ffffff;
 
-@mixin fs-L {
+@mixin heading-fs-l {
 	font-size: 32px;
 	font-weight: 300;
 	line-height: 40px;
-	font-style: normal;
+	font-style: 1;
 	letter-spacing: -0.5px;
 }
 
-@mixin fs-M {
+@mixin heading-fs-m {
 	font-style: normal;
 	font-weight: 300;
 	font-size: 24px;
-	line-height: 30px;
+	line-height: 1;
 }
 
-@mixin fs-S {
+@mixin heading-fs-s {
 	font-style: normal;
 	font-weight: 500;
-	font-size: 24px;
-	line-height: 30px;
+	font-size: 20px;
+	line-height: 1;
 }
 
-@mixin fs-XS {
+@mixin section-heading {
+	@include heading-fs-s;
+
+	@media screen and (min-width: 767px) {
+		@include heading-fs-m;
+	}
+
+	@media screen and (min-width: 1439px) {
+		@include heading-fs-l
+	}
+}
+
+@mixin text-fs-m {
 	font-style: normal;
-	font-weight: 500;
-	font-size: 18px;
-	line-height: 23px;
+	font-size: 15px;
+	font-weight: 300;
+	line-height: 1;
+}
+
+@mixin text-fs-s {
+	font-size: 13px;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 1;
 }

@@ -1,41 +1,68 @@
 import React, { useState } from "react";
 import "./App.scss";
 import Header from "./components/Header/Header";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Search from "./components/Search/Search";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import Serials from "./pages/Serials";
 import Bookmarks from "./pages/Bookmarks";
 import Wishlist from "./pages/Wishlist";
-import { useQueryAllVideos } from "./firebase/service";
+// import { useQueryAllVideos } from "./firebase/service";
 import SearchGrid from "./components/SearchGrid/SearchGrid";
 import AddButton from "./components/UI/AddButton";
 import AddForm from "./components/AddForm/AddForm";
 import HeaderBig from "./components/Header/HeaderBig";
+import RootLayout from "./pages/RootLayout";
+import ErrorPage from "./pages/ErrorPage";
+import { queryAllContent, queryWishlistItems } from "./firebase/service";
+import Trending from "./components/Trending/Trending";
+import Recommended from "./components/Recomended/Recommended";
+import { Provider } from "react-redux";
 
 const App = () => {
 
-  useQueryAllVideos()
+	const router = createBrowserRouter([
+		{
+			path: "/",
+			element: <RootLayout />,
+			// errorElement: <ErrorPage/>,
+			
+			children: [
+				{
+					path: '/', 
+					element: <Home/>,
+					// loader:  () => queryAllContent(),
+				},
+				{ 
+					path: "movies", 
+					element: <Movies />, 
+					// loader: () => queryAllContent('movie') 
+				},
+				{ 
+					path: "serials", 
+					element: <Serials />,
+					// loader: () => queryAllContent('serial')
+				 },
+				{ 
+					path: "bookmarks", 
+					element: <Bookmarks />, 
+					// loader: () => queryAllContent('isBookmarked')
+				},
+				{
+					path: 'wishlist',
+					element: <Wishlist/>,
+					// loader: () => queryWishlistItems()
+				}
+			],
+		},
+	]);
 
-	const [inputValue, setInputValue] = useState('')
+	return ( 
 
-	return (
-			<Router>
-				<div className="gridSys">
-					{window.screen.width > "1440" ? <HeaderBig/> : <Header/>}
-					<Search setInputValue={setInputValue} inputValue={inputValue}></Search>
-					{inputValue ? <div className="container"><SearchGrid inputValue={inputValue}/></div> : <Routes>
-						<Route path="/" element={<Home/>}/>
-						<Route path="/movies" element={<Movies/>}/>
-						<Route path="/serials" element={<Serials/>}/>
-						<Route path="/bookmarks" element={<Bookmarks/>}/>
-						<Route path="/wishlist" element={<Wishlist/>}/>
-						<Route path="/add" element={<AddForm/>}/>
-					</Routes>	}
-						<AddButton />
-				</div>
-			</Router>
+			<RouterProvider router={router} />
+
+		
 	);
 };
 export default App;
