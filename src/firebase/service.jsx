@@ -1,4 +1,4 @@
-import { collection, getDocs, addDoc, doc, query, where, updateDoc, getDoc, limit, startAfter } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, query, where, updateDoc, getDoc, limit, startAfter, startAt, orderBy, endAt } from "firebase/firestore";
 import { db, storage } from "./config";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -14,27 +14,33 @@ export const queryAllContent = async (filter, initialLimit) => {
 			queryRef = query(ref, where(filter, "==", "true"));
 			break;
 		case "isBookmarked":
-			queryRef = query(ref, where(filter, "==", "true"));
+			queryRef = query(ref, where(filter, "==", "true"), limit(initialLimit));
 			break;
+			case "isRecommended":
+				queryRef = query(ref, where(filter, "==", "true"), limit(initialLimit));
+				break;
 		case "movie":
-			queryRef = query(ref, where("category", "==", filter));
+			queryRef = query(ref, where("category", "==", filter),limit(initialLimit));
 			break;
 		case "serial":
-			queryRef = query(ref, where("category", "==", filter));
+			queryRef = query(ref, where("category", "==", filter), limit(initialLimit));
 			break;
 		default:
-			queryRef = ref;
+			queryRef = query(ref, orderBy('title'), startAt(filter), endAt(filter + '\uf8ff' ));
 	}
-	if (filter === "movie" || filter === "serial") {
-		queryRef = query(ref, where("category", "==", filter), limit(initialLimit));
-	}
-	if (filter === "isBookmarked" || filter === "isRecommended") {
-		queryRef = query(ref, where(filter, "==", "true"), limit(initialLimit));
-	}
+
 
 	const res = await getDocs(queryRef);
 	return res;
 };
+
+export const querySearch = async() => {
+	const ref = collection(db, 'videos')
+	const queryRef = query(ref, orderBy('title'), startAt('The'), endAt('The' + '\uf8ff' ))
+	const result = await getDocs(queryRef)
+	const con = result.docs.map((doc) => ({...doc.data()}))
+	console.log(con)
+}
 
 export const lazyLoad = async (filter, initialLimit, counter) => {
 	console.log(counter)
@@ -60,9 +66,8 @@ export const lazyLoad = async (filter, initialLimit, counter) => {
 
 	const res = await getDocs(query(ref, queryRef, limit(counter)));
 	const lastVisible = res.docs[res.docs.length - 1];
-	console.log(res.docs.length - 1)
 	const next = await getDocs(query(ref, queryRef, startAfter(lastVisible), limit(initialLimit)));
-	console.log(next.docs.map((doc) => ({...doc.data()})))
+
 
 	return next
 };

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { collection, getDocs, limit, query, startAfter, where } from "firebase/firestore";
 import { db } from "../firebase/config.js";
-import { lazyLoad, queryAllContent, queryWishlistItems } from "../firebase/service.jsx";
+import { lazyLoad, queryAllContent, querySearch, queryWishlistItems } from "../firebase/service.jsx";
 
 const initialState = {
 	trendingVideo: [],
@@ -12,19 +12,15 @@ const initialState = {
 	lazyLoadStatus: "idle",
 };
 
-// let counter = null;
 let initialLimit = null;
 
 if (window.screen.width > 1919) {
-	// counter = 5;
 	initialLimit = 5;
 }
 if (window.screen.width < 1919) {
-	// counter = 4;
 	initialLimit = 4;
 }
 if (window.screen.width < 1200) {
-	// counter = 3;
 	initialLimit = 3;
 }
 
@@ -34,12 +30,11 @@ export const fetchWishlistItems = createAsyncThunk('wishlist', async () => {
 	return result
 })
 
-export const lazyLoadContentThunk = createAsyncThunk("videos/paginateRecommended", async (filter, number) => {
+export const lazyLoadContentThunk = createAsyncThunk("videos/paginateRecommended", async (filter, {getState}) => {
+	const content = getState()
 	try {
-		console.log(number)
-		const next = await lazyLoad(filter, initialLimit, number)
+		const next = await lazyLoad(filter, initialLimit, content.content.length)
 		const result = next.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-		// counter += initialLimit;
 		return result;
 	} catch (error) {
 		throw new Error(error)

@@ -19,10 +19,8 @@ const VideosGrid = ({filter}) => {
 	const isBlock = useSelector(isBlockLoadButton)
 	const lazyLoadStutus = useSelector(lazyStatus)
 
-	const onLoadButtonClick = (e) => {
-		const count = e.target.parentNode.childNodes[1].childElementCount
+	const onLoadButtonClick = () => {
 		dispatch(lazyLoadContentThunk(filter))
-																					//Object{...}
 	}
 
 	return (
@@ -60,7 +58,7 @@ const VideosGrid = ({filter}) => {
 					);
 				}) : <p>Loading...</p>}
 			</div>
-			<button onClick={(e) => onLoadButtonClick(e)} className="loading-button" disabled={isBlock || lazyLoadStutus === 'loading' ? true : false}>{lazyLoadStutus === 'loading' ? 'LOADING...' : 'LOAD MORE'}</button>
+			<button onClick={() => onLoadButtonClick()} className="loading-button" disabled={isBlock || lazyLoadStutus === 'loading' ? true : false}>{lazyLoadStutus === 'loading' ? 'LOADING...' : 'LOAD MORE'}</button>
 		</>
 	);
 };

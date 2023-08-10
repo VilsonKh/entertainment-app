@@ -1,11 +1,11 @@
 import "./Search.scss";
 import loupe from "../../assets/loupe.svg";
 
-const Search = ({ setInputValue, inputValue }) => {
+const Search = ({ setInputText, inputText }) => {
 
 	const onChangeInput = (e) => {
 		let value = e.target.value;
-		setInputValue(value);
+		setInputText(value);
 	};
 	return (
 		<div className="search">
@@ -16,7 +16,8 @@ const Search = ({ setInputValue, inputValue }) => {
 				<input onChange={(e) => onChangeInput(e)} 
 							 type="text" 
 							 className="search__input" 
-							 placeholder="Search for movies or TV serials" />
+							 placeholder="Search for movies or TV serials"
+							 defaultValue={inputText} />
 			</div>
 		</div>
 	);
