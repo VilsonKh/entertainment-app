@@ -7,7 +7,7 @@ const Recommended = () => {
 		<section className="recommended">
 			<div className="recommended__container">
 				<h1 className="section-heading">Recommended for you</h1>
-				<VideosGrid />
+				<VideosGrid filter={'isRecommended'} />
 			</div>
 		</section>
 	);

@@ -5,7 +5,7 @@ import "../../../node_modules/slick-carousel/slick/slick.css";
 import Bookmark from "../UI/Bookmark";
 import { useQueryAllContent } from "../../firebase/service";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchTrendingVideos, getTrending, trendingContent, trendingData, trendingStatus } from "../../store/videosSlice";
+import { content, fetchTrendingVideos, trendingStatus, trendingVideo } from "../../store/videosSlice";
 import { useEffect, useState } from "react";
 import ExternalImage from "../UI/ExternalImage";
 
@@ -16,14 +16,11 @@ const TrendingSlider = () => {
 		dispatch(fetchTrendingVideos());
 	}, [dispatch]);
 
-	const data = useSelector(trendingContent);
-	const status = useSelector(trendingStatus);
+	const data = useSelector(trendingVideo);
+	const queryStatus = useSelector(trendingStatus);
 
 	const sliderItems = data.map((content, i) => {
-		const { year, category, rating, title, id, isBookmarked, thumbnail, isTrending } = content;
-
-
-		if (isTrending === "false") return;
+		const { year, category, rating, title, id, isBookmarked, thumbnail } = content;
 	
 		return (
 			<SwiperSlide key={i} className="swiper-slide">
@@ -57,7 +54,7 @@ const TrendingSlider = () => {
 
 	return (
 		<Swiper spaceBetween={20} slidesPerView={"auto"} simulateTouch={true}>
-			{status === "loading" ? <p>Loading...</p> : sliderItems}
+			{queryStatus === "loading" ? <p>Loading...</p> : sliderItems}
 		</Swiper>
 	);
 };

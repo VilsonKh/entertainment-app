@@ -1,82 +1,71 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { collection, getDocs, limit, query, startAfter, where } from "firebase/firestore";
 import { db } from "../firebase/config.js";
+import { lazyLoad, queryAllContent, queryWishlistItems } from "../firebase/service.jsx";
 
 const initialState = {
 	trendingVideo: [],
 	trendingStatus: "idle",
-	recommendedVideo: [],
-	recommendedStatus: "idle",
+	content: [],
+	contentStatus: 'idle',
 	isBlockLoadButton: false,
-	paginationStatus: 'idle'
+	lazyLoadStatus: "idle",
 };
 
-let counter = null;
-if(window.screen.width > 1919) {
-	counter = 5
-} 
- if (window.screen.width < 1919) {
-	counter = 4
-} 
- if (window.screen.width < 1200) {
-	counter = 3
-}
-
+// let counter = null;
 let initialLimit = null;
-if(window.screen.width > 1919) {
-	initialLimit = 5
-} 
+
+if (window.screen.width > 1919) {
+	// counter = 5;
+	initialLimit = 5;
+}
 if (window.screen.width < 1919) {
-	initialLimit = 4
-} 
+	// counter = 4;
+	initialLimit = 4;
+}
 if (window.screen.width < 1200) {
-	initialLimit = 3
+	// counter = 3;
+	initialLimit = 3;
 }
 
-export const fetchTrendingVideos = createAsyncThunk(
-	"videos/fetcByTrending",
-	async () => {
-		try {
-			const res = await getDocs(query(collection(db, `videos`), where("isTrending", "==", "true")));
-			const result = [];
-			res.forEach((doc) => result.push({ ...doc.data(), id: doc.id }));
-			return result;
-		} catch (error) {
-			throw new Error(error);
-		}
-	}
-);
+export const fetchWishlistItems = createAsyncThunk('wishlist', async () => {
+	const res = await queryWishlistItems()
+	const result = res.docs.map((doc) => ({...doc.data(), id: doc.id}))
+	return result
+})
 
-export const fetchRecommendedVideos = createAsyncThunk(
-	'videos/fetchByRecommended',
-	async () => {
-		try {
-			const res = await getDocs(query(collection(db, `videos`), where("isRecommended", "==", "true"), limit(initialLimit)));
-			const result = [];
-			res.forEach((doc) => result.push({ ...doc.data(), id: doc.id }));
-			return result
-		} catch (error) {
-			throw new Error(error)
-		}
-	}
-)
-
-export const paginateRecommendedVideos = createAsyncThunk(
-	'videos/paginateRecommended',
-	async () => {
-		try{
-			const res =  await getDocs(query(collection(db, `videos`), where("isRecommended", "==", "true"), limit(counter)));
-			const lastVisible = res.docs[res.docs.length - 1]
-			const next = await getDocs(query(collection(db, 'videos'), where('isRecommended', '==', 'true'), startAfter(lastVisible), limit(initialLimit)))
-			const result = [];
-			next.forEach((doc)=> result.push({...doc.data(), id: doc.id}))
-			counter += initialLimit
-			return result
+export const lazyLoadContentThunk = createAsyncThunk("videos/paginateRecommended", async (filter, number) => {
+	try {
+		console.log(number)
+		const next = await lazyLoad(filter, initialLimit, number)
+		const result = next.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+		// counter += initialLimit;
+		return result;
 	} catch (error) {
-
+		throw new Error(error)
 	}
-}
-)
+});
+
+export const fetchTrendingVideos = createAsyncThunk("videos/fetcByTrending", async () => {
+	try {
+		const res = await queryAllContent('isTrending')
+		const result = res.docs.map((doc) => ({...doc.data(), id: doc.id}))
+		return result;
+	} catch (error) {
+		throw new Error(error);
+	}
+});
+
+export const fetchContent = createAsyncThunk("videos/fetchByRecommended", async (filter) => {
+	try {
+		const res = await queryAllContent(filter, initialLimit)
+		
+		const result = res.docs.map((doc) => ({...doc.data(), id: doc.id}))
+		return result;
+	} catch (error) {
+		throw new Error(error);
+	}
+});
 
 export const videosSlice = createSlice({
 	name: "videos",
@@ -86,9 +75,9 @@ export const videosSlice = createSlice({
 			state.trendingVideo.push(action.payload);
 		},
 		incrementLimit(state, action) {
-			console.log('increment')
-			state.loadingLimit = state.loadingLimit + 3
-		}
+			console.log("increment");
+			state.loadingLimit = state.loadingLimit + 3;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -102,35 +91,45 @@ export const videosSlice = createSlice({
 			.addCase(fetchTrendingVideos.rejected, (state, action) => {
 				state.trendingStatus = "rejected";
 			})
-			.addCase(fetchRecommendedVideos.fulfilled, (state, action) => {
-				state.recommendedStatus = 'succeeded';
-				state.recommendedVideo = [...action.payload];
+			.addCase(fetchContent.fulfilled, (state, action) => {
+				state.contentStatus = "succeeded";
+				state.content = [...action.payload];
 			})
-			.addCase(fetchRecommendedVideos.pending, (state, action) => {
-				state.recommendedStatus = 'loading';
+			.addCase(fetchContent.pending, (state, action) => {
+				state.contentStatus = "loading";
 			})
-			.addCase(fetchRecommendedVideos.rejected, (state, action) => {
-				state.trendingStatus = 'rejected'
+			.addCase(fetchContent.rejected, (state, action) => {
+				state.contentStatus = "rejected";
 			})
-			.addCase(paginateRecommendedVideos.fulfilled, (state, action) => {
-				state.recommendedVideo.push(...action.payload)
-				if(action.payload.length < initialLimit) state.isBlockLoadButton = true;
-				state.paginationStatus = 'succeeded'
+			.addCase(lazyLoadContentThunk.fulfilled, (state, action) => {
+				state.content.push(...action.payload);
+				action.payload.length < initialLimit ? state.isBlockLoadButton = true : state.isBlockLoadButton = false;
+				state.lazyLoadStatus = "succeeded";
 			})
-			.addCase(paginateRecommendedVideos.pending, (state, action) => {
-				state.paginationStatus = 'loading';
+			.addCase(lazyLoadContentThunk.pending, (state, action) => {
+				state.lazyLoadStatus = "loading";
 			})
-			.addCase(paginateRecommendedVideos.rejected, (state, action) => {
-				state.paginationStatus = 'rejected';
+			.addCase(lazyLoadContentThunk.rejected, (state, action) => {
+				state.lazyLoadStatus = "rejected";
+			})
+			.addCase(fetchWishlistItems.fulfilled, (state, action) => {
+				state.contentStatus = "succeeded";
+				state.content = [...action.payload];
+			})
+			.addCase(fetchWishlistItems.pending, (state, action) => {
+				state.contentStatus = "loading";
+			})
+			.addCase(fetchWishlistItems.rejected, (state, action) => {
+				state.contentStatus = "rejected";
 			})
 	},
 });
 
 export const { getTrending, incrementLimit } = videosSlice.actions;
-export const trendingContent = (state) => state.trendingVideo;
+export const trendingVideo = (state) => state.trendingVideo;
 export const trendingStatus = (state) => state.trendingStatus;
-export const recommendedContent = (state) => state.recommendedVideo;
-export const recommenedeStatus = (state) => state.recommendedStatus;
-export const paginationStatus = (state) => state.paginationStatus;
-export const isBlockLoadButton = (state) => state.isBlockLoadButton
+export const content = (state) => state.content;
+export const contentStatus = (state) => state.contentStatus;
+export const lazyStatus = (state) => state.lazyLoadStatus;
+export const isBlockLoadButton = (state) => state.isBlockLoadButton;
 export default videosSlice.reducer;

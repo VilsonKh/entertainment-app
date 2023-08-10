@@ -1,112 +1,70 @@
-import { collection, getDocs, addDoc, doc, query, where, updateDoc, getDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, query, where, updateDoc, getDoc, limit, startAfter } from "firebase/firestore";
 import { db, storage } from "./config";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getAllMovies, getAllSerials, getTrending, getWishlistItems } from "../store/videosSlice";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 
-// export const useQueryAllVideos = () => {
-
-// 	const dispatch = useDispatch();
-
-// 	useEffect(() => {
-// 		dispatch(changePendingState(true));
-// 		const ref = doc(db, "videos/movies");
-// 		getDocs(ref).then((snapshot) => {
-// 			let results = [];
-// 			if (snapshot.empty) {
-// 				dispatch(changeErrorState("Cannot get movie/tv serial"));
-// 				dispatch(changePendingState(false));
-// 			} else {
-// 				snapshot.docs.forEach((doc) => {
-// 					results.push({ id: doc.id, ...doc.data() });
-// 				});
-// 				dispatch(changePendingState(false))
-// 				dispatch(getAllMovies(results));
-// 			}
-// 		}).catch((error) => {
-// 			dispatch(changeErrorState(error.message))
-// 			dispatch(changePendingState(false ))
-// 		});
-// 	}, []);
-
-// 	console.log("получил все фильмы");
-
-// 	useEffect(() => {
-// 		const ref = collection(db, "videos/elUR9WQsWsqUqaC1wwlE/serials");
-// 		getDocs(ref).then((snapshot) => {
-// 			let results = [];
-// 			snapshot.docs.forEach((doc) => {
-// 				results.push({ id: doc.id, ...doc.data() });
-// 			});
-// 			dispatch(getAllSerials(results));
-// 		});
-// 	}, []);
-
-// 	console.log("получил все сериалы");
-
-// 	useEffect(() => {
-// 		const ref = collection(db, "wishlist");
-// 		getDocs(ref).then((snapshot) => {
-// 			let results = [];
-// 			snapshot.docs.forEach((doc) => {
-// 				results.push({ id: doc.id, ...doc.data() });
-// 			});
-// 			dispatch(getWishlistItems(results));
-// 		});
-// 	}, []);
-// };
-
-// export const usePostCollection = (data, category) => {
-// 	if (category === "movie") {
-// 		const ref = collection(db, "videos/elUR9WQsWsqUqaC1wwlE/movies");
-// 		addDoc(ref, data);
-// 	} else if (category === "serial") {
-// 		const ref = collection(db, "videos/elUR9WQsWsqUqaC1wwlE/serials");
-// 		addDoc(ref, data);
-// 	}
-// };
-// export const usePostWishlistItem = (data) => {
-// 	const ref = doc(db, "wishlist");
-// 	addDoc(ref, data);
-// };
-
-export const queryAllContent = async (filter) => {
+export const queryAllContent = async (filter, initialLimit) => {
 	const ref = collection(db, `videos`);
 	let queryRef = null;
 
 	switch (filter) {
 		case "isTrending":
-			console.log("сработал isTrending");
 			queryRef = query(ref, where(filter, "==", "true"));
 			break;
 		case "isBookmarked":
-			console.log("сработал isBookmarked");
 			queryRef = query(ref, where(filter, "==", "true"));
 			break;
 		case "movie":
-			console.log("сработал movie");
 			queryRef = query(ref, where("category", "==", filter));
 			break;
 		case "serial":
-			console.log("сработал serial");
 			queryRef = query(ref, where("category", "==", filter));
 			break;
 		default:
-			console.log("сработал default");
 			queryRef = ref;
 	}
+	if (filter === "movie" || filter === "serial") {
+		queryRef = query(ref, where("category", "==", filter), limit(initialLimit));
+	}
+	if (filter === "isBookmarked" || filter === "isRecommended") {
+		queryRef = query(ref, where(filter, "==", "true"), limit(initialLimit));
+	}
 
-
-	// let result = [];
-	const res = await getDocs(queryRef)
-	// .then((docs) => {
-	// 	const response = docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-	// 	result = [...response]
-	// });
-	console.log(res)
-
+	const res = await getDocs(queryRef);
 	return res;
+};
+
+export const lazyLoad = async (filter, initialLimit, counter) => {
+	console.log(counter)
+	let queryRef = null;
+	const ref = collection(db, 'videos')
+	switch (filter) {
+		case "isRecommended":
+			console.log('сработал isRecommended')
+			queryRef = where(filter, "==", "true");
+			break;
+		case "movie":
+			queryRef = where("category", "==", filter);
+			break;
+		case "serial":
+			queryRef = where("category", "==", filter);
+			break;
+		case "isBookmarked":
+			queryRef = where(filter, "==", "true");
+			break;
+		default:
+			break;
+	}
+
+	const res = await getDocs(query(ref, queryRef, limit(counter)));
+	const lastVisible = res.docs[res.docs.length - 1];
+	console.log(res.docs.length - 1)
+	const next = await getDocs(query(ref, queryRef, startAfter(lastVisible), limit(initialLimit)));
+	console.log(next.docs.map((doc) => ({...doc.data()})))
+
+	return next
 };
 
 export const queryWishlistItems = async () => {

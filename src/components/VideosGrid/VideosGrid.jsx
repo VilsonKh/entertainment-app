@@ -1,39 +1,35 @@
 import movieIcon from "../../assets/moviesTab.svg";
 import { useSelector, useDispatch } from "react-redux";
-import videosSlice, { concatVideos, fetchRecommendedVideos, incrementLimit, isBlockLoadButton, paginateRecommendedVideos, paginationStatus, recommendedContent, recommenedeStatus } from "../../store/videosSlice";
+import { isBlockLoadButton, content, contentStatus, lazyLoadContentThunk, fetchContent, lazyStatus } from "../../store/videosSlice";
 
 import "./VideosGrid.scss";
 import Bookmark from "../UI/Bookmark";
-import Preloader from "../Preloader/Preloader";
-import { Await, useLoaderData } from "react-router-dom";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import oval from '../../assets/oval.svg'
 import ExternalImage from "../UI/ExternalImage";
 
-const VideosGrid = () => {
+const VideosGrid = ({filter}) => {
 	const dispatch = useDispatch()
-
-
 	useEffect(() => {
-		dispatch(fetchRecommendedVideos())
-	},[dispatch])
+		dispatch(fetchContent(filter))
+	},[])
 
-	const data = useSelector(recommendedContent)
-	const status = useSelector(recommenedeStatus)
+	const data = useSelector(content)
+	const status = useSelector(contentStatus)
 	const isBlock = useSelector(isBlockLoadButton)
-	const paginationLoadingStatus = useSelector(paginationStatus)
-	const onLoadButtonClick = () => {
-		dispatch(paginateRecommendedVideos())
-		
-	}
+	const lazyLoadStutus = useSelector(lazyStatus)
 
+	const onLoadButtonClick = (e) => {
+		const count = e.target.parentNode.childNodes[1].childElementCount
+		dispatch(lazyLoadContentThunk(filter))
+																					//Object{...}
+	}
 
 	return (
 		<>
 			<div className="recommended__gridContainer">
 				{status === 'succeeded' ? data.map((video, i) => {
-					const { thumbnail, year, category, rating, title, isBookmarked, isRecommended, id} = video;
-					if(isRecommended === 'false') return
+					const { thumbnail, year, category, rating, title, isBookmarked, id} = video;
 					return (
 						<div key={i} className="recommended__item">
 							<div className="recommended__img-container">
@@ -64,7 +60,7 @@ const VideosGrid = () => {
 					);
 				}) : <p>Loading...</p>}
 			</div>
-			<button onClick={() => onLoadButtonClick()} className="loading-button" disabled={isBlock || paginationLoadingStatus === 'loading' ? true : false}>{paginationLoadingStatus === 'loading' ? 'LOADING...' : 'LOAD MORE'}</button>
+			<button onClick={(e) => onLoadButtonClick(e)} className="loading-button" disabled={isBlock || lazyLoadStutus === 'loading' ? true : false}>{lazyLoadStutus === 'loading' ? 'LOADING...' : 'LOAD MORE'}</button>
 		</>
 	);
 };

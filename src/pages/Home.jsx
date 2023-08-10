@@ -7,7 +7,6 @@ import { useLoaderData } from "react-router-dom";
 const Home = () => {
 	return (
 		<>
-			
 			<Trending />
 			<Recommended />
 		</>

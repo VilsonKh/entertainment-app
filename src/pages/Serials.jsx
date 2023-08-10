@@ -6,12 +6,6 @@ import { useLoaderData } from 'react-router-dom';
 
 const Serials = () => {
 
-	const data = useLoaderData()
-
-
-	const contentData = data.docs.map((doc) => doc.data())
-	console.log(contentData)
-
   return (
     <div className="serials">
         <h1 className="section-heading">Serials</h1>
@@ -50,7 +44,7 @@ const Serials = () => {
           return false
 				})}
 			</div> */}
-			<VideosGrid/>
+			<VideosGrid filter={'serial'}/>
 		</div>
   )
 }

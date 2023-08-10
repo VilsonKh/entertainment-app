@@ -1,10 +1,19 @@
+import { useDispatch, useSelector } from "react-redux";
 import "./WishlistTable.scss";
 import { useLoaderData } from "react-router-dom";
+import { useEffect } from "react";
+import { content, contentStatus, fetchWishlistItems } from "../../store/videosSlice";
 
 const WishlistTable = () => {
-	const data = useLoaderData()
-	const contentData = data.docs.map((doc) => doc.data())
-	console.log(contentData)
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(fetchWishlistItems());
+	}, [dispatch]);
+
+	const data = useSelector(content);
+	const queryStatus = useSelector(contentStatus);
 
   let counter = 1
 	return (
@@ -19,7 +28,7 @@ const WishlistTable = () => {
 				</tr>
 			</thead>
 			<tbody>
-				{contentData.map((item) => {
+				{data.map((item) => {
           
           const { genre, title,id,year,category} = item;
 					return (

@@ -5,12 +5,6 @@ import Bookmark from "../components/UI/Bookmark";
 import { useLoaderData } from "react-router-dom";
 
 const Movies = () => {
-	// const videos = useSelector((state) => state.videos.allVideos);
-	const data = useLoaderData()
-
-
-	const contentData = data.docs.map((doc) => doc.data())
-	console.log(contentData)
 
 	return (
 		<div className="movies">
@@ -48,7 +42,7 @@ const Movies = () => {
 					}
           return false
 				})} */}
-				<VideosGrid/>
+				<VideosGrid filter={'movie'}/>
 		</div>
 	);
 };
