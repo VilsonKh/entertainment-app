@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./WishlistTable.scss";
-import { useLoaderData } from "react-router-dom";
+import preloader from '../../assets/preloader.gif'
 import { useEffect } from "react";
 import { content, contentStatus, fetchWishlistItems } from "../../store/videosSlice";
 
@@ -28,8 +28,9 @@ const WishlistTable = () => {
 				</tr>
 			</thead>
 			<tbody>
-				{data.map((item) => {
-          
+				{queryStatus === 'loading' ? 
+				<p>Loading...</p> : 
+				data.map((item) => {
           const { genre, title,id,year,category} = item;
 					return (
 						<tr key={id}>

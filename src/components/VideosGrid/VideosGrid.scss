@@ -6,7 +6,7 @@
 		grid-template-columns: calc(50% - 10px) calc(50% - 10px);
 		gap: 20px;
 
-		@media screen and (min-width: 767px) {
+		@media screen and (min-width: 500px) {
 			grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
 		}
 
@@ -27,29 +27,13 @@
 
 	&__item {
 		position: relative;
-		min-height: 300px;
-		width: calc(300px / 1.4);
-
-		
-		@media screen and (min-width: 767px) {
-			min-height: 350px;
-			width: calc(350px / 1.4);
-		}
-
-		@media screen and (min-width: 1199px) {
-			min-height: 350px;
-			width: calc(350px / 1.4);
-		}
-
-		@media screen and (min-width: 1439px) {
-			min-height: 400px;
-			width: calc(400px / 1.4);
-		}
+		min-height: 210px;
+		width: 100%;
 	}
 
 	&__info {
 		display: flex;
-		justify-content: flex-start;
+		justify-content: space-between;
 		margin-bottom: 8px;
 	}
 
@@ -57,18 +41,12 @@
 		margin-bottom: 10px;
 		border-radius: 3px;
 		overflow: hidden;
-		@media screen and (min-width: 1439px) {
-		}
+		min-height: 210px;
 	}
 
 	&__img {
 		width: 100%;
 		object-fit: cover;
-
-		// @media screen and (min-width: 767px) {
-		// 	width: 150px;
-		// 	height: 200px;
-		// }
 
 		@media screen and (min-width: 1439px) {
 			width: 100%;
@@ -86,10 +64,12 @@
 	}
 
 	&__caption {
+		max-width: 170px;
 		font-style: normal;
 		font-weight: 300;
 		font-size: 13px;
 		line-height: 16px;
+
 		@media screen and (min-width: 1439px) {
 			font-size: 18px;
 		}

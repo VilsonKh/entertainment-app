@@ -1,23 +1,22 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
 import Search from "../components/Search/Search";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import VideosGrid from "../components/VideosGrid/VideosGrid";
-
-
-
+import MainBoard from "./MainBoard";
+import AddButton from "../components/UI/AddButton";
+import { useSelector } from "react-redux";
+import { modalState } from "../store/videosSlice";
+import AddForm from "../components/AddForm/AddForm";
 
 const RootLayout = () => {
-	const [inputText, setInputText] = useState()
-
-	const HeaderMemo = () => useMemo(() => <Header/>, [inputText])
+	const isModalOpen = useSelector(modalState)
 	return (
 		<>
-			<HeaderMemo/>
-			<div className="container">
-				<Search setInputText={setInputText} inputText={inputText}/>
-				{inputText === undefined || inputText.length === 0 ? <Outlet /> : <VideosGrid filter={inputText}/>}
-			</div>
+			<Header/>
+			<MainBoard/>
+			<AddButton/>
+			{isModalOpen && <AddForm/>}
 		</>
 	);
 };

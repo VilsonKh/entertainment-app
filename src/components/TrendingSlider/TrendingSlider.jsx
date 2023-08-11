@@ -3,7 +3,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/bundle";
 import "../../../node_modules/slick-carousel/slick/slick.css";
 import Bookmark from "../UI/Bookmark";
-import { querySearch, useQueryAllContent } from "../../firebase/service";
 import { useDispatch, useSelector } from "react-redux";
 import { content, fetchTrendingVideos, trendingStatus, trendingVideo } from "../../store/videosSlice";
 import { useEffect, useState } from "react";
@@ -18,9 +17,6 @@ const TrendingSlider = () => {
 
 	const data = useSelector(trendingVideo);
 	const queryStatus = useSelector(trendingStatus);
-
-	//TODO don't forget to delete
-	querySearch()
 
 	const sliderItems = data.map((content, i) => {
 		const { year, category, rating, title, id, isBookmarked, thumbnail } = content;
@@ -48,7 +44,7 @@ const TrendingSlider = () => {
 					</div>
 					<div className="caption__title-container">
 						<p className="caption__title">{title}</p>
-						<p className="caption__rating">{rating}</p>
+						<p className="caption__rating" style={rating >= 9 ? {color: '#c4a876'} : null}>{rating}</p>
 					</div>
 				</div>
 			</SwiperSlide>

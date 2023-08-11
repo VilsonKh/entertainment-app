@@ -26,20 +26,21 @@ export const queryAllContent = async (filter, initialLimit) => {
 			queryRef = query(ref, where("category", "==", filter), limit(initialLimit));
 			break;
 		default:
+			console.log('сработал default')
 			queryRef = query(ref, orderBy('title'), startAt(filter), endAt(filter + '\uf8ff' ));
 	}
 
-
+	console.log(filter)
 	const res = await getDocs(queryRef);
 	return res;
 };
 
-export const querySearch = async() => {
+export const querySearch = async(inputText) => {
+
 	const ref = collection(db, 'videos')
 	const queryRef = query(ref, orderBy('title'), startAt('The'), endAt('The' + '\uf8ff' ))
 	const result = await getDocs(queryRef)
 	const con = result.docs.map((doc) => ({...doc.data()}))
-	console.log(con)
 }
 
 export const lazyLoad = async (filter, initialLimit, counter) => {

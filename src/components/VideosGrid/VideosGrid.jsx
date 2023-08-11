@@ -5,19 +5,22 @@ import { isBlockLoadButton, content, contentStatus, lazyLoadContentThunk, fetchC
 import "./VideosGrid.scss";
 import Bookmark from "../UI/Bookmark";
 import React, { useEffect } from "react";
-import oval from '../../assets/oval.svg'
+import dot from '../../assets/oval.svg'
 import ExternalImage from "../UI/ExternalImage";
 
 const VideosGrid = ({filter}) => {
 	const dispatch = useDispatch()
+
 	useEffect(() => {
 		dispatch(fetchContent(filter))
-	},[])
+	},[filter])
 
 	const data = useSelector(content)
 	const status = useSelector(contentStatus)
 	const isBlock = useSelector(isBlockLoadButton)
 	const lazyLoadStutus = useSelector(lazyStatus)
+
+	console.log(filter)
 
 	const onLoadButtonClick = () => {
 		dispatch(lazyLoadContentThunk(filter))
@@ -36,7 +39,7 @@ const VideosGrid = ({filter}) => {
 							<div className="recommended__caption">
 								<div className="recommended__info">
 									<p className="recommended__year">{year}</p>
-									<img src={oval} alt="" />
+									<img src={dot} alt="dot" />
 									<div className="recommended__category-container align-items-center">
 										<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 											<path
@@ -49,7 +52,8 @@ const VideosGrid = ({filter}) => {
 
 										<p className="recommended__category">{category}</p>
 									</div>
-									<p className="caption__rating">{rating}</p>
+									<img src={dot} alt="dot" />
+									<p className="caption__rating" style={rating >= 9 ? {color: '#c4a876'} : null}>{rating}</p>
 								</div>
 								<div className="recommended__title">{title}</div>
 							</div>

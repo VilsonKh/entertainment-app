@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { collection, getDocs, limit, query, startAfter, where } from "firebase/firestore";
 import { db } from "../firebase/config.js";
-import { lazyLoad, queryAllContent, querySearch, queryWishlistItems } from "../firebase/service.jsx";
+import { lazyLoad, queryAllContent, queryWishlistItems } from "../firebase/service.jsx";
 
 const initialState = {
 	trendingVideo: [],
@@ -10,6 +10,7 @@ const initialState = {
 	contentStatus: 'idle',
 	isBlockLoadButton: false,
 	lazyLoadStatus: "idle",
+	isModalOpen: false,
 };
 
 let initialLimit = null;
@@ -66,13 +67,9 @@ export const videosSlice = createSlice({
 	name: "videos",
 	initialState,
 	reducers: {
-		getTrending(state, action) {
-			state.trendingVideo.push(action.payload);
-		},
-		incrementLimit(state, action) {
-			console.log("increment");
-			state.loadingLimit = state.loadingLimit + 3;
-		},
+		setModalState(state) {
+			state.isModalOpen = !state.isModalOpen
+		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -88,10 +85,12 @@ export const videosSlice = createSlice({
 			})
 			.addCase(fetchContent.fulfilled, (state, action) => {
 				state.contentStatus = "succeeded";
+				state.isBlockLoadButton = false
 				state.content = [...action.payload];
 			})
 			.addCase(fetchContent.pending, (state, action) => {
 				state.contentStatus = "loading";
+				state.isBlockLoadButton = false
 			})
 			.addCase(fetchContent.rejected, (state, action) => {
 				state.contentStatus = "rejected";
@@ -120,7 +119,8 @@ export const videosSlice = createSlice({
 	},
 });
 
-export const { getTrending, incrementLimit } = videosSlice.actions;
+export const { setModalState } = videosSlice.actions;
+export const modalState = (state) => state.isModalOpen;
 export const trendingVideo = (state) => state.trendingVideo;
 export const trendingStatus = (state) => state.trendingStatus;
 export const content = (state) => state.content;

@@ -16,6 +16,7 @@ import gigachad from "../../assets/gigachad.jpg";
 import wishlist from "../../assets/wishlist.svg";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import React from "react";
 
 const chooseIcon = (small, big) => {
 	return window.screen.width > "767" ? big : small;
@@ -85,6 +86,6 @@ const Header = () => {
 			</div>
 		</header>
 	);
-};
+}
 
 export default Header;
