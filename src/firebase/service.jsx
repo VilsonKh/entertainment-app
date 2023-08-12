@@ -30,13 +30,17 @@ export const queryAllContent = async (filter, initialLimit) => {
 			queryRef = query(ref, orderBy('title'), startAt(filter), endAt(filter + '\uf8ff' ));
 	}
 
-	console.log(filter)
 	const res = await getDocs(queryRef);
 	return res;
 };
 
-export const querySearch = async(inputText) => {
+	export const postNewWishlistItem = async (data) => {
+		const ref = collection(db, 'wishlist');
+		await addDoc(ref, data)
+	}
 
+//TODO check to delete
+export const querySearch = async(inputText) => {
 	const ref = collection(db, 'videos')
 	const queryRef = query(ref, orderBy('title'), startAt('The'), endAt('The' + '\uf8ff' ))
 	const result = await getDocs(queryRef)
@@ -81,9 +85,13 @@ export const queryWishlistItems = async () => {
 };
 
 export const updateBookmark = async (videoId, bookmarkValue) => {
-	console.log("update bookmark");
-	console.log(videoId);
-	console.log(bookmarkValue);
 	const ref = doc(db, `videos/${videoId}`);
 	await updateDoc(ref, { isBookmarked: bookmarkValue });
 };
+
+export const getCurrentCard = async (videoId) => {
+	const ref = doc(db, `videos/${videoId}`);
+	const res = await getDoc(ref)
+	console.log(res.data())
+	return res
+}

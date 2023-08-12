@@ -1,10 +1,7 @@
 import "./Search.scss";
 import loupe from "../../assets/loupe.svg";
-import { useSearchDebouncer } from "./useSearchDebouncer";
 
-const Search = ({ setInputText, inputText }) => {
-
-
+const Search = ({ setInputText }) => {
 	
 	return (
 		<div className="search">

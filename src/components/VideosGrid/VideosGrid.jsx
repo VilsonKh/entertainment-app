@@ -7,6 +7,7 @@ import Bookmark from "../UI/Bookmark";
 import React, { useEffect } from "react";
 import dot from '../../assets/oval.svg'
 import ExternalImage from "../UI/ExternalImage";
+import { useNavigate } from "react-router-dom";
 
 const VideosGrid = ({filter}) => {
 	const dispatch = useDispatch()
@@ -26,13 +27,15 @@ const VideosGrid = ({filter}) => {
 		dispatch(lazyLoadContentThunk(filter))
 	}
 
+	const navigate = useNavigate()
+
 	return (
 		<>
 			<div className="recommended__gridContainer">
 				{status === 'succeeded' ? data.map((video, i) => {
 					const { thumbnail, year, category, rating, title, isBookmarked, id} = video;
 					return (
-						<div key={i} className="recommended__item">
+						<div key={i} className="recommended__item" onClick={() => navigate(id)}>
 							<div className="recommended__img-container">
 								<ExternalImage thumbnail={thumbnail}/>
 							</div>

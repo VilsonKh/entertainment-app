@@ -8,6 +8,7 @@ import Bookmarks from "./pages/Bookmarks";
 import Wishlist from "./pages/Wishlist";
 import AddForm from "./components/AddForm/AddForm";
 import RootLayout from "./pages/RootLayout";
+import ItemCard from "./components/ItemCard/ItemCard";
 
 const App = () => {
 	const router = createBrowserRouter([
@@ -15,7 +16,6 @@ const App = () => {
 			path: "/",
 			element: <RootLayout />,
 			// errorElement: <ErrorPage/>,
-
 			children: [
 				{
 					path: "/",
@@ -37,6 +37,10 @@ const App = () => {
 					path: "wishlist",
 					element: <Wishlist />,
 				},
+				{
+					path: ':filmName',
+					element: <ItemCard/>
+				}
 			],
 		},
 	]);

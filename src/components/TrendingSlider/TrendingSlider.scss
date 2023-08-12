@@ -105,6 +105,11 @@
 	//необходимо для того, чтобы слайды не растягивались
 	height: 200px !important;
 	width: calc(200px / 1.4) !important;
+	transition: all .3s ease !important;
+
+	&:hover {
+		opacity: 0.5;
+	}
 
 	@media screen and (min-width: 767px) {
 		height: 250px !important;

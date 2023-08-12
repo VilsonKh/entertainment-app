@@ -4,30 +4,43 @@ import { FormProvider, useForm } from "react-hook-form";
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 import Input from "./Input";
+import { postNewWishlistItem } from "../../firebase/service";
+import { useDispatch } from "react-redux";
+import { setModalState } from "../../store/videosSlice";
 
 const Form = () => {
 
+  const currentYear = new Date().getFullYear()
+  const dispatch = useDispatch()
   const validationSchema = yup
   .object({
     email: yup.string().email('invalid email').required('required'),
     title: yup.string().max(39, 'max 40 characters').required('required'),
     genre: yup.string(),
     category: yup.string(),
-    year: yup.number()
+    year: yup.string()
   })
   .required();
 
 	const formData = useForm({
     mode: 'onChange',
-    resolver: yupResolver(validationSchema)
+    resolver: yupResolver(validationSchema),
+    defaultValues: {
+      email : '',
+      title : '',
+      category: "don't know",
+      genre : '',
+      year : currentYear
+    }
   });
 
   const {handleSubmit, register} = formData;
 	const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-	const onSubmit = (data) => {
-
-    console.log(data)
+	const onSubmit = async (data) => {
+    console.log(data);
+    dispatch(setModalState())
+    await postNewWishlistItem(data)
   };
 
 	return (
@@ -47,7 +60,7 @@ const Form = () => {
             <Input inputType={'text'} inputName={'title'} required={true}/>
 					</div>
 					<div className="form__field">
-            <Input inputType={'text'} inputName={'year'} required={false}/>
+            <Input inputType={'number'} inputName={'year'} required={true}/>
 					</div>
 					<div className="form__field">
             <Input inputType={'text'} inputName={'category'} required={false}/>
@@ -64,7 +77,7 @@ const Form = () => {
 						</select>
 					</div>
 				</fieldset>
-				<button className="form__submitButton" type="submit" form={'addForm'} onClick={handleSubmit(onSubmit)}>
+				<button className="form__submitButton" type="submit" form='addForm' onClick={handleSubmit(onSubmit)}>
 					Submit
 				</button>
 			</form>

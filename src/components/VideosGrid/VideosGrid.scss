@@ -29,6 +29,10 @@
 		position: relative;
 		min-height: 210px;
 		width: 100%;
+		transition: all .3s ease;
+		&:hover {
+			opacity: 0.5;
+		}
 	}
 
 	&__info {
