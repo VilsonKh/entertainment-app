@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import preloader from '../../assets/preloader.gif'
+import preloader from '../../assets/preloader.gif';
+
 const ExternalImage = ({thumbnail}) => {
   const [url, setUrl] = useState(false);
 

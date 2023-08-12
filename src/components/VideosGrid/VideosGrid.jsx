@@ -21,8 +21,6 @@ const VideosGrid = ({filter}) => {
 	const isBlock = useSelector(isBlockLoadButton)
 	const lazyLoadStutus = useSelector(lazyStatus)
 
-	console.log(filter)
-
 	const onLoadButtonClick = () => {
 		dispatch(lazyLoadContentThunk(filter))
 	}

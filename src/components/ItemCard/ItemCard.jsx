@@ -15,10 +15,13 @@ const ItemCard = () => {
   useEffect(() => {
     dispatch(fetchCurrentItem(location.pathname.slice(1)))
   }, [dispatch])
+
+
   return (
     <div style={{width: "50%"}}>
       <h1>THIS IS ITEM CARD</h1>
-      <ExternalImage thumbnail={data[0].thumbnail}/>
+      <ExternalImage />
+      <p>{}</p>
     </div>
   )
 }

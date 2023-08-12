@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { collection, getDocs, limit, query, startAfter, where } from "firebase/firestore";
-import { db } from "../firebase/config.js";
 import { getCurrentCard, lazyLoad, queryAllContent, queryWishlistItems } from "../firebase/service.jsx";
 
 const initialState = {
@@ -12,6 +10,8 @@ const initialState = {
 	lazyLoadStatus: "idle",
 	isModalOpen: false,
 	currentCard: [],
+	searchContent: [],
+	searchStatus: 'idle'
 };
 
 let initialLimit = null;
@@ -25,6 +25,12 @@ if (window.screen.width < 1919) {
 if (window.screen.width < 1200) {
 	initialLimit = 3;
 }
+
+export const fetchSearchContent = createAsyncThunk('searchItem', async (filter) => {
+	const res = await queryAllContent(filter);
+	const result = res.docs.map((doc) => ({...doc.data(), id: doc.id}));
+	return result
+})
 
 export const fetchCurrentItem = createAsyncThunk("currentCard", async (videoId) => {
 	console.log(videoId)
@@ -78,6 +84,9 @@ export const videosSlice = createSlice({
 		setModalState(state) {
 			state.isModalOpen = !state.isModalOpen;
 		},
+		cleanSearchContent(state) {
+			state.searchContent = []
+		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -133,11 +142,24 @@ export const videosSlice = createSlice({
 			})
 			.addCase(fetchCurrentItem.rejected, (state, action) => {
 				state.contentStatus = "rejected";
+			})
+			.addCase(fetchSearchContent.fulfilled, (state, action) => {
+				state.searchStatus = "succeeded";
+				state.searchContent = [...action.payload];
+			})
+			.addCase(fetchSearchContent.pending, (state, action) => {
+				state.searchStatus = "loading";
+			})
+			.addCase(fetchSearchContent.rejected, (state, action) => {
+				state.searchStatus = "rejected";
 			});
+
 	},
 });
 
-export const { setModalState } = videosSlice.actions;
+export const { setModalState, cleanSearchContent } = videosSlice.actions;
+export const searchContent = (state) => state.searchContent;
+export const searchStatus = (state) => state.searchStatus;
 export const currentCard = (state) => state.currentCard;
 export const modalState = (state) => state.isModalOpen;
 export const trendingVideo = (state) => state.trendingVideo;
