@@ -15,12 +15,6 @@ const MainBoard = () => {
 			{search && <SearchPopup filter={search}/>}
 		</div>
 	);
-  // return (
-  //   <div className="container">
-  //     <Search setInputText={setQuery}/>
-  //     <Outlet/>
-  //   </div>
-  // )
 };
 
 export default MainBoard;

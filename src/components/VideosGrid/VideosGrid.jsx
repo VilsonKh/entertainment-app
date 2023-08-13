@@ -33,7 +33,7 @@ const VideosGrid = ({filter}) => {
 				{status === 'succeeded' ? data.map((video, i) => {
 					const { thumbnail, year, category, rating, title, isBookmarked, id} = video;
 					return (
-						<div key={i} className="recommended__item" onClick={() => navigate(id)}>
+						<div key={i} className="recommended__item" onClick={() => navigate(`/${id}`)}>
 							<div className="recommended__img-container">
 								<ExternalImage thumbnail={thumbnail}/>
 							</div>

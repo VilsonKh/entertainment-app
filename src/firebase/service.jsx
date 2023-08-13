@@ -92,6 +92,13 @@ export const updateBookmark = async (videoId, bookmarkValue) => {
 export const getCurrentCard = async (videoId) => {
 	const ref = doc(db, `videos/${videoId}`);
 	const res = await getDoc(ref)
-	console.log(res.data())
+	
+	return res
+}
+
+export const getReviews = async(docId) => {
+	const ref = collection(db, `videos/${docId}/reviews`)
+	const res = await getDocs(ref)
+	console.log(res.docs.map((doc) => ({...doc.data()})))
 	return res
 }

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCurrentCard, lazyLoad, queryAllContent, queryWishlistItems } from "../firebase/service.jsx";
+import { getCurrentCard, getReviews, lazyLoad, queryAllContent, queryWishlistItems } from "../firebase/service.jsx";
 
 const initialState = {
 	trendingVideo: [],
@@ -9,9 +9,10 @@ const initialState = {
 	isBlockLoadButton: false,
 	lazyLoadStatus: "idle",
 	isModalOpen: false,
-	currentCard: [],
+	currentCard: {},
 	searchContent: [],
-	searchStatus: 'idle'
+	searchStatus: "idle",
+	reviews: [],
 };
 
 let initialLimit = null;
@@ -26,14 +27,20 @@ if (window.screen.width < 1200) {
 	initialLimit = 3;
 }
 
-export const fetchSearchContent = createAsyncThunk('searchItem', async (filter) => {
+export const fetchReviews = createAsyncThunk("reviews", async (docId) => {
+	console.log(docId)
+	const res = await getReviews(docId);
+	const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+	return result;
+});
+
+export const fetchSearchContent = createAsyncThunk("searchItem", async (filter) => {
 	const res = await queryAllContent(filter);
-	const result = res.docs.map((doc) => ({...doc.data(), id: doc.id}));
-	return result
-})
+	const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+	return result;
+});
 
 export const fetchCurrentItem = createAsyncThunk("currentCard", async (videoId) => {
-	console.log(videoId)
 	const res = await getCurrentCard(videoId);
 	const result = res.data();
 	return result;
@@ -85,8 +92,8 @@ export const videosSlice = createSlice({
 			state.isModalOpen = !state.isModalOpen;
 		},
 		cleanSearchContent(state) {
-			state.searchContent = []
-		}
+			state.searchContent = [];
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -135,7 +142,7 @@ export const videosSlice = createSlice({
 			})
 			.addCase(fetchCurrentItem.fulfilled, (state, action) => {
 				state.contentStatus = "succeeded";
-				state.currentCard = [action.payload];
+				state.currentCard = { ...action.payload };
 			})
 			.addCase(fetchCurrentItem.pending, (state, action) => {
 				state.contentStatus = "loading";
@@ -152,12 +159,16 @@ export const videosSlice = createSlice({
 			})
 			.addCase(fetchSearchContent.rejected, (state, action) => {
 				state.searchStatus = "rejected";
-			});
-
+			})
+			.addCase(fetchReviews.fulfilled, (state, action) => {
+				state.reviews = [...action.payload];
+			})
+			
 	},
 });
 
 export const { setModalState, cleanSearchContent } = videosSlice.actions;
+export const reviewsContetn = (state) => state.reviews;
 export const searchContent = (state) => state.searchContent;
 export const searchStatus = (state) => state.searchStatus;
 export const currentCard = (state) => state.currentCard;

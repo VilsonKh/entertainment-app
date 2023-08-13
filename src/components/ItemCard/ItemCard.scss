@@ -1,0 +1,53 @@
+@import '../../variables/variables';
+
+.itemCard {
+
+  &__heading {
+    @include heading-fs-s;
+    text-align: center;
+  }
+
+  &__thumbnail {
+    width: 50%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
+
+  &__description {
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+
+  &__rating {
+    background: $color-light-blue;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  &__rating-number {
+    font-size: 4rem;
+    text-align: center;
+  }
+
+  &__total-rating {
+    text-align: center;
+    opacity: .5;
+    margin-bottom: 10px;
+  }
+
+  &__addFeedback {
+    background: $color-red;
+    border: none;
+    color: white;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 20px;
+    transition: all .3s ease;
+
+    &:hover {
+      opacity: .5;
+    }
+
+  }
+}
