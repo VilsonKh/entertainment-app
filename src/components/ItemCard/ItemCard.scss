@@ -1,9 +1,65 @@
 @import "../../variables/variables";
 
 .itemCard {
+	&__container {
+		display: grid;
+		grid-template-columns: 1fr;
+		@media screen and (min-width: 767px) {
+			grid-template-columns: calc(33% - 10px) calc(66% - 10px);
+			gap: 20px;
+		}
+	}
+
+	&__main {
+		@media screen and (min-width: 767px) {
+		}
+	}
+
+	&__row {
+		display: flex;
+		justify-content: space-between;
+		width: 90%;
+		&:not(:last-child) {
+			margin-bottom: 15px;
+		}
+
+		@media screen and (min-width: 1439px) {
+			&:not(:last-child) {
+				margin-bottom: 20px;
+			}
+		}
+	}
+
+	&__aboutFilm {
+		display: none;
+		@media screen and (min-width: 767px) {
+			display: block;
+			grid-area: 2/2/4/3;
+		}
+	}
+
+	&__infoItem {
+		width: 100%;
+		opacity: 0.7;
+
+		@media screen and (min-width: 1439px) {
+			@include text-fs-m;
+		}
+	}
+
+	&__infoData {
+		text-align: left;
+		width: 100%;
+	}
+
 	&__heading {
 		@include heading-fs-m;
 		text-align: center;
+
+		@media screen and (min-width: 767px) {
+			grid-area: 1/2/2/3;
+			margin: 0;
+		}
 	}
 
 	&__subheading {
@@ -14,11 +70,27 @@
 		width: 50%;
 		margin: 0 auto;
 		margin-bottom: 20px;
+		max-width: 300px;
+		min-height: 200px;
+		position: relative;
+
+		@media screen and (min-width: 767px) {
+			grid-area: 1/1/3/2;
+			width: 100%;
+		}
+
+		@media screen and (min-width: 1439px) {
+		}
 	}
 
 	&__description {
 		text-align: justify;
 		margin-bottom: 20px;
+
+		@media screen and (min-width: 767px) {
+			grid-area: 4/2/5/3;
+			margin: 0;
+		}
 	}
 
 	&__rating {
@@ -26,6 +98,16 @@
 		border-radius: 5px;
 		padding: 10px;
 		margin-bottom: 20px;
+
+		@media screen and (min-width: 767px) {
+			margin: 0;
+		}
+	}
+
+	&__ratingHeading {
+		@media screen and (min-width: 767px) {
+			display: none;
+		}
 	}
 
 	&__rating-number {
@@ -40,55 +122,71 @@
 		margin-bottom: 10px;
 	}
 
-	&__addFeedback {
-    @include actionButton;
-    margin: 0 auto;
+	&__reviewsSlider {
+		@media screen and (min-width: 767px) {
+			grid-area: 5/2/6/3;
+		}
 	}
-
-	&__newReviewForm {
-		border-radius: 5px;
-		overflow: hidden;
-
-	}
-
-	&__input {
-		margin: 0;
-		@include input;
-		margin-bottom: 10px;
-	}
-
-  &__textareaGroup {
-    background: $color-light-blue;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-
-  &__name {
-    padding: 10px;
-  }
-
-
-	&__counter {
-		opacity: 0.5;
-		font-size: 15px;
-	}
-
-  &__submit {
-    @include actionButton;
-    margin-left: auto;
-    width: 100px;
-  }
 }
 
-input[aria-invalid="true"], div[aria-invalid='true'] {
+input[aria-invalid="true"],
+div[aria-invalid="true"] {
 	border: 1px solid $color-red;
 }
 
 .popup-overlay {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,.5);
-  top: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	top: 0;
+}
+
+.tools {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+	margin-bottom: 20px;
+
+	@media screen and (min-width: 767px) {
+		grid-area: 3/1/4/2;
+	}
+	&__item {
+		cursor: pointer;
+	}
+
+	&__rate-button {
+		background: transparent;
+		border: none;
+		color: gray;
+		width: 50px;
+	}
+
+	&__rate-icon {
+		width: 30px;
+		cursor: pointer;
+	}
+
+	&__rate-text {
+		text-align: center;
+		color: $color-light-purple;
+		font-size: 12px;
+	}
+
+	&__bookmark-button {
+		background: transparent;
+		border: none;
+		width: 100%;
+	}
+
+	&__bookmark-text {
+		text-align: center;
+	}
+
+	&__bookmark-icon {
+		width: 26px;
+		display: block;
+		margin: 0 auto;
+		cursor: pointer;
+	}
 }

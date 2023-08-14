@@ -1,9 +1,13 @@
 import { useForm } from "react-hook-form";
 import TextAreaInput from "./TextAreaInput";
 import { postNewReview } from "../../firebase/service";
+import './NewReviewForm.scss';
 import { useState } from "react";
 
 const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
+
+  const [charLength, setCharLength] = useState(0)
+
 	const formData = useForm();
 	const {
 		handleSubmit,
@@ -12,24 +16,23 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 		reset,
 	} = formData;
 
-
-
 	const onSubmit = async (values) => {
     setIsMessageOpen(true)
-		reset();
-    // setTimeout(() => {
-      // setIsMessageOpen(false)
-    // }, 2000);
+    setTimeout(() => {
+      reset();
+      setIsMessageOpen(false)
+      setCharLength(0)
+    }, 2000);
 		// await postNewReview(currentLocation, values)
 	};
 
 	const errorIndicator = errors["name"] ? "true" : "false";
 
 	return (
-		<form className="itemCard__newReviewForm" onSubmit={handleSubmit(onSubmit)}>
+		<form className="reviewForm" onSubmit={handleSubmit(onSubmit)}>
 			<h2 className="itemCard__subheading">ADD NEW REVIEW</h2>
 			<input
-				className="itemCard__input itemCard__name"
+				className="reviewForm__input reviewForm__name"
 				type="text"
 				placeholder="Name"
 				{...register("name", {
@@ -37,8 +40,8 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 				})}
 				aria-invalid={errorIndicator}
 			/>
-			<TextAreaInput rowsQuantity={4} register={register} errors={errors} />
-			<button type="submit" className="itemCard__submit">
+			<TextAreaInput rowsQuantity={4} register={register} errors={errors} setCharLength={setCharLength} charLength={charLength}/>
+			<button type="submit" className="reviewForm__submit">
 				SUBMIT
 			</button>
 		</form>

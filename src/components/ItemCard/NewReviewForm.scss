@@ -1,0 +1,45 @@
+@import "../../variables/variables.scss";
+
+.reviewForm {
+
+  @media screen and (min-width: 767px) {
+    grid-area: 6/2/7/3;
+  }
+	&__addFeedback {
+		@include actionButton;
+		margin: 0 auto;
+	}
+
+	&__newReviewForm {
+		border-radius: 5px;
+		overflow: hidden;
+	}
+
+	&__input {
+		margin: 0;
+		@include input;
+		margin-bottom: 10px;
+	}
+
+	&__textareaGroup {
+		background: $color-light-blue;
+		padding: 10px;
+		margin-bottom: 10px;
+		border-radius: 5px;
+	}
+
+	&__name {
+		padding: 10px;
+	}
+
+	&__counter {
+		opacity: 0.5;
+		font-size: 15px;
+	}
+
+	&__submit {
+		@include actionButton;
+		margin-left: auto;
+		width: 100px;
+	}
+}

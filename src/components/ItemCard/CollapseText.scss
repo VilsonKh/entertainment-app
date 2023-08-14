@@ -4,6 +4,7 @@
 		background: $color-light-blue;
 		padding: 10px;
 		border-radius: 5px;
+		min-height: 160px;
 	}
 
 	&__name {
@@ -30,6 +31,10 @@
     border: none;
     margin-left: auto;
 		margin-top: 10px;
+
+		&[disabled] {
+			opacity: .5;
+		}
   }
 
 

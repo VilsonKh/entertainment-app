@@ -10,7 +10,7 @@ const ExternalImage = ({thumbnail}) => {
         style={{display : url ? 'block' : 'none'}}
         onLoad={() => setUrl(true)}
         src={thumbnail} 
-        alt="" 
+        alt="film cover" 
         />
         {!url && <img src={preloader} alt='' className='img-placeholder'/>}
       {}

@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 
-const TextAreaInput = ({ rowsQuantity, register, errors}) => {
-
-  const [charLength, setCharLength] = useState(0)
+const TextAreaInput = ({ rowsQuantity, register, errors, setCharLength, charLength}) => {
 
 
-	const errorIndicator = errors?.['name'] ? "true" : "false";
+
+
+	const errorIndicator = errors['message'] ? "true" : "false";
 
 	return (
-		<div className="itemCard__textareaGroup" aria-invalid={errorIndicator}>
-			<textarea className="itemCard__input itemCard__message" rows={rowsQuantity} wrap="soft" placeholder="Type here your review" maxLength={1000} onInput={(e) => setCharLength(e.target.value.length)}
+		<div className="reviewForm__textareaGroup" aria-invalid={errorIndicator}>
+			<textarea className="reviewForm__input reviewForm__message" rows={rowsQuantity} wrap="soft" placeholder="Type here your review" maxLength={1000} onInput={(e) => setCharLength(e.target.value.length)}
       {...register('message', {
         required: 'required'
       })}
       />
-			<span className="itemCard__counter">{`${charLength}/1000`}</span>
+			<span className="reviewForm__counter">{`${charLength}/1000`}</span>
 		</div>
 	);
 };

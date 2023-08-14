@@ -70,7 +70,7 @@ const RatingPopup = ({ thumbnail, title, setIsRatingPopupOpen }) => {
 					)}
 				</div>
 			</div>
-		</div> : <AcceptPopup/>)
+		</div> : <AcceptPopup text={'rate'}/>)
 	
 };
 
