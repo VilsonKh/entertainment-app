@@ -102,3 +102,9 @@ export const getReviews = async(docId) => {
 	console.log(res.docs.map((doc) => ({...doc.data()})))
 	return res
 }
+
+export const postNewReview = async(docId, data) => {
+	console.log(data)
+	const ref = collection(db, `videos/${docId}/reviews`)
+	const res = await addDoc(ref, data);
+}

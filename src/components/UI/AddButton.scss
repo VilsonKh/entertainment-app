@@ -1,33 +1,30 @@
 .addButton {
+	&__button {
+		background: #fc4747;
+		border: none;
+		border-radius: 50%;
+		color: white;
+    z-index: 1;
+		width: 50px;
+		height: 50px;
+		transition: 0.3s ease;
+		padding: 0;
+		position: fixed;
+		bottom: 10%;
+		right: 10%;
+		font-size: 3rem;
 
-  &__button {
-    background: #fc4747;
-    border: none;
-    border-radius: 50%;
-    color: white;
+		& span {
+			position: relative;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -55%);
+			display: block;
+		}
 
-    width: 50px;
-    height: 50px;
-    transition: .3s ease;
-    padding: 0;
-    position: fixed;
-    bottom: 10%;
-    right: 10%;
-      font-size: 3rem;
-
-
-    & span {
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -55%);
-      display: block;
-    }
-
-    &:hover {
-      background-color: white;
-      color: black;
-    
-    }
-  }
+		&:hover {
+			background-color: white;
+			color: black;
+		}
+	}
 }

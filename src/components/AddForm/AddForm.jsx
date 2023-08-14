@@ -11,7 +11,7 @@ const AddForm = () => {
 
 	return (
 		<div className="addForm__container" onClick={(e) => overlayClick(e)}>
-			<Form />
+			<Form  />
 		</div>
 	);
 };

@@ -22,7 +22,7 @@ const TrendingSlider = () => {
 		const { year, category, rating, title, id, isBookmarked, thumbnail } = content;
 	
 		return (
-			<SwiperSlide key={i} className="swiper-slide">
+			<SwiperSlide key={i} className="trending__slide">
 				<ExternalImage thumbnail={thumbnail}/>
 				<Bookmark isBookmarked={isBookmarked} videoId={id} />
 				<div className="trending__caption">

@@ -1,53 +1,94 @@
-@import '../../variables/variables';
+@import "../../variables/variables";
 
 .itemCard {
+	&__heading {
+		@include heading-fs-m;
+		text-align: center;
+	}
 
-  &__heading {
-    @include heading-fs-s;
-    text-align: center;
-  }
+	&__subheading {
+		@include heading-fs-s;
+	}
 
-  &__thumbnail {
-    width: 50%;
+	&__thumbnail {
+		width: 50%;
+		margin: 0 auto;
+		margin-bottom: 20px;
+	}
+
+	&__description {
+		text-align: justify;
+		margin-bottom: 20px;
+	}
+
+	&__rating {
+		background: $color-light-blue;
+		border-radius: 5px;
+		padding: 10px;
+		margin-bottom: 20px;
+	}
+
+	&__rating-number {
+		font-size: 4rem;
+		text-align: center;
+		line-height: 1;
+	}
+
+	&__total-rating {
+		text-align: center;
+		opacity: 0.5;
+		margin-bottom: 10px;
+	}
+
+	&__addFeedback {
+    @include actionButton;
     margin: 0 auto;
-    margin-bottom: 20px;
-  }
+	}
 
-  &__description {
-    text-align: justify;
-    margin-bottom: 20px;
-  }
+	&__newReviewForm {
+		border-radius: 5px;
+		overflow: hidden;
 
-  &__rating {
+	}
+
+	&__input {
+		margin: 0;
+		@include input;
+		margin-bottom: 10px;
+	}
+
+  &__textareaGroup {
     background: $color-light-blue;
-    border-radius: 5px;
     padding: 10px;
-  }
-
-  &__rating-number {
-    font-size: 4rem;
-    text-align: center;
-  }
-
-  &__total-rating {
-    text-align: center;
-    opacity: .5;
     margin-bottom: 10px;
+    border-radius: 5px;
   }
 
-  &__addFeedback {
-    background: $color-red;
-    border: none;
-    color: white;
+  &__name {
     padding: 10px;
-    display: block;
-    margin: 0 auto;
-    border-radius: 20px;
-    transition: all .3s ease;
-
-    &:hover {
-      opacity: .5;
-    }
-
   }
+
+
+	&__counter {
+		opacity: 0.5;
+		font-size: 15px;
+	}
+
+  &__submit {
+    @include actionButton;
+    margin-left: auto;
+    width: 100px;
+  }
+}
+
+input[aria-invalid="true"], div[aria-invalid='true'] {
+	border: 1px solid $color-red;
+}
+
+.popup-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.5);
+  top: 0;
 }

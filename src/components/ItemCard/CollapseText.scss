@@ -1,0 +1,45 @@
+@import '../../variables/variables.scss';
+.review {
+	&__item {
+		background: $color-light-blue;
+		padding: 10px;
+		border-radius: 5px;
+	}
+
+	&__name {
+		padding: 10px 0;
+		margin-bottom: 10px;
+		border-bottom: 1px solid $color-light-purple;
+	}
+
+	&__text {
+		text-align: justify;
+		&[aria-hidden="false"] {
+			display: -webkit-box;
+			-webkit-line-clamp: 4;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+  &__collapseButton {
+    color: $color-red;
+    background: transparent;
+    display: flex;
+    border: none;
+    margin-left: auto;
+		margin-top: 10px;
+  }
+
+
+  &__collapseIcon {
+    display: block;
+    font-size: 15px;
+    margin-left: 10px;
+
+    &.open {
+      transform: rotate(180deg)
+    }
+  }
+}
