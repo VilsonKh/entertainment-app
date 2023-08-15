@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import preloader from '../../assets/preloader.gif';
 
-const ExternalImage = ({thumbnail}) => {
+const ExternalImage = ({thumbnail, opacity=false}) => {
   const [url, setUrl] = useState(false);
 
   return (
     <>
-      <img className="movie-thumb" 
+      <img className={`movie-thumb${opacity ? ' opacity' : ''}`}
         style={{display : url ? 'block' : 'none'}}
         onLoad={() => setUrl(true)}
         src={thumbnail} 

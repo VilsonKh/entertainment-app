@@ -17,6 +17,7 @@ const Search = ({ setInputText }) => {
 							 type="text" 
 							 className="search__input" 
 							 placeholder="Search for movies or TV serials"
+							 
 							 />
 				
 			</div>

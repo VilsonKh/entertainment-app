@@ -20,7 +20,7 @@
     width: 92%;
     top: 130px; 
     left: 0;
-    max-width: 300px;
+    max-width: 400px;
     margin: 0 auto;
     margin-top: 10px;
     border-radius: 10px;
@@ -44,6 +44,11 @@
     position: relative;
     border-radius: 3%;
     overflow: hidden;
+    width: 40%;
+  }
+
+  &__info {
+    // width: 40%;
   }
 
   &__item {
@@ -56,7 +61,5 @@
 
   }
 
-  &__thumbnail {
-    width: 20%;
-  }
+
 }

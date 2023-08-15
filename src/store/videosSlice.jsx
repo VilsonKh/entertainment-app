@@ -6,13 +6,14 @@ const initialState = {
 	trendingStatus: "idle",
 	content: [],
 	contentStatus: "idle",
-	isBlockLoadButton: false,
+	isEndOfList: false,
 	lazyLoadStatus: "idle",
 	isModalOpen: false,
 	currentCard: {},
 	searchContent: [],
 	searchStatus: "idle",
 	reviews: [],
+	isSearchPopupOpen: false,
 };
 
 let initialLimit = null;
@@ -54,6 +55,7 @@ export const fetchWishlistItems = createAsyncThunk("wishlist", async () => {
 
 export const lazyLoadContentThunk = createAsyncThunk("videos/paginateRecommended", async (filter, { getState }) => {
 	const content = getState();
+	console.log('lazy loading...')
 	try {
 		const next = await lazyLoad(filter, initialLimit, content.content.length);
 		const result = next.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
@@ -94,6 +96,13 @@ export const videosSlice = createSlice({
 		cleanSearchContent(state) {
 			state.searchContent = [];
 		},
+		cleanCurrentItemContent(state) {
+			console.log('clean current item')
+			state.currentCard = {};
+		},
+		setIsSearchPopupOpen(state, action) {
+			state.isSearchPopupOpen = action.payload;
+		}
 	},
 	extraReducers: (builder) => {
 		builder
@@ -109,19 +118,19 @@ export const videosSlice = createSlice({
 			})
 			.addCase(fetchContent.fulfilled, (state, action) => {
 				state.contentStatus = "succeeded";
-				state.isBlockLoadButton = false;
+				state.isEndOfList = false;
 				state.content = [...action.payload];
 			})
 			.addCase(fetchContent.pending, (state, action) => {
 				state.contentStatus = "loading";
-				state.isBlockLoadButton = false;
+				state.isEndOfList = false;
 			})
 			.addCase(fetchContent.rejected, (state, action) => {
 				state.contentStatus = "rejected";
 			})
 			.addCase(lazyLoadContentThunk.fulfilled, (state, action) => {
 				state.content.push(...action.payload);
-				action.payload.length < initialLimit ? (state.isBlockLoadButton = true) : (state.isBlockLoadButton = false);
+				action.payload.length < initialLimit ? (state.isEndOfList = true) : (state.isEndOfList = false);
 				state.lazyLoadStatus = "succeeded";
 			})
 			.addCase(lazyLoadContentThunk.pending, (state, action) => {
@@ -167,7 +176,7 @@ export const videosSlice = createSlice({
 	},
 });
 
-export const { setModalState, cleanSearchContent } = videosSlice.actions;
+export const { setModalState, cleanSearchContent, cleanCurrentItemContent, setIsSearchPopupOpen } = videosSlice.actions;
 export const reviewsContetn = (state) => state.reviews;
 export const searchContent = (state) => state.searchContent;
 export const searchStatus = (state) => state.searchStatus;
@@ -178,5 +187,6 @@ export const trendingStatus = (state) => state.trendingStatus;
 export const content = (state) => state.content;
 export const contentStatus = (state) => state.contentStatus;
 export const lazyStatus = (state) => state.lazyLoadStatus;
-export const isBlockLoadButton = (state) => state.isBlockLoadButton;
+export const isEndOfList = (state) => state.isEndOfList;
+export const searchPopupState = (state) => state.isSearchPopupOpen;
 export default videosSlice.reducer;

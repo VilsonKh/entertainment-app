@@ -27,9 +27,9 @@ const ItemCard = () => {
 
 
 	useEffect(() => {
-		dispatch(fetchCurrentItem(location.pathname.slice(1))).unwrap();
+		dispatch(fetchCurrentItem(currentLocation));
 		dispatch(fetchReviews(currentLocation));
-	}, [dispatch]);
+	}, [dispatch, currentLocation]);
 
 	const [isRatingPopupOpen, setIsRatingPopupOpen] = useState(false);
 
@@ -37,7 +37,7 @@ const ItemCard = () => {
 		setIsCurrentBookmarked(data.isBookmarked);
 	}, [data]);
 
-  console.log(data.info)
+
 	return (
 		<>
 			<div className="itemCard__container">
@@ -92,7 +92,7 @@ const ItemCard = () => {
                   spaceBetween={20}
                   breakpoints={{
                     1439: {
-                      slidesPerView: 2
+                      slidesperview: 2
                     }
                   }}>
   					{reviewsData.map((review, i) => {

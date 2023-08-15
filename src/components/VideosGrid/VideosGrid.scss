@@ -29,10 +29,7 @@
 		position: relative;
 		min-height: 210px;
 		width: 100%;
-		transition: all .3s ease;
-		&:hover {
-			opacity: 0.5;
-		}
+		transition: all 0.3s ease;
 	}
 
 	&__info {
@@ -46,6 +43,10 @@
 		border-radius: 3px;
 		overflow: hidden;
 		min-height: 210px;
+
+		& .movie-thumb:hover {
+			opacity: 0.5;
+		}
 	}
 
 	&__img {
@@ -76,6 +77,7 @@
 
 		@media screen and (min-width: 1439px) {
 			font-size: 18px;
+			max-width: 100%;
 		}
 	}
 
@@ -86,6 +88,17 @@
 		@media screen and (min-width: 1439px) {
 			font-size: 18px;
 		}
+	}
+
+	&__end {
+		text-align: center;
+		color: gray;
+		margin-top: 20px;
+	}
+
+	&__preloader {
+		display: block;
+		margin: 0 auto;
 	}
 }
 

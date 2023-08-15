@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./SearchPopup.scss";
 import { useEffect } from "react";
-import { content, contentStatus, fetchSearchContent, searchContent, searchStatus } from "../../store/videosSlice";
+import { cleanCurrentItemContent, content, contentStatus, fetchSearchContent, searchContent, searchStatus, setIsSearchPopupOpen } from "../../store/videosSlice";
 import ExternalImage from "../UI/ExternalImage";
 import { useNavigate } from "react-router-dom";
 
@@ -17,13 +17,19 @@ const SearchPopup = ({ filter }) => {
 
   const navigate = useNavigate()
 
+	const onItemClick = (id) => {
+		dispatch(cleanCurrentItemContent())
+		navigate(`/${id}`)
+		dispatch(setIsSearchPopupOpen(false))
+	}
+
 	return (
 
 			<div className="searchPopup__container">
 				<div className="searchPopup__heading">Search Result</div>
 				{data.map((content, i) => {
 					return (
-						<div className="searchPopup__item" key={i} onClick={() => navigate(content.id)}>
+						<div className="searchPopup__item" key={i} onClick={() => onItemClick(content.id)}>
 							<div className="searchPopup__thumbnail">
 								<ExternalImage thumbnail={content.thumbnail} />
 							</div>

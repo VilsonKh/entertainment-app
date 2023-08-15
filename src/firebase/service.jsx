@@ -26,7 +26,6 @@ export const queryAllContent = async (filter, initialLimit) => {
 			queryRef = query(ref, where("category", "==", filter), limit(initialLimit));
 			break;
 		default:
-			console.log('сработал default')
 			queryRef = query(ref, orderBy('title'), startAt(filter), endAt(filter + '\uf8ff' ));
 	}
 
@@ -48,7 +47,6 @@ export const querySearch = async(inputText) => {
 }
 
 export const lazyLoad = async (filter, initialLimit, counter) => {
-	console.log(counter)
 	let queryRef = null;
 	const ref = collection(db, 'videos')
 	switch (filter) {
@@ -78,7 +76,6 @@ export const lazyLoad = async (filter, initialLimit, counter) => {
 };
 
 export const queryWishlistItems = async () => {
-	console.log("queryWishLIstItems");
 	const ref = collection(db, "wishlist");
 	const res = await getDocs(ref);
 	return res;
@@ -99,12 +96,10 @@ export const getCurrentCard = async (videoId) => {
 export const getReviews = async(docId) => {
 	const ref = collection(db, `videos/${docId}/reviews`)
 	const res = await getDocs(ref)
-	console.log(res.docs.map((doc) => ({...doc.data()})))
 	return res
 }
 
 export const postNewReview = async(docId, data) => {
-	console.log(data)
 	const ref = collection(db, `videos/${docId}/reviews`)
-	const res = await addDoc(ref, data);
+	await addDoc(ref, data);
 }
