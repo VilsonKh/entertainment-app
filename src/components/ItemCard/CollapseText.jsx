@@ -10,7 +10,9 @@ const CollapseText = ({ name, message }) => {
 				{message}
 			</p>
 
-			<button className="review__collapseButton" onClick={() => setIsCollapsed(!isCollapsed)} disabled={message.length > 357 ? false : true}>
+			<button className="review__collapseButton" 
+							onClick={() => setIsCollapsed(!isCollapsed)} 
+							disabled={message.length > 357 ? false : true}>
 				Show more <p className={`review__collapseIcon ${isCollapsed ? "open" : null}`}>&#709;</p>
 			</button>
 		</div>

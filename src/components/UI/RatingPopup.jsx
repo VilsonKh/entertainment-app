@@ -37,7 +37,7 @@ const RatingPopup = ({ thumbnail, title, setIsRatingPopupOpen }) => {
 			<div className="ratingPopup__container">
 				<div className="ratingPopup__filmBox">
 					<img className="ratingPopup__thumbnail" src={thumbnail} alt="filmImg" />
-					<p>{title}</p>
+					<p className="ratingPopup__heading">{title}</p>
 				</div>
 				<div className={`ratingPopup__chosenMark ${chosenMarkColor}`}>
 					{rating === 0 ? <p className="ratingPopup__placeholder">SET A MARK</p> : <p className="ratingPopup__rate">{rating}</p>}

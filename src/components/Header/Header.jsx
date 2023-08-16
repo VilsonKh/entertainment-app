@@ -2,20 +2,8 @@ import "./Header.scss";
 
 import logo from "../../assets/logo.svg";
 import logoBig from "../../assets/logoBig.svg";
-import mainTab from "../../assets/mainTab.svg";
-import mainTabBig from "../../assets/mainTabBig.svg";
-import moviesTab from "../../assets/moviesTab.svg";
-import moviesTabBig from "../../assets/moviesTabBig.svg";
-import serialsTab from "../../assets/serialsTab.svg";
-import serialsTabBig from "../../assets/serialsTabBig.svg";
-import bookmarkTab from "../../assets/bookmarkTab.svg";
-import bookmarkTabBig from "../../assets/bookmarkTabBig.svg";
-import preloader from "../../assets/preloader.gif";
-import avatar from "../../assets/avatar.jpg";
 import gigachad from "../../assets/gigachad.jpg";
-import wishlist from "../../assets/wishlist.svg";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import React from "react";
 
 const chooseIcon = (small, big) => {
@@ -23,7 +11,6 @@ const chooseIcon = (small, big) => {
 };
 
 const svgSize =  window.screen.width > "767" ? '20' : "16"
-
 
 const Header = () => {
 	return (

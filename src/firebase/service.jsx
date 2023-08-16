@@ -1,9 +1,5 @@
 import { collection, getDocs, addDoc, doc, query, where, updateDoc, getDoc, limit, startAfter, startAt, orderBy, endAt } from "firebase/firestore";
-import { db, storage } from "./config";
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { getAllMovies, getAllSerials, getTrending, getWishlistItems } from "../store/videosSlice";
-import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { db } from "./config";
 
 export const queryAllContent = async (filter, initialLimit) => {
 	const ref = collection(db, `videos`);
@@ -37,14 +33,6 @@ export const queryAllContent = async (filter, initialLimit) => {
 		const ref = collection(db, 'wishlist');
 		await addDoc(ref, data)
 	}
-
-//TODO check to delete
-export const querySearch = async(inputText) => {
-	const ref = collection(db, 'videos')
-	const queryRef = query(ref, orderBy('title'), startAt('The'), endAt('The' + '\uf8ff' ))
-	const result = await getDocs(queryRef)
-	const con = result.docs.map((doc) => ({...doc.data()}))
-}
 
 export const lazyLoad = async (filter, initialLimit, counter) => {
 	let queryRef = null;
@@ -82,6 +70,7 @@ export const queryWishlistItems = async () => {
 };
 
 export const updateBookmark = async (videoId, bookmarkValue) => {
+	console.log(videoId, bookmarkValue)
 	const ref = doc(db, `videos/${videoId}`);
 	await updateDoc(ref, { isBookmarked: bookmarkValue });
 };

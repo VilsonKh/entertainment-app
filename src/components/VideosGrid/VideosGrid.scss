@@ -1,10 +1,11 @@
 @import "../../variables/variables";
 
-.recommended {
+.videoGrid {
 	&__gridContainer {
 		display: grid;
 		grid-template-columns: calc(50% - 10px) calc(50% - 10px);
 		gap: 20px;
+		row-gap: 30px;
 
 		@media screen and (min-width: 500px) {
 			grid-template-columns: calc(33% - 10px) calc(33% - 10px) calc(33% - 10px);
@@ -73,7 +74,7 @@
 		font-style: normal;
 		font-weight: 300;
 		font-size: 13px;
-		line-height: 16px;
+		line-height: 1.2;
 
 		@media screen and (min-width: 1439px) {
 			font-size: 18px;

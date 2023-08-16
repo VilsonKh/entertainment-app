@@ -38,18 +38,22 @@ $color-white: #ffffff;
 	}
 }
 
-@mixin text-fs-m {
-	font-style: normal;
-	font-size: 15px;
+@mixin text-fs-l {
+	font-size: 20px;
 	font-weight: 300;
-	line-height: 1;
+	line-height: 1.2;
+}
+
+@mixin text-fs-m {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 1.2;
 }
 
 @mixin text-fs-s {
-	font-size: 13px;
-	font-style: normal;
+	font-size: 15px;
 	font-weight: 300;
-	line-height: 1;
+	line-height: 1.2;
 }
 
 @mixin input {

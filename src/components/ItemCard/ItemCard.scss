@@ -19,11 +19,17 @@
 		display: flex;
 		justify-content: space-between;
 		width: 90%;
+		@include text-fs-s;
 		&:not(:last-child) {
 			margin-bottom: 15px;
 		}
 
-		@media screen and (min-width: 1439px) {
+		@media screen and (min-width: 767px) {
+			@include text-fs-m;
+		}
+
+		@media screen and (min-width: 1439px) { 
+			@include text-fs-l;
 			&:not(:last-child) {
 				margin-bottom: 20px;
 			}
@@ -41,9 +47,10 @@
 	&__infoItem {
 		width: 100%;
 		opacity: 0.7;
+		font-size: inherit;
 
 		@media screen and (min-width: 1439px) {
-			@include text-fs-m;
+			
 		}
 	}
 
@@ -53,17 +60,24 @@
 	}
 
 	&__heading {
-		@include heading-fs-m;
+		@include heading-fs-s;
 		text-align: center;
 
+
 		@media screen and (min-width: 767px) {
+			@include heading-fs-m;
 			grid-area: 1/2/2/3;
 			margin: 0;
+		}
+
+		@media screen and (min-width: 1439px) {
+			@include heading-fs-l;
 		}
 	}
 
 	&__subheading {
 		@include heading-fs-s;
+		margin: 20px 0;
 	}
 
 	&__thumbnail {
@@ -75,7 +89,8 @@
 		position: relative;
 
 		@media screen and (min-width: 767px) {
-			grid-area: 1/1/3/2;
+			margin-bottom: 0;
+			grid-area: 2/1/3/2;
 			width: 100%;
 		}
 
@@ -86,10 +101,17 @@
 	&__description {
 		text-align: justify;
 		margin-bottom: 20px;
+		@include text-fs-s;
 
 		@media screen and (min-width: 767px) {
+			@include text-fs-m;
 			grid-area: 4/2/5/3;
 			margin: 0;
+		}
+
+		@media screen and (min-width: 1439px) {
+			@include text-fs-l;
+
 		}
 	}
 
@@ -101,6 +123,7 @@
 
 		@media screen and (min-width: 767px) {
 			margin: 0;
+			grid-area: 4/1/5/2;
 		}
 	}
 
@@ -146,7 +169,7 @@ div[aria-invalid="true"] {
 	display: flex;
 	justify-content: center;
 	gap: 20px;
-	margin-bottom: 20px;
+	margin: 20px 0;
 
 	@media screen and (min-width: 767px) {
 		grid-area: 3/1/4/2;

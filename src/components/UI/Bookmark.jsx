@@ -1,8 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
 import "./Bookmark.scss";
 import { useState } from "react";
-import { getUpdatedBookmarkState, updateBookmark } from "../../firebase/service";
-
+import { updateBookmark } from "../../firebase/service";
 const Bookmark = ({ isBookmarked, videoId }) => {
 	const [isBookmarkedState, setIsBookmarkedState] = useState((isBookmarked));
 

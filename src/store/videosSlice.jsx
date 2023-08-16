@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getCurrentCard, getReviews, lazyLoad, queryAllContent, queryWishlistItems } from "../firebase/service.jsx";
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchContent, fetchCurrentItem, fetchReviews, fetchSearchContent, fetchTrendingVideos, fetchWishlistItems, lazyLoadContentThunk } from "./thunks.js";
+import { fetchContentCases, fetchCurrentItemCases, fetchReviewsCases, fetchSearchContentCases, fetchTrendingVideosCases, fetchWishlistItemsCases, lazyLoadContentThunkCases } from "./extraReducers.js";
 
 const initialState = {
 	trendingVideo: [],
@@ -16,76 +17,6 @@ const initialState = {
 	isSearchPopupOpen: false,
 };
 
-let initialLimit = null;
-
-if (window.screen.width > 1919) {
-	initialLimit = 5;
-}
-if (window.screen.width < 1919) {
-	initialLimit = 4;
-}
-if (window.screen.width < 1200) {
-	initialLimit = 3;
-}
-
-export const fetchReviews = createAsyncThunk("reviews", async (docId) => {
-	console.log(docId)
-	const res = await getReviews(docId);
-	const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-	return result;
-});
-
-export const fetchSearchContent = createAsyncThunk("searchItem", async (filter) => {
-	const res = await queryAllContent(filter);
-	const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-	return result;
-});
-
-export const fetchCurrentItem = createAsyncThunk("currentCard", async (videoId) => {
-	const res = await getCurrentCard(videoId);
-	const result = res.data();
-	return result;
-});
-
-export const fetchWishlistItems = createAsyncThunk("wishlist", async () => {
-	const res = await queryWishlistItems();
-	const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-	return result;
-});
-
-export const lazyLoadContentThunk = createAsyncThunk("videos/paginateRecommended", async (filter, { getState }) => {
-	const content = getState();
-	console.log('lazy loading...')
-	try {
-		const next = await lazyLoad(filter, initialLimit, content.content.length);
-		const result = next.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-		return result;
-	} catch (error) {
-		throw new Error(error);
-	}
-});
-
-export const fetchTrendingVideos = createAsyncThunk("videos/fetcByTrending", async () => {
-	try {
-		const res = await queryAllContent("isTrending");
-		const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-		return result;
-	} catch (error) {
-		throw new Error(error);
-	}
-});
-
-export const fetchContent = createAsyncThunk("videos/fetchByRecommended", async (filter) => {
-	try {
-		const res = await queryAllContent(filter, initialLimit);
-
-		const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-		return result;
-	} catch (error) {
-		throw new Error(error);
-	}
-});
-
 export const videosSlice = createSlice({
 	name: "videos",
 	initialState,
@@ -97,86 +28,45 @@ export const videosSlice = createSlice({
 			state.searchContent = [];
 		},
 		cleanCurrentItemContent(state) {
-			console.log('clean current item')
 			state.currentCard = {};
 		},
 		setIsSearchPopupOpen(state, action) {
 			state.isSearchPopupOpen = action.payload;
+		},
+		cleanContent(state) {
+			state.content = []
 		}
 	},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchTrendingVideos.fulfilled, (state, action) => {
-				state.trendingStatus = "succeeded";
-				state.trendingVideo = [...action.payload];
-			})
-			.addCase(fetchTrendingVideos.pending, (state, action) => {
-				state.trendingStatus = "loading";
-			})
-			.addCase(fetchTrendingVideos.rejected, (state, action) => {
-				state.trendingStatus = "rejected";
-			})
-			.addCase(fetchContent.fulfilled, (state, action) => {
-				state.contentStatus = "succeeded";
-				state.isEndOfList = false;
-				state.content = [...action.payload];
-			})
-			.addCase(fetchContent.pending, (state, action) => {
-				state.contentStatus = "loading";
-				state.isEndOfList = false;
-			})
-			.addCase(fetchContent.rejected, (state, action) => {
-				state.contentStatus = "rejected";
-			})
-			.addCase(lazyLoadContentThunk.fulfilled, (state, action) => {
-				state.content.push(...action.payload);
-				action.payload.length < initialLimit ? (state.isEndOfList = true) : (state.isEndOfList = false);
-				state.lazyLoadStatus = "succeeded";
-			})
-			.addCase(lazyLoadContentThunk.pending, (state, action) => {
-				state.lazyLoadStatus = "loading";
-			})
-			.addCase(lazyLoadContentThunk.rejected, (state, action) => {
-				state.lazyLoadStatus = "rejected";
-			})
-			.addCase(fetchWishlistItems.fulfilled, (state, action) => {
-				state.contentStatus = "succeeded";
-				state.content = [...action.payload];
-			})
-			.addCase(fetchWishlistItems.pending, (state, action) => {
-				state.contentStatus = "loading";
-			})
-			.addCase(fetchWishlistItems.rejected, (state, action) => {
-				state.contentStatus = "rejected";
-			})
-			.addCase(fetchCurrentItem.fulfilled, (state, action) => {
-				state.contentStatus = "succeeded";
-				state.currentCard = { ...action.payload };
-			})
-			.addCase(fetchCurrentItem.pending, (state, action) => {
-				state.contentStatus = "loading";
-			})
-			.addCase(fetchCurrentItem.rejected, (state, action) => {
-				state.contentStatus = "rejected";
-			})
-			.addCase(fetchSearchContent.fulfilled, (state, action) => {
-				state.searchStatus = "succeeded";
-				state.searchContent = [...action.payload];
-			})
-			.addCase(fetchSearchContent.pending, (state, action) => {
-				state.searchStatus = "loading";
-			})
-			.addCase(fetchSearchContent.rejected, (state, action) => {
-				state.searchStatus = "rejected";
-			})
-			.addCase(fetchReviews.fulfilled, (state, action) => {
-				state.reviews = [...action.payload];
-			})
+			.addCase(fetchTrendingVideos.fulfilled, fetchTrendingVideosCases.succeeded)
+			.addCase(fetchTrendingVideos.pending, fetchTrendingVideosCases.loading)
+			.addCase(fetchTrendingVideos.rejected, fetchTrendingVideosCases.rejected)
+			.addCase(fetchContent.fulfilled, fetchContentCases.succeeded)
+			.addCase(fetchContent.pending, fetchContentCases.loading)
+			.addCase(fetchContent.rejected, fetchContentCases.rejected)
+			.addCase(lazyLoadContentThunk.fulfilled, lazyLoadContentThunkCases.succeeded)
+			.addCase(lazyLoadContentThunk.pending, lazyLoadContentThunkCases.loading)
+			.addCase(lazyLoadContentThunk.rejected, lazyLoadContentThunkCases.rejected)
+			.addCase(fetchWishlistItems.fulfilled, fetchWishlistItemsCases.succeeded)
+			.addCase(fetchWishlistItems.pending, fetchWishlistItemsCases.loading)
+			.addCase(fetchWishlistItems.rejected, fetchWishlistItemsCases.rejected)
+			.addCase(fetchCurrentItem.fulfilled, fetchCurrentItemCases.succeeded)
+			.addCase(fetchCurrentItem.pending, fetchCurrentItemCases.loading)
+			.addCase(fetchCurrentItem.rejected, fetchCurrentItemCases.rejected)
+			.addCase(fetchSearchContent.fulfilled, fetchSearchContentCases.succeeded)
+			.addCase(fetchSearchContent.pending, fetchSearchContentCases.loading)
+			.addCase(fetchSearchContent.rejected, fetchSearchContentCases.rejected)
+			.addCase(fetchReviews.fulfilled, fetchReviewsCases.succeeded)
 			
 	},
 });
 
-export const { setModalState, cleanSearchContent, cleanCurrentItemContent, setIsSearchPopupOpen } = videosSlice.actions;
+export const { setModalState, 
+							 cleanSearchContent, 
+							 cleanCurrentItemContent, 
+							 setIsSearchPopupOpen, 
+							 cleanContent } = videosSlice.actions;
 export const reviewsContetn = (state) => state.reviews;
 export const searchContent = (state) => state.searchContent;
 export const searchStatus = (state) => state.searchStatus;

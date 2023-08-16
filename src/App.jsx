@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.scss";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
@@ -6,7 +5,6 @@ import Movies from "./pages/Movies";
 import Serials from "./pages/Serials";
 import Bookmarks from "./pages/Bookmarks";
 import Wishlist from "./pages/Wishlist";
-import AddForm from "./components/AddForm/AddForm";
 import RootLayout from "./pages/RootLayout";
 import ItemCard from "./components/ItemCard/ItemCard";
 

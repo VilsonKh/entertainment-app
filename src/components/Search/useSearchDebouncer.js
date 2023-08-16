@@ -13,6 +13,7 @@ export const useSearchDebouncer = (delay = 700) => {
 			dispatch(cleanSearchContent());
 		}, delay);
 		return () => clearTimeout(setDelay);
+		// eslint-disable-next-line
 	}, [query, delay]);
 
 	return [search, setQuery];

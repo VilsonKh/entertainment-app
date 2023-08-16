@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import TextAreaInput from "./TextAreaInput";
-import { postNewReview } from "../../firebase/service";
 import './NewReviewForm.scss';
 import { useState } from "react";
+import { postNewReview } from "../../firebase/service";
 
 const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 
@@ -23,14 +23,14 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
       setIsMessageOpen(false)
       setCharLength(0)
     }, 2000);
-		// await postNewReview(currentLocation, values)
+		await postNewReview(currentLocation, values)
 	};
 
 	const errorIndicator = errors["name"] ? "true" : "false";
 
 	return (
 		<form className="reviewForm" onSubmit={handleSubmit(onSubmit)}>
-			<h2 className="itemCard__subheading">ADD NEW REVIEW</h2>
+			<h2 className="itemCard__subheading">ADD NEW COMMENT</h2>
 			<input
 				className="reviewForm__input reviewForm__name"
 				type="text"

@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./WishlistTable.scss";
-import preloader from '../../assets/preloader.gif'
 import { useEffect } from "react";
-import { content, contentStatus, fetchWishlistItems } from "../../store/videosSlice";
+import { content, contentStatus } from "../../store/videosSlice";
+import { fetchWishlistItems } from "../../store/thunks";
 
 const WishlistTable = () => {
 

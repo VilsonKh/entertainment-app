@@ -1,0 +1,27 @@
+.loading {
+	display: block;
+	background: #363f54;
+	background-repeat: repeat;
+	background-image: none;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-name: placeHolderShimmer;
+	animation-timing-function: linear;
+	background-image: linear-gradient(to right, #363f54 0%, #5a698f 20%, #363f54 40%, #363f54 100%);
+	background-repeat: no-repeat;
+	border-radius: 10px;
+
+  @media screen and (min-width: 1439px) {
+    
+  }
+}
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}

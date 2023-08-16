@@ -1,20 +1,22 @@
-import React from 'react'
-import { useFormContext } from 'react-hook-form';
+import React from "react";
+import { useFormContext } from "react-hook-form";
 
-const Input = ({inputType, inputName, required}) => {
-  const {register, formState: {errors}} = useFormContext()
+const Input = ({ inputType, inputName, required }) => {
+	const {
+		register,
+		formState: { errors },
+	} = useFormContext();
 
-  return (
-   <>
-      <input className="form__input" 
+	return (
+		<>
+			<input className="form__input" 
              id={inputName} 
-             type={inputType}
+             type={inputType} 
              placeholder={inputName} 
-             {...register(inputName)} 
-      />
-  {required && <span>{errors[inputName]?.message}</span>}
-   </>
-  )
-}
+             {...register(inputName)} />
+			{required && <span>{errors[inputName]?.message}</span>}
+		</>
+	);
+};
 
-export default Input
+export default Input;

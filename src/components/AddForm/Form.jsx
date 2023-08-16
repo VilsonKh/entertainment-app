@@ -1,4 +1,3 @@
-import { Link } from "@mui/material";
 import React, { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import * as yup from 'yup';
@@ -7,6 +6,7 @@ import Input from "./Input";
 import { postNewWishlistItem } from "../../firebase/service";
 import { useDispatch } from "react-redux";
 import { setModalState } from "../../store/videosSlice";
+import AcceptPopup from "../UI/AcceptPopup";
 
 const Form = () => {
 
@@ -35,18 +35,22 @@ const Form = () => {
   });
 
   const {handleSubmit, register} = formData;
-	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const [isMessageOpen, setIsMessageOpen] = useState(false);
 
 	const onSubmit = async (data) => {
     console.log(data);
-    dispatch(setModalState())
+		setIsMessageOpen(true)
+		setTimeout(() => {
+			setIsMessageOpen(false)
+			dispatch(setModalState())
+		}, 2000)
     await postNewWishlistItem(data)
   };
 
 	return (
 		<>
     	<FormProvider {...formData}>
-			<form  className="addForm" id="addForm">
+			{!isMessageOpen ? <form  className="addForm" id="addForm">
 				<legend className="form__legend">Add your film to a wishlist</legend>
 				<fieldset className="addForm__fieldset">
 					<label htmlFor='email' className="form__label">Your email: </label>
@@ -80,20 +84,7 @@ const Form = () => {
 				<button className="form__submitButton" type="submit" form='addForm' onClick={handleSubmit(onSubmit)}>
 					Submit
 				</button>
-			</form>
-			{isPopupOpen ? (
-				<div className="formPopup">
-					<div className="container">
-						<h1 className="formPopup__heading">Thank you for your request!</h1>
-						<p className="formPopup__text">We will inform you as soon as the movie will be available.</p>
-						<button className="formPopup__button">
-							<Link to="/">
-								Go to main page
-							</Link>
-						</button>
-					</div>
-				</div>
-			) : null}
+			</form> : <AcceptPopup text={'request'}/>}
       </FormProvider>
 		</>
 	);

@@ -17,7 +17,8 @@
 
   &__container {
     position: absolute;
-    width: 92%;
+    min-width: 380px;
+    box-sizing: border-box;
     top: 130px; 
     left: 0;
     max-width: 400px;
@@ -27,9 +28,11 @@
     background: $color-dark-blue;
     padding: 20px;
     z-index: 1;
-    box-shadow: 0px 0px 48px 16px rgba(0,0,0,0.75);
+    box-shadow: 0px 20px 28px 7px rgba(0,0,0,0.75);
+    
 
     @media screen and (min-width: 767px) {
+      box-shadow: 0px 0px 48px 16px rgba(0,0,0,0.75);
       margin-left: 24px;
       top: 200px;
     }
@@ -56,7 +59,7 @@
     gap: 20px;
 
     &:not(:last-child) {
-      margin-bottom: 10px;
+      margin-bottom: 30px;
     }
 
   }
