@@ -14,7 +14,8 @@ import bookmark from "../../assets/bookmarkTab.svg";
 import bookmarkWhite from "../../assets/bookmarkTab-white.svg";
 import star from "../../assets/icon-star.svg";
 import { updateBookmark } from "../../firebase/service";
-import Skeleton from "../SkeletonLoader/Skeleton";
+import { Skeleton } from "@mui/material";
+
 
 const ItemCard = () => {
 	const dispatch = useDispatch();
@@ -51,7 +52,7 @@ const ItemCard = () => {
 				</div>
 				<>
 					<div className="itemCard__heading">
-						{status === 'loading' ? <Skeleton loadingState={status === 'loading' ? false : true} backgroundSize={'800px 20px'} height={'20px'}/> : <h1 className="itemCard__heading">{`${data.title} (${data.year})`}</h1>}
+						{status === 'loading' ? <Skeleton variant="rounded" style={{ background: '#363f54'}} height={30}/> : <h1 className="itemCard__heading">{`${data.title} (${data.year})`}</h1>}
 					</div>
 					<div className="tools">
 						<div className="tools__item" onClick={() => setIsRatingPopupOpen(true)}>
@@ -72,7 +73,7 @@ const ItemCard = () => {
 						</div>
 					</div>
 					<div className="itemCard__aboutFilm">
-	          {status === 'loading' ? [...Array(10)].map(() => <Skeleton loadingState={status === 'loading' ? false : true} backgroundSize={'800px 30px'} height={'30px'} margin={'0 0 20px 0'}/>) : 
+	          {status === 'loading' ? [...Array(10)].map(() => <Skeleton variant="rounded" style={{ background: '#363f54', marginBottom: '20px'}} height={30}/>) : 
 						<>
 							<h2 className="itemCard__subheading">About</h2>
 							{data && data.info && Object.keys(data.info[0]).sort().map((key, i) => {
@@ -88,12 +89,12 @@ const ItemCard = () => {
 							}
 					</div>
 					<div className="itemCard__description">
-						{status === 'loading' ? <Skeleton loadingState={status === 'loading' ? false : true} backgroundSize={'800px 150px'} height={'150px'}/> : <p className="itemCard__description">{data.description}</p>}
+						{status === 'loading' ? <Skeleton variant="rounded" style={{ background: '#363f54'}} height={150} /> : <p className="itemCard__description">{data.description}</p>}
 					</div>
 					<h2 className="itemCard__subheading itemCard__ratingHeading">RATING</h2>
 					 
 					<div className="itemCard__rating">
-						{status === 'loading' ? <Skeleton loadingState={status === 'loading' ? false : true} backgroundSize={'800px 150px'} height={'150px'}/> : <>
+						{status === 'loading' ? <Skeleton variant="rounded" style={{ background: '#363f54'}} height={150}/> : <>
 							<p className="itemCard__rating-number">{data.rating}</p>
 							<p className="itemCard__total-rating">{`${data.totalRating} rates`}</p>
 							<button className="reviewForm__addFeedback" onClick={() => setIsRatingPopupOpen(true)}>
@@ -103,7 +104,7 @@ const ItemCard = () => {
 					</div>
 					<div className="itemCard__reviewsSlider">
 					  <h2 className="itemCard__subheading">COMMENTS</h2>
-	  				{status === 'loading' ? <Skeleton loadingState={status === 'loading' ? false : true} backgroundSize={'800px 150px'} height={'150px'}/> : <Swiper sildesPerView={1} 
+	  				{status === 'loading' ? <Skeleton variant="rounded" style={{ background: '#363f54'}} height={150}/> : <Swiper sildesPerView={1} 
 	                  simulateTouch={true} 
 	                  spaceBetween={20}
 	                  breakpoints={{
