@@ -6,6 +6,7 @@ import { fetchSearchContent } from "../../store/thunks";
 import ExternalImage from "../UI/ExternalImage";
 import { useNavigate } from "react-router-dom";
 import noResult from '../../assets/no-result.svg';
+import { Skeleton } from "@mui/material";
 
 const SearchPopup = ({ filter }) => {
 	const dispatch = useDispatch();
@@ -27,10 +28,9 @@ const SearchPopup = ({ filter }) => {
 	}
 
 	return (
-
-			<div className="searchPopup__container">
+			<div className="searchPopup__container" data-testid="searchPopup">
 				<div className="searchPopup__heading">Search Result</div>
-				{data.map((content, i) => {
+				{status === 'loading' ? [...Array(3)].map(() => <Skeleton variant="rounded" style={{ paddingTop: '50%',background: '#363f54', marginBottom: '20px'}}/>) : data.map((content, i) => {
 					return (
 						<div className="searchPopup__item" key={i} onClick={() => onItemClick(content.id)}>
 							<div className="searchPopup__thumbnail">

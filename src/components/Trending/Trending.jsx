@@ -1,9 +1,5 @@
-import { useLoaderData } from "react-router-dom";
 import TrendingSlider from "../TrendingSlider/TrendingSlider";
 import "./Trending.scss";
-import { useEffect, useState } from "react";
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
 
 const Trending = () => {
 	return (

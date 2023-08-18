@@ -39,7 +39,6 @@ const VideosGrid = ({ filter }) => {
 			dispatch(cleanCurrentItemContent());
 		}
 	};
-	// <Skeleton loadingState={status === 'succeeded' ? false : true} backgroundSize={'800px 250px'} height={'250px'}/>
 
 	return (
 		<>

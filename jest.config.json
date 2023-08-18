@@ -1,0 +1,12 @@
+{
+	"moduleNameMapper": {
+		"swiper/css": "swiper/swiper.min.css"
+	},
+	"transform": {
+		"^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "@nrwl/react/plugins/jest",
+		"^.+\\.[tj]sx?$": ["babel-jest"]
+	},
+  "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
+  "transformIgnorePatterns": ["node_modules/(?!swiper|ssr-window|dom7)"],
+	"setupFilesAfterEnv": ["<rootDir>/setup.js"] 
+}

@@ -41,6 +41,7 @@ const ItemCard = () => {
 
 
 	const onBookmarkClick = async () => {
+		//data receives as string
 		setIsCurrentBookmarked(isCurrentBookmarked === 'true' ? 'false' : 'true')
 		await updateBookmark(data.id, isCurrentBookmarked === 'true' ? 'false' : 'true')
 	}

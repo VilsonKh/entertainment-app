@@ -30,7 +30,7 @@ const Header = () => {
 							/>
 						</svg>
 					</NavLink>
-					<NavLink to="/movies" className={({ isActive }) => (isActive ? "active" : "")}>
+					<NavLink data-testid='movieLink' to="/movies" className={({ isActive }) => (isActive ? "active" : "")}>
 						<svg width={svgSize} height={svgSize} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
 								fillRule="evenodd"

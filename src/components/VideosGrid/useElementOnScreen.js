@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const useElementOnScreen = (dependency) => {
 	const targetElement = useRef(null);
@@ -9,6 +9,7 @@ export const useElementOnScreen = (dependency) => {
 		if (targetElement.current) observer.observe(targetElement.current);
 
 		return () => {
+			//eslint-disable-next-line
 			if (targetElement.current) observer.unobserve(targetElement.current);
 		};
 	}, [targetElement, dependency]);

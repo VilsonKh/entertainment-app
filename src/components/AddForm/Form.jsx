@@ -40,6 +40,7 @@ const Form = () => {
 	const onSubmit = async (data) => {
     console.log(data);
 		setIsMessageOpen(true)
+		//timeout нужен для автоматического закрытия сообщения
 		setTimeout(() => {
 			setIsMessageOpen(false)
 			dispatch(setModalState())

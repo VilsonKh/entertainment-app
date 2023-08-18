@@ -11,10 +11,11 @@ const Input = ({ inputType, inputName, required }) => {
 		<>
 			<input className="form__input" 
              id={inputName} 
+						 name={inputName}
              type={inputType} 
              placeholder={inputName} 
              {...register(inputName)} />
-			{required && <span>{errors[inputName]?.message}</span>}
+			{required && <span role='alert'>{errors[inputName]?.message}</span>}
 		</>
 	);
 };

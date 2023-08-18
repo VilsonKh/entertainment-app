@@ -18,6 +18,7 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 
 	const onSubmit = async (values) => {
     setIsMessageOpen(true)
+		//timeout is needed to close message automatically
     setTimeout(() => {
       reset();
       setIsMessageOpen(false)

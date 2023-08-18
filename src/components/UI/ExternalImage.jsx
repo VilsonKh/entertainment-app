@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import preloader from '../../assets/preloader.gif';
 import { Skeleton } from '@mui/material';
 
 const ExternalImage = ({thumbnail, opacity=false}) => {
@@ -13,7 +12,6 @@ const ExternalImage = ({thumbnail, opacity=false}) => {
         src={thumbnail} 
         alt="film cover" 
         />
-       {/* <Skeleton loadingState={isReady} backgroundSize={'800px 500px'} height={'500px'}/> */}
        {isReady ? null : <Skeleton variant="rounded" style={{paddingTop: '140%', background: '#363f54'}} />}
     </>
   )
