@@ -13,7 +13,7 @@ const App = () => {
 		{
 			path: "/",
 			element: <RootLayout />,
-			errorElement: <ErrorPage/>,
+			// errorElement: <ErrorPage/>,
 			children: [
 				{
 					path: "/",
@@ -36,7 +36,7 @@ const App = () => {
 					element: <Wishlist />,
 				},
 				{
-					path: 'card/:filmName',
+					path: ':path/card/:filmName',
 					element: <ItemCard/>
 				}
 			],

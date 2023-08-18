@@ -6,14 +6,15 @@ import { postNewReview } from "../../firebase/service";
 
 const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 
-  const [charLength, setCharLength] = useState(0)
-
-	const formData = useForm();
+	const formData = useForm({
+		mode: 'onChange'
+	});
 	const {
 		handleSubmit,
 		register,
 		formState: { errors },
 		reset,
+		control
 	} = formData;
 
 	const onSubmit = async (values) => {
@@ -22,7 +23,7 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
     setTimeout(() => {
       reset();
       setIsMessageOpen(false)
-      setCharLength(0)
+			reset()
     }, 2000);
 		await postNewReview(currentLocation, values)
 	};
@@ -38,10 +39,14 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 				placeholder="Name"
 				{...register("name", {
 					required: "required",
+					maxLength: {
+						value: 40
+					}
 				})}
 				aria-invalid={errorIndicator}
 			/>
-			<TextAreaInput rowsQuantity={4} register={register} errors={errors} setCharLength={setCharLength} charLength={charLength}/>
+			{/* <TextAreaInput  register={register} errors={errors} setCharLength={setCharLength} charLength={charLength}/> */}
+			<TextAreaInput register={register} errors={errors} control={control}/>
 			<button type="submit" className="reviewForm__submit">
 				SUBMIT
 			</button>

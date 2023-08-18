@@ -1,6 +1,11 @@
-const TextAreaInput = ({ rowsQuantity, register, errors, setCharLength, charLength }) => {
-	const errorIndicator = errors["message"] ? "true" : "false";
+import { useWatch } from "react-hook-form";
 
+const TextAreaInput = ({ rowsQuantity, register, errors, control}) => {
+	const errorIndicator = errors["commentText"] ? "true" : "false";
+	const textarea = useWatch({
+		control,
+		name: 'commentText'
+	})
 	return (
 		<div className="reviewForm__textareaGroup" aria-invalid={errorIndicator}>
 			<textarea
@@ -8,13 +13,14 @@ const TextAreaInput = ({ rowsQuantity, register, errors, setCharLength, charLeng
 				rows={rowsQuantity}
 				wrap="soft"
 				placeholder="Type here your review"
-				maxLength={1000}
-				onInput={(e) => setCharLength(e.target.value.length)}
-				{...register("message", {
+				{...register("commentText", {
 					required: "required",
+					maxLength: {
+						value: 1000,
+					}
 				})}
 			/>
-			<span className="reviewForm__counter">{`${charLength}/1000`}</span>
+			<span className="reviewForm__counter" style={textarea && textarea.length > 1000 ? {color: '#fc4747'} : null}>{`${(textarea && textarea.length) || 0}/1000`}</span>
 		</div>
 	);
 };
