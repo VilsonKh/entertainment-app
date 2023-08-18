@@ -7,7 +7,7 @@ import Bookmark from "../UI/Bookmark";
 import React, { useEffect } from "react";
 import dot from "../../assets/oval.svg";
 import ExternalImage from "../UI/ExternalImage";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useElementOnScreen } from "./useElementOnScreen";
 import movieTab from '../../assets/moviesTab.svg';
 import serialTab from '../../assets/serialsTab-white.svg';
@@ -35,7 +35,7 @@ const VideosGrid = ({ filter }) => {
 
 	const onItemClick = (e, id) => {
 		if (e.target.className === "movie-thumb") {
-			navigate(`card/${id}`);
+			navigate(`recommended/card/${id}`);
 			dispatch(cleanCurrentItemContent());
 		}
 	};

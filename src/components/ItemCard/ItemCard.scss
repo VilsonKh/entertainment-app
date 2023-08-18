@@ -141,6 +141,21 @@
 			grid-area: 5/2/6/3;
 		}
 	}
+
+	&__reviews-placeholder {
+		height: 150px;
+		background: $color-light-blue;
+		border-radius: 5px;
+		@include text-fs-m;
+		text-align: center;
+
+
+		& p {
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+	}
 }
 
 input[aria-invalid="true"],
@@ -203,4 +218,6 @@ div[aria-invalid="true"] {
 		margin: 0 auto;
 		cursor: pointer;
 	}
+
+
 }

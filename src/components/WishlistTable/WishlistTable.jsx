@@ -29,7 +29,7 @@ const WishlistTable = () => {
 			</thead>
 			<tbody>
 				{queryStatus === 'loading' ? 
-				<p>Loading...</p> : 
+				(<p>Loading...</p>) : 
 				data.map((item) => {
           const { genre, title,id,year,category} = item;
 					return (

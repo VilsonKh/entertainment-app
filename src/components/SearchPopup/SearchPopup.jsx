@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./SearchPopup.scss";
-import { useEffect } from "react";
 import { cleanCurrentItemContent, searchContent, searchStatus, setIsSearchPopupOpen } from "../../store/videosSlice";
-import { fetchSearchContent } from "../../store/thunks";
 import ExternalImage from "../UI/ExternalImage";
 import { useNavigate } from "react-router-dom";
 import noResult from '../../assets/no-result.svg';
@@ -11,11 +9,6 @@ import { Skeleton } from "@mui/material";
 const SearchPopup = ({ filter }) => {
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(fetchSearchContent(filter));
-		// eslint-disable-next-line
-	}, [filter]);
-
 	let data = useSelector(searchContent);
   const status = useSelector(searchStatus)
 
@@ -23,7 +16,7 @@ const SearchPopup = ({ filter }) => {
 
 	const onItemClick = (id) => {
 		dispatch(cleanCurrentItemContent())
-		navigate(`card/${id}`)
+		navigate(`search/card/${id}`)
 		dispatch(setIsSearchPopupOpen(false))
 	}
 

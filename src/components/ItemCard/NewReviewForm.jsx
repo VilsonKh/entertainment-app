@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import TextAreaInput from "./TextAreaInput";
 import './NewReviewForm.scss';
-import { useState } from "react";
 import { postNewReview } from "../../firebase/service";
 
 const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {

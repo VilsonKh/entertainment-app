@@ -39,7 +39,7 @@ export const lazyLoadContentThunk = createAsyncThunk("videos/paginateRecommended
 	}
 });
 
-export const fetchTrendingVideos = createAsyncThunk("videos/fetcByTrending", async () => {
+export const fetchTrendingVideos = createAsyncThunk("videos/fetchByTrending", async () => {
 	try {
 		const res = await queryAllContent("isTrending");
 		const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));

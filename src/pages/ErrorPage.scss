@@ -1,0 +1,40 @@
+@import "../variables/variables.scss";
+
+.errorPage {
+	width: 90%;
+	// max-width: 500px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	&__img {
+		width: 30%;
+	}
+
+	&__text {
+		@include text-fs-m;
+    margin-bottom: 50px;
+    display: block;
+	}
+
+  &__button {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    text-decoration: none;
+    background-color: $color-red;
+    width: 100px;
+    padding: 10px;
+    border-radius: 20px;
+    transition: opacity .3s ease;
+
+    &:hover {
+      opacity: .5;
+    }
+  }
+}

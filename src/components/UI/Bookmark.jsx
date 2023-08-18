@@ -1,12 +1,13 @@
 import "./Bookmark.scss";
 import { useState } from "react";
 import { updateBookmark } from "../../firebase/service";
+
 const Bookmark = ({ isBookmarked, videoId }) => {
 	const [isBookmarkedState, setIsBookmarkedState] = useState((isBookmarked));
 
 	const onBookmarkClick = (e) => {
 		const targetVideoId = e.target.closest('div').getAttribute('data-videoId')
-		const changingStatus = e.target.closest('svg').getAttribute('fill') === 'white' ? 'false' : 'true';
+		const changingStatus = isBookmarked === 'true' ? 'false' : 'true';
 		setIsBookmarkedState(changingStatus)
 		updateBookmark(targetVideoId, changingStatus)
 	};
