@@ -16,7 +16,7 @@ const MainBoard = () => {
 	}, [search]);
 	return (
 		<div className="container">
-			<Search setInputText={setQuery} />
+			<Search setInputText={setQuery} inputValue={search} />
 			<Outlet />
 			{isSearchPopupActive && <SearchPopup filter={search} />}
 		</div>

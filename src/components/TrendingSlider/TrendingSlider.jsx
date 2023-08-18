@@ -26,13 +26,13 @@ const TrendingSlider = () => {
 
 	const onItemClick = (e, id) => {
 		if (e.target.className === "movie-thumb opacity") {
-			navigate(`/${id}`);
+			navigate(`card/${id}`);
 			dispatch(cleanCurrentItemContent());
 		}
 	};
 
 	const sliderItems = data.map((content, i) => {
-		const { year, category, rating, title, id, isBookmarked, thumbnail } = content;
+		const { year, category, rating, title, id, isBookmarked, thumbnail } = content ?? {};
 		return (
 			<SwiperSlide key={i} className="trending__slide" onClick={(e) => onItemClick(e, id)}>
 				{queryStatus === 'loading' ? <Skeleton variant="rounded" style={{paddingTop: '140%', background: '#363f54'}}/> :

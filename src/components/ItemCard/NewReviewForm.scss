@@ -19,6 +19,7 @@
 		margin: 0;
 		@include input;
 		margin-bottom: 10px;
+		resize: none;
 	}
 
 	&__textareaGroup {

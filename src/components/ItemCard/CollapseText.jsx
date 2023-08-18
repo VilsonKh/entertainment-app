@@ -13,7 +13,7 @@ const CollapseText = ({ name, message }) => {
 			<button className="review__collapseButton" 
 							onClick={() => setIsCollapsed(!isCollapsed)} 
 							//357 approximate number of characters equal to 4 rows
-							disabled={message.length > 357 ? false : true}>
+							style={{display: `${message.length > 357 ? 'flex' : 'none'}`}}>
 				Show more <p className={`review__collapseIcon ${isCollapsed ? "open" : null}`}>&#709;</p>
 			</button>
 		</div>

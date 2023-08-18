@@ -17,7 +17,7 @@ const Header = () => {
 		<header className="header">
 			<div className="header__container">
 				<div className="header__logo">
-					<img src={chooseIcon(logo, logoBig)} alt="" />
+					<img src={chooseIcon(logo, logoBig)} alt="logo" />
 				</div>
 				<div className="header__navigation">
 					<NavLink to="/" className={({ isActive }) => (isActive ? "active" : "")}>

@@ -7,13 +7,13 @@ import Bookmarks from "./pages/Bookmarks";
 import Wishlist from "./pages/Wishlist";
 import RootLayout from "./pages/RootLayout";
 import ItemCard from "./components/ItemCard/ItemCard";
-
+import ErrorPage from './pages/ErrorPage';
 const App = () => {
 	const router = createBrowserRouter([
 		{
 			path: "/",
 			element: <RootLayout />,
-			// errorElement: <ErrorPage/>,
+			errorElement: <ErrorPage/>,
 			children: [
 				{
 					path: "/",
@@ -36,7 +36,7 @@ const App = () => {
 					element: <Wishlist />,
 				},
 				{
-					path: ':filmName',
+					path: 'card/:filmName',
 					element: <ItemCard/>
 				}
 			],

@@ -35,7 +35,7 @@ const VideosGrid = ({ filter }) => {
 
 	const onItemClick = (e, id) => {
 		if (e.target.className === "movie-thumb") {
-			navigate(`/${id}`);
+			navigate(`card/${id}`);
 			dispatch(cleanCurrentItemContent());
 		}
 	};

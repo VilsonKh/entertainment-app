@@ -23,7 +23,7 @@ const SearchPopup = ({ filter }) => {
 
 	const onItemClick = (id) => {
 		dispatch(cleanCurrentItemContent())
-		navigate(`/${id}`)
+		navigate(`card/${id}`)
 		dispatch(setIsSearchPopupOpen(false))
 	}
 

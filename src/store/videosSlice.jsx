@@ -3,7 +3,7 @@ import { fetchContent, fetchCurrentItem, fetchReviews, fetchSearchContent, fetch
 import { fetchContentCases, fetchCurrentItemCases, fetchReviewsCases, fetchSearchContentCases, fetchTrendingVideosCases, fetchWishlistItemsCases, lazyLoadContentThunkCases } from "./extraReducers.js";
 
 const initialState = {
-	trendingVideo: [],
+	trendingVideo: [...Array(10)],
 	trendingStatus: "idle",
 	content: [],
 	contentStatus: "idle",

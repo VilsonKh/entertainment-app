@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { contentStatus, currentCard, reviewsContetn } from "../../store/videosSlice";
 import {fetchCurrentItem, fetchReviews} from '../../store/thunks.js';
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import ExternalImage from "../UI/ExternalImage";
 import "./ItemCard.scss";
 import RatingPopup from "../UI/RatingPopup";
@@ -19,20 +19,19 @@ import { Skeleton } from "@mui/material";
 
 const ItemCard = () => {
 	const dispatch = useDispatch();
-	const location = useLocation();
 	const data = useSelector(currentCard);
 	const status = useSelector(contentStatus)
 	const reviewsData = useSelector(reviewsContetn);
-	const currentLocation = location.pathname.slice(1);
+	const {filmName} = useParams()
 
 	const [isMessageOpen, setIsMessageOpen] = useState();
 	const [isCurrentBookmarked, setIsCurrentBookmarked] = useState(data.isBookmarked);
 	const [isRatingPopupOpen, setIsRatingPopupOpen] = useState(false);
 
 	useEffect(() => {
-		dispatch(fetchCurrentItem(currentLocation));
-		dispatch(fetchReviews(currentLocation));
-	}, [dispatch, currentLocation]);
+		dispatch(fetchCurrentItem(filmName));
+		dispatch(fetchReviews(filmName));
+	}, [dispatch, filmName]);
 
 
 	useEffect(() => {
@@ -110,7 +109,7 @@ const ItemCard = () => {
 	                  spaceBetween={20}
 	                  breakpoints={{
 	                    1439: {
-	                      slidesperview: 2
+	                      slidesPerView: 2
 	                    }
 	                  }}>
 	  					{reviewsData.map((review, i) => {
@@ -122,7 +121,7 @@ const ItemCard = () => {
 	  					})}
 	  				</Swiper>}
 					</div>
-					<NewReviewForm currentLocation={currentLocation} setIsMessageOpen={setIsMessageOpen} />
+					<NewReviewForm currentLocation={filmName} setIsMessageOpen={setIsMessageOpen} />
 				</>
 				{isMessageOpen && <AcceptPopup text={"review"} />}
 				{isRatingPopupOpen && <RatingPopup thumbnail={data.thumbnail} title={data.title} setIsRatingPopupOpen={setIsRatingPopupOpen} />}

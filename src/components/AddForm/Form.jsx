@@ -18,7 +18,7 @@ const Form = () => {
     title: yup.string().max(39, 'max 40 characters').required('required'),
     genre: yup.string(),
     category: yup.string(),
-    year: yup.string()
+    year: yup.number().typeError('only number').positive('only positive').integer('only integer')
   })
   .required();
 
@@ -28,8 +28,8 @@ const Form = () => {
     defaultValues: {
       email : '',
       title : '',
-      category: "don't know",
-      genre : '',
+      category: "",
+      genre : "don't know",
       year : currentYear
     }
   });
@@ -40,7 +40,7 @@ const Form = () => {
 	const onSubmit = async (data) => {
     console.log(data);
 		setIsMessageOpen(true)
-		//timeout нужен для автоматического закрытия сообщения
+		//timeout is needed to automatically close popup
 		setTimeout(() => {
 			setIsMessageOpen(false)
 			dispatch(setModalState())

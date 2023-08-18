@@ -4,7 +4,7 @@ import { searchStatus } from "../../store/videosSlice";
 import { useSelector } from "react-redux";
 import preloader from '../../assets/preloader.gif';
 
-const Search = ({ setInputText }) => {
+const Search = ({ setInputText, inputValue }) => {
 	const status = useSelector(searchStatus)
 	return (
 		<div className="search">
@@ -14,7 +14,8 @@ const Search = ({ setInputText }) => {
 				</span>
 				<input onChange={(e) => setInputText
 				(e.target.value)} 
-							 type="text" 
+							 type="text"
+							 style={inputValue.length > 0 ? {borderBottom: '1px solid #5A698F'} : null}
 							 className="search__input" 
 							 placeholder="Search for movies or TV serials"
 							 
