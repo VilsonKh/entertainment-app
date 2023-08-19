@@ -18,7 +18,7 @@ const Form = () => {
     title: yup.string().max(39, 'max 40 characters').required('required'),
     genre: yup.string(),
     category: yup.string(),
-    year: yup.number().typeError('only number').positive('only positive').integer('only integer')
+    year: yup.number().typeError('').positive('only positive').integer('only integer')
   })
   .required();
 
@@ -56,16 +56,16 @@ const Form = () => {
 				<fieldset className="addForm__fieldset">
 					<label htmlFor='email' className="form__label">Your email: </label>
 					<div className="form__field form__email">
-						<Input inputType={'email'} inputName={'email'} required={true}/>
+						<Input inputType={'email'} inputName={'email'}/>
 					</div>
 				</fieldset>
 				<fieldset className="addForm__fieldset">
 					<label>Movie/TV Series Info</label>
 					<div className="form__field">
-            <Input inputType={'text'} inputName={'title'} required={true}/>
+            <Input inputType={'text'} inputName={'title'}/>
 					</div>
 					<div className="form__field">
-            <Input inputType={'number'} inputName={'year'} required={true}/>
+            <Input inputType={'number'} inputName={'year'}/>
 					</div>
 					<div className="form__field">
             <Input inputType={'text'} inputName={'category'} required={false}/>

@@ -44,7 +44,6 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 				})}
 				aria-invalid={errorIndicator}
 			/>
-			{/* <TextAreaInput  register={register} errors={errors} setCharLength={setCharLength} charLength={charLength}/> */}
 			<TextAreaInput register={register} errors={errors} control={control}/>
 			<button type="submit" className="reviewForm__submit">
 				SUBMIT

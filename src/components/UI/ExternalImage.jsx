@@ -12,7 +12,7 @@ const ExternalImage = ({thumbnail, opacity=false}) => {
         src={thumbnail} 
         alt="film cover" 
         />
-       {isReady ? null : <Skeleton variant="rounded" style={{paddingTop: '140%', background: '#363f54'}} />}
+       {!isReady ? null : <Skeleton variant="rounded" style={{paddingTop: '140%', background: '#363f54'}} />}
     </>
   )
 }

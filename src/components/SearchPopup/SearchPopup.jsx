@@ -37,7 +37,8 @@ const SearchPopup = ({ filter }) => {
 						</div>
 					);
 				})}
-				{!data.length && status === 'succeeded' ? <img className="no-result" src={noResult} alt='no-result'/> : null}
+
+				{!data.length  ? <img className="no-result" src={noResult} alt='no-result'/> : null}
 			</div>
 
 	);
