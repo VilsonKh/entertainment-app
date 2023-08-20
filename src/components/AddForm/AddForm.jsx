@@ -2,6 +2,7 @@ import "./AddForm.scss";
 import { useDispatch } from "react-redux";
 import { setModalState } from "../../store/videosSlice";
 import Form from "./Form";
+
 const AddForm = () => {
 	const dispatch = useDispatch();
 
