@@ -1,21 +1,20 @@
 @import "../../variables/variables.scss";
 
-table {
-width: 100%;
-}
 
-th {
-  position: sticky;
-  top: 0;
-  border-bottom: 1px solid white;
-  font-size: 15px;
-}
 
 tr {
-  border-bottom: $color-light-purple;
+	border-bottom: $color-light-purple;
+	& th:last-child,
+	& td:last-child {
+		@media screen and (max-width: 767px) {
+			display: none !important;
+		}
+	}
 }
 
-td {
-  border-bottom: 1px solid white;
-  font-size: 18px;
+td, th {
+	color: white !important;
+  @media screen and (max-width: 767px) {
+    padding: 8px !important;
+  }
 }

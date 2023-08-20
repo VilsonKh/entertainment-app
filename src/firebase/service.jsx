@@ -63,7 +63,7 @@ export const lazyLoad = async (filter, initialLimit, counter) => {
 };
 
 export const queryWishlistItems = async () => {
-	const ref = collection(db, "wishlist");
+	const ref = query(collection(db, 'wishlist'), orderBy('timestamp'));
 	const res = await getDocs(ref);
 	return res;
 };
@@ -91,3 +91,5 @@ export const postNewReview = async (docId, data) => {
 	const ref = collection(db, `videos/${docId}/reviews`);
 	await addDoc(ref, data);
 };
+
+

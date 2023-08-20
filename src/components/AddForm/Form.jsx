@@ -38,14 +38,15 @@ const Form = () => {
 	const [isMessageOpen, setIsMessageOpen] = useState(false);
 
 	const onSubmit = async (data) => {
-    console.log(data);
+    const postData = {...data, timestamp: new Date().getTime()}
 		setIsMessageOpen(true)
 		//timeout is needed to automatically close popup
 		setTimeout(() => {
 			setIsMessageOpen(false)
 			dispatch(setModalState())
 		}, 2000)
-    await postNewWishlistItem(data)
+
+    await postNewWishlistItem(postData)
   };
 
 	return (
