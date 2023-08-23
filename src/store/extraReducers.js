@@ -85,7 +85,11 @@ export const fetchCurrentItemCases = {
 
 export const fetchSearchContentCases = {
 	succeeded: (state, action) => {
-		state.searchStatus = "succeeded";
+		if (action.payload.length < 1) {
+			state.searchStatus = "empty";
+		} else {
+			state.searchStatus = "succeeded";
+		}
 		state.searchContent = [...action.payload];
 	},
 	loading: (state, action) => {

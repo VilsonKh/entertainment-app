@@ -7,6 +7,8 @@ body {
 	font-family: "Outfit", sans-serif;
 	background: $color-dark-blue;
 	min-width: 380px;
+	max-width: 1920px;
+	margin: 0 auto;
 }
 
 p {
@@ -23,6 +25,7 @@ a:hover {
 
 .container {
 	padding: 16px;
+	position: relative;
 
 	@media screen and (min-width: 767px) {
 		padding: 24px;

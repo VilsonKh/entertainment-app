@@ -56,7 +56,6 @@ export const lazyLoad = async (filter, initialLimit, counter) => {
 
 	const res = await getDocs(query(ref, queryRef, limit(counter)));
 	const lastVisible = res.docs[res.docs.length - 1];
-	console.log(lastVisible);
 	const next = await getDocs(query(ref, queryRef, startAfter(lastVisible), limit(initialLimit)));
 
 	return next;
@@ -69,7 +68,6 @@ export const queryWishlistItems = async () => {
 };
 
 export const updateBookmark = async (videoId, bookmarkValue) => {
-	console.log(videoId, bookmarkValue);
 	const ref = doc(db, `videos/${videoId}`);
 	await updateDoc(ref, { isBookmarked: bookmarkValue });
 };

@@ -26,7 +26,7 @@ const TrendingSlider = () => {
 
 	const onItemClick = (e, id) => {
 		if (e.target.className === "movie-thumb opacity") {
-			navigate(`trending/card/${id}`);
+			navigate(`/card/${id}`);
 			dispatch(cleanCurrentItemContent());
 		}
 	};

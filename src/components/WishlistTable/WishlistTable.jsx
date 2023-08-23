@@ -33,7 +33,6 @@ const WishlistTable = () => {
 				{queryStatus === 'loading' ? 
 				(<TableRowsLoader rowsNum={5}/>) : 
 				data.map((item, i) => {
-					console.log()
           const { genre, title,id,year,category, timestamp} = item;
 					return (
 						<TableRow key={id}>

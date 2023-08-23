@@ -102,9 +102,11 @@
 	width: 100%;
 	transition: opacity .3s ease;
 
-	&:hover {
-		opacity: 0.7;
-	}
+
+}
+
+.trending__slide .movie-thumb:hover {
+	opacity: .7
 }
 
 .trending__slide {

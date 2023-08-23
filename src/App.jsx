@@ -9,6 +9,7 @@ import RootLayout from "./pages/RootLayout";
 import ItemCard from "./components/ItemCard/ItemCard";
 import ErrorPage from './pages/ErrorPage';
 const App = () => {
+
 	const router = createBrowserRouter([
 		{
 			path: "/",
@@ -36,12 +37,15 @@ const App = () => {
 					element: <Wishlist />,
 				},
 				{
-					path: ':path/card/:filmName',
+					path: '/card/:filmName',
 					element: <ItemCard/>
-				}
+				},
 			],
 		},
 	]);
+
+	
+
 
 	return <RouterProvider router={router} />;
 };

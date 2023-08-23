@@ -7,7 +7,6 @@ const RatingPopup = ({ thumbnail, title, setIsRatingPopupOpen }) => {
 	const [hover, setHover] = useState(0);
 	const [isMessageOpen, setIsMessageOpen] = useState(false);
 	let chosenMarkColor = null;
-	// console.log(rating < 5)
 
 	if (rating > 6) {
 		chosenMarkColor = "ratingPopup__chosenMark-high";

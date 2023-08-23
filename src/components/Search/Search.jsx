@@ -6,22 +6,36 @@ import preloader from "../../assets/preloader.gif";
 import { useSearchDebouncer } from "./useSearchDebouncer";
 import { useEffect } from "react";
 import { fetchSearchContent } from "../../store/thunks";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Search = () => {
 	const dispatch = useDispatch();
 	const [search, setQuery] = useSearchDebouncer();
+	const navigate = useNavigate()
+	const [searchParams] = useSearchParams()
+	const searchQuery = searchParams.get('search')
+
+	useEffect(() => {
+		if(searchQuery) setQuery(searchQuery)
+		//eslint-disable-next-line
+	},[])
+	
 
 	useEffect(() => {
 		dispatch(search ? setIsSearchPopupOpen(true) : setIsSearchPopupOpen(false));
 		if(search.length === 0 ) return;
 		dispatch(fetchSearchContent(search));
+		navigate({
+			search: `search=${search}`
+		})
 		// eslint-disable-next-line
 	}, [search]);
 
 	useEffect(() => {
 		const handleSearchExit = (e) => {
 			const target = e.target;
-			if (target.closest(".searchPopup__container")) return;
+			console.log(target.className === 'search__input')
+			if (target.closest(".searchPopup__container") || target.className === 'search__input') return;
 			dispatch(setIsSearchPopupOpen(false));
 		};
 
@@ -43,9 +57,10 @@ const Search = () => {
 				<input
 					onChange={(e) => setQuery(e.target.value)}
 					type="text"
-					style={search.length > 0 ? { borderBottom: "1px solid #5A698F" } : null}
+					style={search?.length > 0 ? { borderBottom: "1px solid #5A698F" } : null}
 					className="search__input"
 					placeholder="Search for movies or TV serials"
+					defaultValue={searchQuery}
 				/>
 			</div>
 		</div>

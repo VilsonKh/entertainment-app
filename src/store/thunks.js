@@ -3,7 +3,6 @@ import { getCurrentCard, getReviews, lazyLoad, queryAllContent, queryWishlistIte
 import { initialLimit } from "./extraReducers";
 
 export const fetchReviews = createAsyncThunk("reviews", async (docId) => {
-	console.log(docId);
 	const res = await getReviews(docId);
 	const result = res.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
 	return result;
@@ -29,7 +28,6 @@ export const fetchWishlistItems = createAsyncThunk("wishlist", async () => {
 
 export const lazyLoadContentThunk = createAsyncThunk("videos/paginateRecommended", async (filter, { getState }) => {
 	const content = getState();
-	console.log("lazy loading...");
 	try {
 		const next = await lazyLoad(filter, initialLimit, content.content.length);
 		const result = next.docs.map((doc) => ({ ...doc.data(), id: doc.id }));

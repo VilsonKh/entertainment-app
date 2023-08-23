@@ -35,7 +35,7 @@ const VideosGrid = ({ filter }) => {
 
 	const onItemClick = (e, id) => {
 		if (e.target.className === "movie-thumb") {
-			navigate(`recommended/card/${id}`);
+			navigate(`/card/${id}`);
 			dispatch(cleanCurrentItemContent());
 		}
 	};
@@ -43,7 +43,7 @@ const VideosGrid = ({ filter }) => {
 	return (
 		<>
 			<div className="videoGrid__gridContainer">
-				{status === 'loading' ? [...Array(10)].map(() => <Skeleton variant="rounded" style={{paddingTop: '140%', background: '#363f54'}}/>) :
+				{status === 'loading' ? [...Array(10)].map((item, i ) => <Skeleton variant="rounded" style={{paddingTop: '140%', background: '#363f54'}} key={i}/>) :
 					data.map((video, i) => {
 						const { thumbnail, year, category, rating, title, isBookmarked, id } = video;
 						return (

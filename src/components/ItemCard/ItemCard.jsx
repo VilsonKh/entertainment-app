@@ -70,7 +70,7 @@ const ItemCard = () => {
 			</div>
 			<div className="itemCard__aboutFilm">
 				{status === "loading" ? (
-					[...Array(10)].map(() => <Skeleton variant="rounded" style={{ background: "#363f54", marginBottom: "20px" }} height={30} />)
+					[...Array(10)].map((item, i) => <Skeleton variant="rounded" style={{ background: "#363f54", marginBottom: "20px" }} height={30} key={i}/>)
 				) : (
 					<>
 						<h2 className="itemCard__subheading">About</h2>
@@ -123,7 +123,6 @@ const ItemCard = () => {
 						}}
 					>
 						{reviewsData.map((review, i) => {
-							console.log(review)
 							return (
 								<SwiperSlide key={i}>
 									<CollapseText {...review} />
