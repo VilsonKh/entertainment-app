@@ -1,5 +1,8 @@
+
+
 export let initialLimit = null;
 
+//define how many cards should initially be loaded
 if (window.screen.width > 1919) {
 	initialLimit = 10;
 }

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./CollapseText.scss";
+
+//component renders in comments slider and hide text if it consists of more than 4 rows
 const CollapseText = ({ name, commentText }) => {
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	return (

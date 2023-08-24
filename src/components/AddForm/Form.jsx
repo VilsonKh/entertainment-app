@@ -8,10 +8,12 @@ import { useDispatch } from "react-redux";
 import { setModalState } from "../../store/videosSlice";
 import AcceptPopup from "../UI/AcceptPopup";
 
+//form is used to add an item to a wishlist
 const Form = () => {
 
   const currentYear = new Date().getFullYear()
   const dispatch = useDispatch()
+	
   const validationSchema = yup
   .object({
     email: yup.string().email('invalid email').required('required'),

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setModalState } from "../../store/videosSlice";
 import Form from "./Form";
 
+//form renders when the state isModalOpen is true
 const AddForm = () => {
 	const dispatch = useDispatch();
 

@@ -13,6 +13,8 @@ import movieTab from '../../assets/moviesTab.svg';
 import serialTab from '../../assets/serialsTab-white.svg';
 import { Skeleton } from "@mui/material";
 
+//component renders content in grid layout of different categories
+//receives a key like 'isBookmarked' to get filtered data from firestore
 const VideosGrid = ({ filter }) => {
 	const dispatch = useDispatch();
 	const data = useSelector(content);
@@ -21,6 +23,7 @@ const VideosGrid = ({ filter }) => {
 	const lazyLoadStatus = useSelector(lazyStatus);
 	const navigate = useNavigate();
 
+	//observes visibility of elements for lazy load
 	const [targetElement, isInView] = useElementOnScreen(data);
 
 	useEffect(() => {

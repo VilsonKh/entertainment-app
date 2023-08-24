@@ -16,6 +16,7 @@ import star from "../../assets/icon-star.svg";
 import { updateBookmark } from "../../firebase/service";
 import { Skeleton } from "@mui/material";
 
+//component renders when user clicks on any film
 const ItemCard = () => {
 	const dispatch = useDispatch();
 	const data = useSelector(currentCard);
@@ -48,7 +49,11 @@ const ItemCard = () => {
 				<ExternalImage thumbnail={data.thumbnail} />
 			</div>
 			<div className="itemCard__heading">
-				{status === "loading" ? <Skeleton variant="rounded" style={{ background: "#363f54" }} height={30} /> : <h1 className="itemCard__heading">{`${data.title} (${data.year})`}</h1>}
+				{status === "loading" ? ( 
+				<Skeleton variant="rounded" style={{ background: "#363f54" }} height={30} />
+				) : ( 
+				<h1 className="itemCard__heading">{`${data.title} (${data.year})`}</h1>
+				)}
 			</div>
 			<div className="tools">
 				<div className="tools__item" onClick={() => setIsRatingPopupOpen(true)}>

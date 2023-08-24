@@ -5,12 +5,13 @@ import logoBig from "../../assets/logoBig.svg";
 import gigachad from "../../assets/gigachad.jpg";
 import { NavLink } from "react-router-dom";
 import React from "react";
+import {tabWidth} from '../const';
 
 const chooseIcon = (small, big) => {
-	return window.screen.width > "767" ? big : small;
+	return window.screen.width > tabWidth ? big : small;
 };
 
-const svgSize =  window.screen.width > "767" ? '20' : "16"
+const svgSize =  window.screen.width > tabWidth ? '20' : "16"
 
 const Header = () => {
 	return (

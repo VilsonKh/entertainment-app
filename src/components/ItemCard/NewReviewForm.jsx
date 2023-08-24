@@ -3,6 +3,7 @@ import TextAreaInput from "./TextAreaInput";
 import './NewReviewForm.scss';
 import { postNewReview } from "../../firebase/service";
 
+//form adds comments to the comments section in item card
 const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
 
 	const formData = useForm({

@@ -8,37 +8,42 @@ import { useEffect } from "react";
 import { fetchSearchContent } from "../../store/thunks";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
+//component renders a search bar under the header
 const Search = () => {
 	const dispatch = useDispatch();
 	const [search, setQuery] = useSearchDebouncer();
 	const navigate = useNavigate()
 	const [searchParams] = useSearchParams()
 	const searchQuery = searchParams.get('search')
-
+	const status = useSelector(searchStatus);
+	
+	//is needed to add text to a search bar when enter the page
 	useEffect(() => {
 		if(searchQuery) setQuery(searchQuery)
 		//eslint-disable-next-line
 	},[])
 	
-
+	//sets the opening search popup state and fetch search query
 	useEffect(() => {
 		dispatch(search ? setIsSearchPopupOpen(true) : setIsSearchPopupOpen(false));
 		if(search.length === 0 ) return;
 		dispatch(fetchSearchContent(search));
+		//adds to url address input value
 		navigate({
 			search: `search=${search}`
 		})
 		// eslint-disable-next-line
 	}, [search]);
 
-	useEffect(() => {
-		const handleSearchExit = (e) => {
-			const target = e.target;
-			console.log(target.className === 'search__input')
-			if (target.closest(".searchPopup__container") || target.className === 'search__input') return;
-			dispatch(setIsSearchPopupOpen(false));
-		};
+	const handleSearchExit = (e) => {
+		const target = e.target;
+		console.log(target.className === 'search__input')
+		if (target.closest(".searchPopup__container") || target.className === 'search__input') return;
+		dispatch(setIsSearchPopupOpen(false));
+	};
 
+	//close search popup only if a click wasn't on search bar or search popup
+	useEffect(() => {
 		window.addEventListener("click", handleSearchExit);
 
 		return () => {
@@ -47,7 +52,8 @@ const Search = () => {
 		//eslint-disable-next-line
 	}, []);
 
-	const status = useSelector(searchStatus);
+	
+
 	return (
 		<div className="search">
 			<div className="search__input-container">
