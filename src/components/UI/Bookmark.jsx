@@ -7,7 +7,7 @@ const Bookmark = ({ isBookmarked, videoId }) => {
 
 	const onBookmarkClick = (e) => {
 		const targetVideoId = e.target.closest('div').getAttribute('data-videoId')
-		const changingStatus = isBookmarked === 'true' ? 'false' : 'true';
+		const changingStatus = isBookmarkedState === 'true' ? 'false' : 'true';
 		setIsBookmarkedState(changingStatus)
 		updateBookmark(targetVideoId, changingStatus)
 	};

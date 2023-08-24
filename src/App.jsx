@@ -2,12 +2,12 @@ import "./App.scss";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
-import Serials from "./pages/Serials";
 import Bookmarks from "./pages/Bookmarks";
 import Wishlist from "./pages/Wishlist";
 import RootLayout from "./pages/RootLayout";
 import ItemCard from "./components/ItemCard/ItemCard";
 import ErrorPage from './pages/ErrorPage';
+import TVseries from "./pages/TVseries";
 const App = () => {
 
 	const router = createBrowserRouter([
@@ -25,8 +25,8 @@ const App = () => {
 					element: <Movies />,
 				},
 				{
-					path: "serials",
-					element: <Serials />,
+					path: "tvseries",
+					element: <TVseries />,
 				},
 				{
 					path: "bookmarks",

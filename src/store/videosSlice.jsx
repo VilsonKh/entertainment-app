@@ -15,6 +15,7 @@ const initialState = {
 	searchStatus: "idle",
 	reviews: [],
 	isSearchPopupOpen: false,
+	wishlistItems: [],
 };
 
 export const videosSlice = createSlice({
@@ -35,6 +36,12 @@ export const videosSlice = createSlice({
 		},
 		cleanContent(state) {
 			state.content = []
+		},
+		addUserCommet(state, action) {
+			state.reviews.push(action.payload)
+		},
+		addWishlistItem(state, action) {
+			state.wishlistItems.push(action.payload)
 		}
 	},
 	extraReducers: (builder) => {
@@ -66,7 +73,9 @@ export const { setModalState,
 							 cleanSearchContent, 
 							 cleanCurrentItemContent, 
 							 setIsSearchPopupOpen, 
-							 cleanContent } = videosSlice.actions;
+							 cleanContent, 
+							 addUserCommet,
+							 addWishlistItem } = videosSlice.actions;
 export const reviewsContetn = (state) => state.reviews;
 export const searchContent = (state) => state.searchContent;
 export const searchStatus = (state) => state.searchStatus;
@@ -79,4 +88,5 @@ export const contentStatus = (state) => state.contentStatus;
 export const lazyStatus = (state) => state.lazyLoadStatus;
 export const isEndOfList = (state) => state.isEndOfList;
 export const searchPopupState = (state) => state.isSearchPopupOpen;
+export const wishlistItems = (state) => state.wishlistItems;
 export default videosSlice.reducer;

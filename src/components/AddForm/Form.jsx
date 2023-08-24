@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import Input from "./Input";
 import { postNewWishlistItem } from "../../firebase/service";
 import { useDispatch } from "react-redux";
-import { setModalState } from "../../store/videosSlice";
+import { addWishlistItem, setModalState } from "../../store/videosSlice";
 import AcceptPopup from "../UI/AcceptPopup";
 
 //form is used to add an item to a wishlist
@@ -20,7 +20,7 @@ const Form = () => {
     title: yup.string().max(40, 'max 40 characters').required('required'),
     genre: yup.string(),
     category: yup.string().max(40, 'max 40 characters'),
-    year: yup.number().typeError('only numbers').positive('only positive').integer('only integer')
+    year: yup.number().typeError('only integer').positive('only positive').max(currentYear, `can't exeed ${currentYear}`)
   })
   .required();
 
@@ -30,7 +30,7 @@ const Form = () => {
     defaultValues: {
       email : '',
       title : '',
-      category: "",
+      category: 'movie',
       genre : "don't know",
       year : currentYear
     }
@@ -47,7 +47,7 @@ const Form = () => {
 			setIsMessageOpen(false)
 			dispatch(setModalState())
 		}, 2000)
-
+		dispatch(addWishlistItem(data))
     await postNewWishlistItem(postData)
   };
 
@@ -70,11 +70,17 @@ const Form = () => {
 					<div className="form__field">
             <Input inputType={'number'} inputName={'year'}/>
 					</div>
+			
 					<div className="form__field">
-            <Input inputType={'text'} inputName={'category'} required={false}/>
-					</div>
-					<div className="form__field">
-						<label className="form__label">Choose genre: </label>
+					<label className="form__label">Choose genre and category: </label>
+					<select className="form__input form__input_category" id="category" type="text" {...register("category")}>
+            <option value="don't know">movie</option>
+              <option value="action">tv series</option>
+							<option value="fantasy">cartoon</option>
+							<option value="drama">other</option>
+						</select>
+
+			
 						<select className="form__input" id="genre" type="text" {...register("genre")}>
             <option value="don't know">don't know</option>
               <option value="action">action</option>

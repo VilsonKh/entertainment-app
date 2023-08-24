@@ -25,14 +25,14 @@ describe("Search", () => {
 
   it("should render search input", () => {
     render(<Search />);
-    const searchInput = screen.getByPlaceholderText("Search for movies or TV serials");
+    const searchInput = screen.getByPlaceholderText("Search for movies or TV Series");
 
     expect(searchInput).toBeInTheDocument();
   });
 
   it("should call setQuery when input value changes", () => {
     render(<Search />);
-    const searchInput = screen.getByPlaceholderText("Search for movies or TV serials");
+    const searchInput = screen.getByPlaceholderText("Search for movies or TV Series");
 
     fireEvent.change(searchInput);
 
@@ -42,7 +42,7 @@ describe("Search", () => {
 
   it("should call fetchSearchContent when search query changes", async () => {
     render(<Search />);
-    const searchInput = screen.getByPlaceholderText("Search for movies or TV serials");
+    const searchInput = screen.getByPlaceholderText("Search for movies or TV Series");
 
     fireEvent.change(searchInput, { target: { value: "Test search" } });
 

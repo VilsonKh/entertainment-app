@@ -1,6 +1,6 @@
 # dependencies
 /node_modules
-
+data.json
 /utils
 .env 
 package-lock.json

@@ -65,7 +65,7 @@ const Search = () => {
 					type="text"
 					style={search?.length > 0 ? { borderBottom: "1px solid #5A698F" } : null}
 					className="search__input"
-					placeholder="Search for movies or TV serials"
+					placeholder="Search for movies or TV Series"
 					defaultValue={searchQuery}
 				/>
 			</div>

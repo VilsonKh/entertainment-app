@@ -1,6 +1,9 @@
 import "./TrendingSlider.scss";
+import SwiperCore from 'swiper';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/autoplay';
 import Bookmark from "../UI/Bookmark";
 import { useDispatch, useSelector } from "react-redux";
 import { cleanCurrentItemContent, trendingStatus, trendingVideo } from "../../store/videosSlice";
@@ -13,6 +16,7 @@ import serialTab from "../../assets/serialsTab-white.svg";
 import { Skeleton } from "@mui/material";
 
 const TrendingSlider = () => {
+	SwiperCore.use([Autoplay])
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -66,13 +70,15 @@ const TrendingSlider = () => {
 		<Swiper
 			spaceBetween={20}
 			slidesPerView={2}
-			simulateTouch={true}
+			autoplay={{delay: 2000, 
+								 disableOnInteraction: false, 
+								 pauseOnMouseEnter: true}}
 			breakpoints={{
 				767: {
 					slidesPerView: 4,
 				},
 				1439: {
-					slidesPerView: 6,
+					slidesPerView: 5,
 				},
 			}}
 		>

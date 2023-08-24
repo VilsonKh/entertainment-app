@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./WishlistTable.scss";
 import { useEffect } from "react";
-import { content, contentStatus } from "../../store/videosSlice";
+import { content, contentStatus, wishlistItems } from "../../store/videosSlice";
 import { fetchWishlistItems } from "../../store/thunks";
 import TableRowsLoader from "./TableRowsLoader";
 import { Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
@@ -14,7 +14,7 @@ const WishlistTable = () => {
 		dispatch(fetchWishlistItems());
 	}, [dispatch]);
 
-	const data = useSelector(content);
+	const data = useSelector(wishlistItems);
 	const queryStatus = useSelector(contentStatus);
 
 	return (
@@ -36,11 +36,11 @@ const WishlistTable = () => {
           const { genre, title,id,year,category, timestamp} = item;
 					return (
 						<TableRow key={id}>
-							<TableCell>{`${i+1}.`}</TableCell>
+							<TableCell >{`${i+1}.`}</TableCell>
 							<TableCell>{title}</TableCell>
-							<TableCell>{year || '-'}</TableCell>
+							<TableCell >{year || '-'}</TableCell>
 							<TableCell>{category || '-'}</TableCell>
-							<TableCell>{genre || '-'}</TableCell>
+							<TableCell className='table__genre'>{genre || '-'}</TableCell>
 							<TableCell>{new Date(timestamp).toLocaleDateString()}</TableCell>
 						</TableRow>
 					);

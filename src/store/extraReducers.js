@@ -1,5 +1,3 @@
-
-
 export let initialLimit = null;
 
 //define how many cards should initially be loaded
@@ -63,7 +61,7 @@ export const lazyLoadContentThunkCases = {
 export const fetchWishlistItemsCases = {
 	succeeded: (state, action) => {
 		state.contentStatus = "succeeded";
-		state.content = [...action.payload];
+		state.wishlistItems = [...action.payload];
 	},
 	loading: (state, action) => {
 		state.contentStatus = "loading";

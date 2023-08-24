@@ -3,10 +3,10 @@ import "./Header.scss";
 import logo from "../../assets/logo.svg";
 import logoBig from "../../assets/logoBig.svg";
 import gigachad from "../../assets/gigachad.jpg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import React from "react";
 import {tabWidth} from '../const';
-
+import  ExternalImage from '../UI/ExternalImage'
 const chooseIcon = (small, big) => {
 	return window.screen.width > tabWidth ? big : small;
 };
@@ -14,10 +14,12 @@ const chooseIcon = (small, big) => {
 const svgSize =  window.screen.width > tabWidth ? '20' : "16"
 
 const Header = () => {
+
+	const navigate = useNavigate()
 	return (
 		<header className="header">
 			<div className="header__container">
-				<div className="header__logo">
+				<div className="header__logo" onClick={() => navigate('/') }>
 					<img src={chooseIcon(logo, logoBig)} alt="logo" />
 				</div>
 				<div className="header__navigation">
@@ -41,7 +43,7 @@ const Header = () => {
 							/>
 						</svg>
 					</NavLink>
-					<NavLink to="/serials" className={({ isActive }) => (isActive ? "active" : "")}>
+					<NavLink to="/tvseries" className={({ isActive }) => (isActive ? "active" : "")}>
 						<svg width={svgSize} height={svgSize} viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path
 								fillRule="evenodd"
@@ -69,7 +71,8 @@ const Header = () => {
 					</NavLink>
 				</div>
 				<div className="header__avatar">
-					<img src={gigachad} alt="" />
+					{/* <img src={gigachad} alt="" /> */}
+					<ExternalImage thumbnail={'https://firebasestorage.googleapis.com/v0/b/entertainment-app-1d1e2.appspot.com/o/gigachad.webp?alt=media&token=dd822f96-70a0-49a0-9c76-8ba72312fe32'}/>
 				</div>
 			</div>
 		</header>

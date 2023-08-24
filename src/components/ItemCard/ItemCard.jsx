@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { contentStatus, currentCard, reviewsContetn } from "../../store/videosSlice";
 import { fetchCurrentItem, fetchReviews } from "../../store/thunks.js";
@@ -121,6 +121,9 @@ const ItemCard = () => {
 						sildesPerView={1}
 						simulateTouch={true}
 						spaceBetween={20}
+						grabCursor={true}
+						loop={true}
+						autoplay={{delay: 2000, disableOnInteraction: false, pauseOnMouseEnter: true}}
 						breakpoints={{
 							1439: {
 								slidesPerView: 2,

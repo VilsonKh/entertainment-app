@@ -8,7 +8,7 @@ The **Entertainment App** project can be accessed vie [this link]()
 
 The app provides users with a content library, encompassing a diverse collection of movies and TV shows. Users can effortlessly search for specific content by entering the title in the search bar. A bookmarking functionality enables users to mark their favorite movies and TV shows.
 
-The navigation is facilitated through intuitive tabs, enabling transitions between different content categories such as "Movies," "Serials", "Bookmarks" and others. Upon selecting a movie or TV show card, users are presented with a detailed view that includes plot summaries, cast information, release dates, and user ratings. Lazy loading is implemented to optimize performance. Content cards and components are loaded on-scroll, reducing initial loading times and enhancing overall user experience.
+The navigation is facilitated through intuitive tabs, enabling transitions between different content categories such as "Movies," "TV Series", "Bookmarks" and others. Upon selecting a movie or TV show card, users are presented with a detailed view that includes plot summaries, cast information, release dates, and user ratings. Lazy loading is implemented to optimize performance. Content cards and components are loaded on-scroll, reducing initial loading times and enhancing overall user experience.
 
 <img width="1920" alt="InvoiceApp" src="https://github.com/VilsonKh/VilsonKh/blob/main/entertainment-app.gif">
 

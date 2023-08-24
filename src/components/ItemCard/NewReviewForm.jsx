@@ -2,9 +2,13 @@ import { useForm } from "react-hook-form";
 import TextAreaInput from "./TextAreaInput";
 import './NewReviewForm.scss';
 import { postNewReview } from "../../firebase/service";
+import { addUserCommet } from "../../store/videosSlice";
+import { useDispatch } from "react-redux";
 
 //form adds comments to the comments section in item card
 const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
+
+	const dispatch = useDispatch()
 
 	const formData = useForm({
 		mode: 'onChange'
@@ -21,11 +25,11 @@ const NewReviewForm = ({ currentLocation, setIsMessageOpen }) => {
     setIsMessageOpen(true)
 		//timeout is needed to close message automatically
     setTimeout(() => {
-      reset();
       setIsMessageOpen(false)
 			reset()
     }, 2000);
-		await postNewReview(currentLocation, values)
+	 	await postNewReview(currentLocation, values)
+		dispatch(addUserCommet(values))
 	};
 
 	const errorIndicator = errors["name"] ? "true" : "false";

@@ -5,6 +5,8 @@ import { db } from "./config";
  * @param {number} initialLimit - number of items to get for the first time
  * @returns Promise
  */
+
+
 export const queryAllContent = async (filter, initialLimit) => {
 	const ref = collection(db, `videos`);
 	let queryRef = null;
@@ -24,7 +26,9 @@ export const queryAllContent = async (filter, initialLimit) => {
 		case "movie":
 			queryRef = query(ref, where("category", "==", filter), limit(initialLimit));
 			break;
-		case "serial":
+		case "TV Series":
+			console.log('series')
+			console.log(filter)
 			queryRef = query(ref, where("category", "==", filter), limit(initialLimit));
 			break;
 		default:
@@ -61,7 +65,7 @@ export const lazyLoad = async (filter, initialLimit, counter) => {
 		case "movie":
 			queryRef = where("category", "==", filter);
 			break;
-		case "serial":
+		case "TV Series":
 			queryRef = where("category", "==", filter);
 			break;
 		case "isBookmarked":

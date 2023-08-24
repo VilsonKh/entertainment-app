@@ -2,7 +2,6 @@
 
 .errorPage {
 	width: 90%;
-	// max-width: 500px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -18,10 +17,13 @@
 
 	&__404 {
 		display: flex;
+		user-select: none;
+		pointer-events: none;
 	}
 
 	&__img {
     width: 150px;
+		user-select: none;
 
 		@media screen and (min-width: 767px) {
 	width: 200px;

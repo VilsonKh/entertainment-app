@@ -98,11 +98,8 @@
 }
 
 .movie-thumb {
-	min-height: 200px;
 	width: 100%;
 	transition: opacity .3s ease;
-
-
 }
 
 .trending__slide .movie-thumb:hover {
@@ -122,4 +119,10 @@
 
 .opacity {
 	opacity: .5;
+}
+
+.swiper-wrapper {
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
 }

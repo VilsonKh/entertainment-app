@@ -27,6 +27,9 @@
 
 	&__fieldset {
 		border: none;
+		& label {
+			margin-bottom: 10px;
+		}
 	}
 }
 
@@ -46,6 +49,8 @@
 		position: relative;
 		min-height: 44px;
 
+
+
 		& span {
 			color: #fc4747;
 			font-weight: 300;
@@ -60,6 +65,10 @@
 		color: rgba(255, 255, 255, 0.7);
 		padding: 5px 10px;
 		border-bottom: 1px solid $color-light-purple;
+
+		&_category {
+			margin-bottom: 20px;
+		}
 
 		&:active,
 		&:focus {
