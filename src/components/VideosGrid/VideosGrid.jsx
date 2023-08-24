@@ -40,6 +40,7 @@ const VideosGrid = ({ filter }) => {
 		if (e.target.className === "movie-thumb") {
 			navigate(`/card/${id}`);
 			dispatch(cleanCurrentItemContent());
+			window.scrollTo(0,0)
 		}
 	};
 
