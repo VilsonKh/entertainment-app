@@ -13,14 +13,14 @@ const Form = () => {
 
   const currentYear = new Date().getFullYear()
   const dispatch = useDispatch()
-	
+
   const validationSchema = yup
   .object({
     email: yup.string().email('invalid email').required('required'),
-    title: yup.string().max(39, 'max 40 characters').required('required'),
+    title: yup.string().max(40, 'max 40 characters').required('required'),
     genre: yup.string(),
-    category: yup.string(),
-    year: yup.number().typeError('').positive('only positive').integer('only integer')
+    category: yup.string().max(40, 'max 40 characters'),
+    year: yup.number().typeError('only numbers').positive('only positive').integer('only integer')
   })
   .required();
 
