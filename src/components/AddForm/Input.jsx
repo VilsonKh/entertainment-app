@@ -2,6 +2,7 @@ import React from "react";
 import { useFormContext } from "react-hook-form";
 
 const Input = ({ inputType, inputName }) => {
+	
 	const {
 		register,
 		formState: { errors },
