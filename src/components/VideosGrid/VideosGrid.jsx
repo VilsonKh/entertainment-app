@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { content, contentStatus, lazyStatus, cleanCurrentItemContent, isEndOfList } from "../../store/videosSlice";
 import { lazyLoadContentThunk, fetchContent } from "../../store/thunks";
-import preloader from '../../assets/preloader.gif';
+import preloader from '../../assets/preloader.svg';
 import "./VideosGrid.scss";
 import Bookmark from "../UI/Bookmark";
 import React, { useEffect } from "react";

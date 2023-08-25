@@ -2,7 +2,7 @@ import "./Search.scss";
 import loupe from "../../assets/loupe.svg";
 import { searchStatus, setIsSearchPopupOpen } from "../../store/videosSlice";
 import { useDispatch, useSelector } from "react-redux";
-import preloader from "../../assets/preloader.gif";
+import preloader from "../../assets/preloader.svg";
 import { useSearchDebouncer } from "./useSearchDebouncer";
 import { useEffect } from "react";
 import { fetchSearchContent } from "../../store/thunks";
