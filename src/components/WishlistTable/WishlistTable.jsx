@@ -33,10 +33,9 @@ const WishlistTable = () => {
 				{queryStatus === 'loading' ? 
 				(<TableRowsLoader rowsNum={5}/>) : 
 				data.map((item, i) => {
-          const { genre, title,id,year,category, timestamp} = item;
-					console.log(timestamp)
+          const { genre, title,year,category, timestamp} = item;
 					return (
-						<TableRow key={id}>
+						<TableRow key={i}>
 							<TableCell >{`${i+1}.`}</TableCell>
 							<TableCell>{title}</TableCell>
 							<TableCell >{year || '-'}</TableCell>
