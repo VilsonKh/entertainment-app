@@ -34,6 +34,7 @@ const WishlistTable = () => {
 				(<TableRowsLoader rowsNum={5}/>) : 
 				data.map((item, i) => {
           const { genre, title,id,year,category, timestamp} = item;
+					console.log(timestamp)
 					return (
 						<TableRow key={id}>
 							<TableCell >{`${i+1}.`}</TableCell>
