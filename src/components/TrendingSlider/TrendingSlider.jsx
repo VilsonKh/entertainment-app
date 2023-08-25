@@ -69,10 +69,12 @@ const TrendingSlider = () => {
 	return (
 		<Swiper
 			spaceBetween={20}
+			loop={true}
 			slidesPerView={2}
 			autoplay={{delay: 2000, 
 								 disableOnInteraction: false, 
-								 pauseOnMouseEnter: true}}
+								 pauseOnMouseEnter: true,
+								}}
 			breakpoints={{
 				767: {
 					slidesPerView: 4,
