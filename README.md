@@ -2,7 +2,7 @@
 
 Entertainment App is a React-based project that serves as a convenient application for browsing and tracking movies and TV shows. The app features a content library that allows users to discover their favorite films and series, add bookmarks, and navigate between different tabs and content cards.
 
-The **Entertainment App** project can be accessed vie [this link]()
+The **Entertainment App** project can be accessed vie [this link](https://projects.devilson.me/entertainment-app)
 
 ## Project Functionality
 
